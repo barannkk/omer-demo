@@ -56,6 +56,7 @@ const brands: Brand[] = [
       { src:'',id: 2, title: 'Guidelines', year: '2024' },
       { src:'',id: 3, title: 'Campaign', year: '2023' },
       { src:'',id: 4, title: 'Digital', year: '2023' },
+      { src:'',id: 5, title: 'Social', year: '2022' },
     ],
   },
 ]
@@ -87,8 +88,8 @@ function Marquee() {
               <Image 
                 src={logo.src} 
                 alt={logo.alt} 
-                width={80} 
-                height={32} 
+                width={300} 
+                height={120} 
                 style={{ objectFit: 'contain' }}
                 className="marquee-img"
               />
@@ -134,7 +135,7 @@ function BrandSlider({ brand }: { brand: Brand }) {
       </div>
 
       {/* Slider */}
-      <div className="slider-outer" >
+      <div className="slider-outer">
         <div className="slider-arrows">
           <button
             className="slider-btn"
@@ -162,39 +163,32 @@ function BrandSlider({ brand }: { brand: Brand }) {
           }}
         >
           {brand.projects.map((project) => (
-  <div key={project.id} className="slide">
-    
-    {project.src ? (
-      <Image 
-        src={project.src} 
-        alt={project.title} 
-        fill 
-        style={{ objectFit: 'cover' }} 
-      />
-    ) : (
-      
-      <div className="slide-placeholder-inner" style={{ backgroundColor: '#222', width: '100%', height: '100%' }} />
-    )}
+            <div key={project.id} className="slide">
+              {project.src ? (
+                <Image
+                  src={project.src}
+                  alt={project.title}
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+              ) : (
+                <div className="slide-placeholder-inner" style={{ backgroundColor: '#222', width: '100%', height: '100%' }} />
+              )}
 
-    <div className="slide-placeholder">
-      <div className="slide-placeholder-inner" />
-    </div>
-    
-    <div className="slide-overlay">
-      <div>
-        <div className="slide-label">{project.title}</div>
-        <div style={{ fontSize: 10, color: 'var(--mid)', letterSpacing: '0.1em', marginTop: 3 }}>
-          {project.year}
-        </div>
-      </div>
-    </div>
-  </div>
-))}
-        </div>
+              <div className="slide-placeholder">
+                <div className="slide-placeholder-inner" />
+              </div>
 
-        {/* OK Badge */}
-        <div className="ok-badge">
-          <span>OK</span>
+              <div className="slide-overlay">
+                <div>
+                  <div className="slide-label">{project.title}</div>
+                  <div style={{ fontSize: 10, color: 'var(--mid)', letterSpacing: '0.1em', marginTop: 3 }}>
+                    {project.year}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -205,8 +199,6 @@ function BrandSlider({ brand }: { brand: Brand }) {
 export default function HomePage() {
   return (
     <>
-      <Marquee />
-
       {/* Hero */}
       <section className="hero">
         <div className="hero-bg-text" aria-hidden="true">DESIGN</div>
@@ -243,6 +235,10 @@ export default function HomePage() {
           <BrandSlider key={brand.id} brand={brand} />
         ))}
       </section>
+
+      <div className="pre-footer-marquee">
+        <Marquee />
+      </div>
     </>
   )
 }
