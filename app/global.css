@@ -199,10 +199,10 @@ a, button { cursor: pointer; }
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 250px; 
-  height: 80px;
-  margin: 0 50px;
-  filter: grayscale(1) brightness(0.8); /* Logoları biraz daha "soft" yaptık */
+  width: 180px;  
+  height: 60px;  
+  margin: 0 40px;
+  filter: grayscale(1) brightness(0.8);
   opacity: 0.6;
   transition: all 0.5s ease;
 }

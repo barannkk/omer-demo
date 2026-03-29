@@ -80,8 +80,8 @@ function Marquee() {
               <Image 
                 src={logo.src} 
                 alt={logo.alt} 
-                width={300} 
-                height={120} 
+                width={200} 
+                height={80} 
                 style={{ objectFit: 'contain' }}
                 className="marquee-img"
               />
