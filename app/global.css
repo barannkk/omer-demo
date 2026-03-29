@@ -47,7 +47,7 @@ a, button { cursor: pointer; }
   color: var(--black);
 }
 
-/* ─── FLOATING NAVIGATION (TAM DÜZELTME) ─── */
+/* ─── FLOATING NAVIGATION ─── */
 .floating-nav {
   position: fixed;
   top: 25px; 
@@ -60,10 +60,9 @@ a, button { cursor: pointer; }
 
 .nav-inner {
   display: flex;
-  align-items: center; /* İçindeki her şeyi dikeyde ortalar */
+  align-items: center; 
   justify-content: space-between; 
   gap: 80px; 
-  /* Sol padding'i biraz azalttık (50px -> 30px) ki logo daha sola yaklaşsın */
   padding: 10px 10px 10px 30px; 
   pointer-events: auto; 
   background: #bfd730; 
@@ -82,16 +81,12 @@ a, button { cursor: pointer; }
 
 .nav-img {
   object-fit: contain;
-  /* Siyah olmasını sağlayan brightness(0) kaldırıldı */
-  /* Eğer logonun bembeyaz olmasını istersen alttaki satırı kullanabilirsin: */
-  /* filter: brightness(0) invert(1); */
   filter: none; 
 }
 
-/* Link Grubu ve Dikey Ortalama */
 .nav-links {
   display: flex;
-  align-items: center; /* Yazıları dikeyde ortalar */
+  align-items: center; 
   gap: 15px;
   list-style: none;
   padding: 0;
@@ -114,12 +109,9 @@ a, button { cursor: pointer; }
   z-index: 1;
 }
 
-/* 2. Sadece Butonun Etrafına Beyaz Glow (Hakkımda & İletişim için) */
-/* className="glow-white" olan linkler için geçerli */
 .nav-links a.glow-white:hover {
-  background: rgba(255, 255, 255, 0.15); /* Üzerine gelince butonun içi hafifçe aydınlansın */
+  background: rgba(255, 255, 255, 0.15); 
   
-  /* YAZI GÖLGESİNİ SİLDİK, SADECE BUTON ETRAFINA GLOW EKLEDİK */
   text-shadow: none !important; 
   
   /* Butonun dış çerçevesine yayılan beyaz parlama */
@@ -130,7 +122,6 @@ a, button { cursor: pointer; }
   transform: translateY(-2px);
 }
 
-/* 3. AI ÇALIŞMALARI Butonu (Sade ve Stabil Hali) */
 .btn-ai {
   background: #111321 !important; 
   color: #bfd730 !important; 
@@ -147,7 +138,6 @@ a, button { cursor: pointer; }
 .btn-ai:hover {
   background: #1a1d33 !important;
   transform: translateY(-1px);
-  /* AI butonunda parlama istemediğin için box-shadow kapalı */
   box-shadow: none !important;
 }
 
@@ -158,19 +148,17 @@ a, button { cursor: pointer; }
   box-shadow: 0 0 15px rgba(191, 215, 48, 0.3);
 }
 
-/* ─── PRE-FOOTER MARQUEE -> HERO ALTINA TAŞINDI ─── */
+/* ─── MARQUEE ─── */
 .marquee-wrapper {
-  margin-top: 0; /* Hero'nun hemen bitimine yapışması için */
+  margin-top: 0; 
   margin-bottom: 40px;
-  border-top: none; /* Çizgileri sildik */
-  border-bottom: none; /* Çizgileri sildik */
+  border-top: none; 
+  border-bottom: none;
   background: transparent; 
   padding: 60px 0; 
   overflow: hidden;
   position: relative;
   
-  /* SAĞA VE SOLA KAYBOLMA EFEKTİ (FADE OUT) */
-  /* Bu maske sayesinde logolar kenarlarda görünmezden gelir/gider */
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
@@ -191,7 +179,6 @@ a, button { cursor: pointer; }
   display: flex;
   align-items: center;
   width: max-content;
-  /* Daha yumuşak bir hız (40-50s idealdir) */
   animation: marquee 50s linear infinite; 
 }
 
@@ -215,21 +202,20 @@ a, button { cursor: pointer; }
 
 @keyframes marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); } /* Döngünün pürüzsüz olması için */
+  to { transform: translateX(-50%); }
 }
 
-/* ─── HERO SPLIT LAYOUT (GÜNCEL) ─── */
+/* ─── HERO SPLIT LAYOUT ─── */
 .hero-split {
   position: relative;
-  height: calc(100vh - var(--nav-h)); /* Navigasyon yüksekliğini düştük */
-  margin-top: var(--nav-h); /* Navigasyonun altında başlaması için */
+  height: calc(100vh - var(--nav-h)); 
+  margin-top: var(--nav-h);
   width: 100%;
   display: flex;
   align-items: center;
   overflow: hidden;
 }
 
-/* Arkaplan Bölünmesi */
 .split-bg {
   position: absolute;
   inset: 0;
@@ -240,12 +226,10 @@ a, button { cursor: pointer; }
 .bg-black { flex: 1; background: var(--black); }
 .bg-green { flex: 1; background: var(--accent); }
 
-/* İçerik Konumlandırma */
 .hero-container {
-  padding-left: 6%; /* Biraz daha sola çektik */
+  padding-left: 6%; 
   width: 100%;
   z-index: 10;
-  /* Metnin sağ yeşil alana taşmaması için genişliği sınırladık */
   max-width: 50%; 
 }
 
@@ -256,8 +240,8 @@ a, button { cursor: pointer; }
 
 .hero-title-top {
   font-family: var(--font-juturu);
-  font-weight: 500; /* Thin (100) yerine Medium (500) yapıldı */
-  font-size: clamp(50px, 8vw, 110px); /* Boyutu biraz dengeledik */
+  font-weight: 500; 
+  font-size: clamp(50px, 8vw, 110px);
   color: var(--white);
   line-height: 0.9;
   letter-spacing: -0.02em;
@@ -273,7 +257,7 @@ a, button { cursor: pointer; }
   font-size: clamp(50px, 8vw, 110px);
   background: var(--accent);
   color: var(--white);
-  padding: 5px 20px; /* Kutuyu biraz daha daralttık */
+  padding: 5px 20px; 
   display: inline-block;
   line-height: 1;
   letter-spacing: -0.02em;
@@ -286,11 +270,11 @@ a, button { cursor: pointer; }
 }
 
 .btn-white-pill, .btn-green-pill {
-  padding: 18px 45px; /* İç boşluğu biraz daha artırarak butonu dolgunlaştırdık */
+  padding: 18px 45px; 
   border-radius: 100px;
   font-family: var(--font-juturu);
-  font-weight: 700; /* Yazıları daha belirgin olması için Bold yaptık */
-  font-size: 16px; /* Yazı boyutu 13'ten 16'ya çıktı, artık daha dengeli */
+  font-weight: 700; 
+  font-size: 16px; 
   text-decoration: none;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
@@ -301,7 +285,7 @@ a, button { cursor: pointer; }
 
 .btn-white-pill {
   background: var(--white);
-  color: var(--black); /* Daha okunaklı olması için içini siyah yaptık */
+  color: var(--black); 
 }
 
 .btn-green-pill {
@@ -320,7 +304,6 @@ a, button { cursor: pointer; }
   position: absolute;
   bottom: 30px;
   left: 40px;
-  opacity: 0.7;
 }
 
 /* MOBİL AYARLAR */
@@ -340,7 +323,7 @@ a, button { cursor: pointer; }
 }
 
 
-/* ─── BRAND SHOWCASE (FINAL STACK VERSION) ─── */
+/* ─── BRAND SHOWCASE ─── */
 .brand-section {
   padding: 100px 6% 0px 6%;
   background: var(--black);
@@ -369,7 +352,7 @@ a, button { cursor: pointer; }
 .image-stack-container {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1; /* Kare yapı: Görselin uzamasını/yamulmasını engeller */
+  aspect-ratio: 1 / 1; 
   perspective: 1200px;
 }
 
@@ -384,7 +367,7 @@ a, button { cursor: pointer; }
 }
 
 .main-img {
-  object-fit: cover !important; /* Görsel oranını bozmadan alanı doldurur */
+  object-fit: cover !important; 
   width: 100%;
   height: 100%;
 }

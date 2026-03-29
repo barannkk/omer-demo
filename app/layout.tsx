@@ -19,7 +19,7 @@ const juturu = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Portfolio — Creative Design',
+  title: 'Ömer — Creative Design',
   description: 'Marka kimliği, ambalaj ve görsel iletişim tasarımı portfolyosu',
   openGraph: {
     title: 'Portfolio — Creative Design',
