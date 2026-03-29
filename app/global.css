@@ -158,80 +158,64 @@ a, button { cursor: pointer; }
   box-shadow: 0 0 15px rgba(191, 215, 48, 0.3);
 }
 
-/* ─── PRE-FOOTER MARQUEE (DEV & SOFT - GÖRSEL VARYASYON TARZI) ─── */
+/* ─── PRE-FOOTER MARQUEE -> HERO ALTINA TAŞINDI ─── */
 .marquee-wrapper {
-  margin-top: 150px; /* Üstteki içerikten iyice uzaklaşsın */
-  margin-bottom: 60px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: 0; /* Hero'nun hemen bitimine yapışması için */
+  margin-bottom: 40px;
+  border-top: none; /* Çizgileri sildik */
+  border-bottom: none; /* Çizgileri sildik */
   background: transparent; 
-  padding: 80px 0; /* Bandı dikeyde çok devasa yaptık */
+  padding: 60px 0; 
   overflow: hidden;
+  position: relative;
+  
+  /* SAĞA VE SOLA KAYBOLMA EFEKTİ (FADE OUT) */
+  /* Bu maske sayesinde logolar kenarlarda görünmezden gelir/gider */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 15%,
+    black 85%,
+    transparent 100%
+  );
 }
 
 .marquee-track {
   display: flex;
   align-items: center;
   width: max-content;
-  /* Daha yavaş, prestijli bir akış (60 saniye) */
-  animation: marquee 60s linear infinite; 
-}
-
-.marquee-track:hover {
-  animation-play-state: paused;
-}
-
-.marquee-item {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  padding: 0;
+  /* Daha yumuşak bir hız (40-50s idealdir) */
+  animation: marquee 50s linear infinite; 
 }
 
 .logo-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 300px;  /* Devasa genişlik */
-  height: 120px; /* Devasa yükseklik */
-  margin: 0 60px; /* Logolar arası çok geniş boşluk */
-  opacity: 1; /* Daha sofistike, arkada duran bir görüntü (Soft Filtre) */
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 250px; 
+  height: 80px;
+  margin: 0 50px;
+  filter: grayscale(1) brightness(0.8); /* Logoları biraz daha "soft" yaptık */
+  opacity: 0.6;
+  transition: all 0.5s ease;
 }
 
 .logo-container:hover {
   opacity: 1;
-  filter: grayscale(0) invert(0); /* Üzerine gelince orijinal rengi parlasın */
-  transform: scale(1.15); /* Hafifçe öne çıksın */
-}
-
-.marquee-dot {
-  width: 8px; /* Noktalar daha büyük ve belirgin */
-  height: 8px;
-  background: var(--accent); /* Senin neon yeşilin */
-  border-radius: 50%;
-  opacity: 0.8;
-  flex-shrink: 0;
-  /* Hafif bir glow (parlama) efekti de ekleyelim */
-  box-shadow: 0 0 10px rgba(191, 215, 48, 0.4); 
+  filter: grayscale(0) brightness(1);
+  transform: scale(1.1);
 }
 
 @keyframes marquee {
   from { transform: translateX(0); }
-  /* Çoğaltma sayına göre (quadrupled ise) -25% en pürüzsüzüdür */
-  to { transform: translateX(-25%); } 
-}
-
-/* Mobilde ekranı patlatmaması için küçültme */
-@media (max-width: 768px) {
-  .logo-container {
-    width: 180px;
-    height: 60px;
-    margin: 0 30px;
-  }
-  .marquee-wrapper {
-    padding: 40px 0;
-  }
+  to { transform: translateX(-50%); } /* Döngünün pürüzsüz olması için */
 }
 
 /* ─── HERO SPLIT LAYOUT (GÜNCEL) ─── */
@@ -355,202 +339,203 @@ a, button { cursor: pointer; }
   .hero-buttons { justify-content: center; }
 }
 
-/* ─── SECTION HEADER ─── */
-.section-header {
+
+/* ─── BRAND SHOWCASE (FINAL STACK VERSION) ─── */
+.brand-section {
+  padding: 100px 6% 0px 6%;
+  background: var(--black);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 28px 40px;
+  justify-content: center;
   border-bottom: 1px solid var(--border);
 }
 
-.section-brand {
-  font-family: var(--font-display);
-  font-size: 38px;
-  letter-spacing: 0.05em;
-}
-
-.section-meta {
-  display: flex;
+.section-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  max-width: 1400px;
+  width: 100%;
   align-items: center;
-  gap: 12px;
 }
 
-.section-all {
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--mid);
-  text-decoration: none;
-  padding: 8px 18px;
-  border: 1px solid var(--border);
-  transition: all 0.2s;
-}
-
-.section-all:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-/* ─── SLIDER ─── */
-.slider-outer {
+.project-visual-side {
   position: relative;
-  display: flex;
-  overflow: hidden;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
 }
 
-.slider-track {
-  display: flex;
-  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  flex: 1;
-}
-
-.slide {
-  min-width: calc(100% / 5);
-  aspect-ratio: 3/4;
-  background: var(--gray);
-  border-right: 1px solid var(--border);
+.image-stack-container {
   position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Kare yapı: Görselin uzamasını/yamulmasını engeller */
+  perspective: 1200px;
 }
 
-.slide img {
+/* Aktif Kart */
+.active-card-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: #1a1a1a;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+  cursor: grab;
+}
+
+.main-img {
+  object-fit: cover !important; /* Görsel oranını bozmadan alanı doldurur */
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
 }
 
-.slide:hover img {
+/* Sabit Deste */
+.static-stack-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.bg-layer {
+  position: absolute;
+  inset: 0;
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.05);
+  overflow: hidden;
+}
+
+/* Açılı Deste Katmanları */
+.layer-near {
+  transform: translate3d(20px, 0, -100px) rotateZ(3deg);
+  z-index: 5;
+  opacity: 0.6;
+}
+
+.layer-far {
+  transform: translate3d(40px, 0, -200px) rotateZ(6deg);
+  z-index: 4;
+  opacity: 0.3;
+}
+
+/* Sağ Taraf Tipografi */
+.brand-title {
+  font-family: var(--font-display);
+  font-size: clamp(50px, 8vw, 100px);
+  font-weight: 900;
+  color: #fff;
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 25px;
+}
+
+.brand-desc {
+  color: var(--mid);
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 450px;
+  margin-bottom: 40px;
+}
+
+.btn-all-work {
+  display: inline-block;
+  background: var(--white);
+  color: var(--black);
+  padding: 16px 45px;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-all-work:hover {
+  background: var(--accent);
   transform: scale(1.05);
 }
 
-.slide-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,35,0.8) 0%, transparent 55%);
-  opacity: 0;
-  transition: opacity 0.3s;
+.stack-dots {
+  margin-top: 50px;
+  margin-bottom: 50px;
   display: flex;
-  align-items: flex-end;
-  padding: 18px;
+  gap: 12px;
 }
 
-.slide:hover .slide-overlay { opacity: 1; }
-
-.slide-label {
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--white);
+.dot {
+  width: 7px;
+  height: 7px;
+  background: #333;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.slide-placeholder {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(140deg, #05052a 0%, #0d0d3a 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.slide-placeholder-inner {
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(191,255,0,0.15);
-  transform: rotate(45deg);
-}
-
-
-.slider-arrows {
-  position: absolute;
-  top: 50%;
-  left: 0; 
-  right: 0; 
-  width: 100%;
-  display: flex;
-  justify-content: space-between; 
-  padding: 0 10px; 
-  transform: translateY(-50%); 
-  z-index: 10;
-}
-
-.slider-btn {
-  width: 38px;
-  height: 38px;
-  background: rgba(0, 0, 35, 0.8);
-  border: 1px solid var(--border);
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-  font-size: 16px;
-  backdrop-filter: blur(8px);
-}
-
-.slider-btn:hover:not(:disabled) {
+.dot.active {
   background: var(--accent);
-  border-color: var(--accent);
-  color: var(--black);
+  transform: scale(1.6);
 }
 
-.slider-btn:disabled {
-  opacity: 0.2;
-  cursor: default;
+@media (max-width: 1024px) {
+  .section-container { grid-template-columns: 1fr; gap: 60px; text-align: center; }
+  .project-info-side { display: flex; flex-direction: column; align-items: center; }
+  .bg-layer { display: none; }
 }
 
-/* OK Badge */
-.ok-badge {
+/* ─── FOOTER LAYOUT STYLES ─── */
+.footer-main {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: calc(100% / 5);
-  aspect-ratio: 3/4;
-  border-left: 1px solid var(--border);
-  background: var(--accent);
-  flex-shrink: 0;
-}
-
-.ok-badge span {
-  font-family: var(--font-display);
-  font-size: 56px;
-  color: var(--black);
-  letter-spacing: 0.04em;
-}
-
-/* ─── FOOTER ─── */
-footer {
-  padding: 56px 40px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  padding: 60px 6%;
+  background: var(--black);
+  border-top: 1px solid var(--border);
+  margin-top: 0px;
 }
 
-.footer-logo {
-  font-family: var(--font-display);
-  font-size: 20px;
-  color: var(--white);
-  letter-spacing: 0.05em;
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-logo-img {
+  object-fit: contain;
+  filter: brightness(1); /* Logonun renklerini korur */
 }
 
 .footer-copy {
   font-size: 11px;
   color: var(--mid);
   letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .footer-contact {
-  font-size: 11px;
-  color: var(--mid);
+  font-family: var(--font-juturu);
+  font-size: clamp(16px, 2vw, 24px);
+  font-weight: 700;
+  color: #fff;
   text-decoration: none;
-  letter-spacing: 0.08em;
-  transition: color 0.2s;
+  transition: color 0.3s ease;
+  border-bottom: 1px solid transparent;
 }
 
-.footer-contact:hover { color: var(--accent); }
+.footer-contact:hover {
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent);
+}
+
+/* Mobil için */
+@media (max-width: 768px) {
+  .footer-main {
+    flex-direction: column;
+    gap: 40px;
+    text-align: center;
+  }
+  .footer-left {
+    align-items: center;
+  }
+}
 
 /* ─── ANIMATIONS ─── */
 @keyframes fadeUp {

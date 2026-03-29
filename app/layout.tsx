@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './global.css'
 import Nav from '@/components/Nav'
 import localFont from 'next/font/local'
+import Image from 'next/image'
 
 const juturu = localFont({
   src: [
@@ -41,17 +42,22 @@ export default function RootLayout({
           {children}
         </main>
 
-        <footer>
-          <span className="footer-logo">
-            PORTFOLIO<span style={{ color: 'var(--accent)' }}>.</span>
-          </span>
+        <footer className="footer-main">
+          <div className="footer-left">
+            <Image 
+              src="/logos/workgreen.svg" // Logo dosya yolun
+              alt="OMR Work" 
+              width={110} 
+              height={35} 
+              className="footer-logo-img"
+            />
+            <p className="footer-copy">
+              © {new Date().getFullYear()} — Tüm hakları saklıdır
+            </p>
+          </div>
 
-          <span className="footer-copy">
-            © {new Date().getFullYear()} — Tüm hakları saklıdır
-          </span>
-
-          <a href="mailto:hello@email.com" className="footer-contact">
-            hello@email.com
+          <a href="mailto:omr.workco@gmail.com" className="footer-contact">
+            omr.workco@gmail.com
           </a>
         </footer>
       </body>

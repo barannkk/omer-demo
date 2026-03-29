@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { motion, AnimatePresence } from 'framer-motion'
 
 
 // ─── Types ───
@@ -16,7 +17,6 @@ interface Project {
 interface Brand {
   id: string
   name: string
-  category: string
   projects: Project[]
 }
 
@@ -25,20 +25,18 @@ const brands: Brand[] = [
   {
     id: 'avon',
     name: 'AVON',
-    category: 'Brand Identity & Packaging',
     projects: [
       { src:'/projects/avon_anneler_gunu.png', id: 1, title: 'Kit Design', year: '2024' },
       { src:'', id: 2, title: 'Packaging', year: '2024' },
-      { src:'',id: 3, title: 'Campaign', year: '2023' },
+      { src:'/projects/avon_anneler_gunu.png',id: 3, title: 'Campaign', year: '2023' },
       { src:'',id: 4, title: 'Social Media', year: '2023' },
-      { src:'',id: 5, title: 'Visual System', year: '2022' },
+      { src:'/projects/avon_anneler_gunu.png',id: 5, title: 'Visual System', year: '2022' },
       { src:'',id: 6, title: 'Identity', year: '2022' },
     ],
   },
   {
     id: 'marka2',
     name: 'MARKA 2',
-    category: 'Packaging Design',
     projects: [
       { src:'',id: 1, title: 'Label Design', year: '2024' },
       { src:'',id: 2, title: 'Box System', year: '2024' },
@@ -50,7 +48,6 @@ const brands: Brand[] = [
   {
     id: 'marka3',
     name: 'MARKA 3',
-    category: 'Creative Direction',
     projects: [
       { src:'',id: 1, title: 'Brand Book', year: '2024' },
       { src:'',id: 2, title: 'Guidelines', year: '2024' },
@@ -61,19 +58,14 @@ const brands: Brand[] = [
   },
 ]
 
-// ─── Marquee loglari ───
-const marqueeItems = [
-  'AVON', 'MARKA 2', 'MARKA 3', 'MARKA 4', 'MARKA 5',
-  'MARKA 6', 'MARKA 7', 'MARKA 8', 'MARKA 9', 'MARKA 10',
-]
-
 // ─── Marquee Logoları ───
 const marqueeLogos = [
   { src: '/logos/avonlogo.svg', alt: 'Avon' },
   { src: '/logos/codagelogo.svg', alt: 'Codage' },
   { src: '/logos/avonlogo.svg', alt: 'Marka 3' },
-  { src: '/logos/avonlogo.svg', alt: 'Marka 4' },
+  { src: '/logos/codagelogo.svg', alt: 'Marka 4' },
   { src: '/logos/avonlogo.svg', alt: 'Marka 5' },
+  { src: '/logos/codagelogo.svg', alt: 'Marka 6' },
 ]
 
 // ─── Marquee ───
@@ -94,7 +86,6 @@ function Marquee() {
                 className="marquee-img"
               />
             </div>
-            <div className="marquee-dot" />
           </div>
         ))}
       </div>
@@ -102,96 +93,136 @@ function Marquee() {
   )
 }
 
-// ─── Brand Slider ───
-function BrandSlider({ brand }: { brand: Brand }) {
+// ─── Brand Showcase ───
+function BrandShowcase({ brand }: { brand: Brand }) {
   const [current, setCurrent] = useState(0)
-  const visibleCount = 5
-  const maxIndex = Math.max(0, brand.projects.length - visibleCount)
+  const [direction, setDirection] = useState(0)
+  const total = brand.projects.length
 
-  const prev = () => setCurrent(c => Math.max(0, c - 1))
-  const next = () => setCurrent(c => Math.min(maxIndex, c + 1))
+  const nextIdx = useMemo(() => (current + 1) % total, [current, total]);
+  const nextNextIdx = useMemo(() => (current + 2) % total, [current, total]);
+
+  const handleNext = () => {
+    setDirection(-1) // Sola fırlat
+    setCurrent(nextIdx)
+  }
+  
+  const handlePrev = () => {
+    setDirection(1) // Sağa fırlat
+    setCurrent((c) => (c - 1 + total) % total)
+  }
+
+  // Animasyon varyantları - custom (direction) parametresini kullanır
+  const variants: any = {
+    enter: (direction: number) => ({
+      x: direction * 100,
+      opacity: 0,
+      scale: 0.9,
+      rotate: 0
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      scale: 1,
+      rotate: 0,
+      transition: { duration: 0.4 }
+    },
+    exit: (direction: number) => ({
+      x: direction * 450,
+      opacity: 0,
+      rotate: direction * -15,
+      scale: 0.8,
+      transition: { 
+        duration: 0.35, 
+        ease: "easeIn" // Buradaki string bazen TS'i yorar, o yüzden 'any' kurtarıcıdır
+      }
+    })
+  };
 
   return (
-    <div className="brand-section">
-      {/* Section header */}
-      <div className="section-header">
-        <div>
-          <div style={{
-            fontSize: 10,
-            letterSpacing: '0.2em',
-            textTransform: 'uppercase',
-            color: 'var(--mid)',
-            marginBottom: 6,
-          }}>
-            {brand.category}
-          </div>
-          <h2 className="section-brand">{brand.name}</h2>
-        </div>
-        <div className="section-meta">
-          <Link href={`/work/${brand.id}`} className="btn-primary">
-            Tüm İşler
-          </Link>
-        </div>
-      </div>
-
-      {/* Slider */}
-      <div className="slider-outer">
-        <div className="slider-arrows">
-          <button
-            className="slider-btn"
-            onClick={prev}
-            disabled={current === 0}
-            aria-label="Önceki"
-          >
-            ←
-          </button>
-          <button
-            className="slider-btn"
-            onClick={next}
-            disabled={current >= maxIndex}
-            aria-label="Sonraki"
-          >
-            →
-          </button>
-        </div>
-
-        {/* Track */}
-        <div
-          className="slider-track"
-          style={{
-            transform: `translateX(calc(-${current} * (100% / ${visibleCount})))`,
-          }}
-        >
-          {brand.projects.map((project) => (
-            <div key={project.id} className="slide">
-              {project.src ? (
-                <Image
-                  src={project.src}
-                  alt={project.title}
-                  fill
-                  style={{ objectFit: 'cover' }}
+    <section className="brand-section">
+      <div className="section-container">
+        
+        <div className="project-visual-side">
+          <div className="image-stack-container">
+            
+            <div className="static-stack-bg">
+              <div className="bg-layer layer-far">
+                <Image 
+                  src={brand.projects[nextNextIdx].src || '/placeholder.jpg'} 
+                  alt="" fill className="object-cover" draggable="false"
                 />
-              ) : (
-                <div className="slide-placeholder-inner" style={{ backgroundColor: '#222', width: '100%', height: '100%' }} />
-              )}
-
-              <div className="slide-placeholder">
-                <div className="slide-placeholder-inner" />
               </div>
-
-              <div className="slide-overlay">
-                <div>
-                  <div className="slide-label">{project.title}</div>
-                  <div style={{ fontSize: 10, color: 'var(--mid)', letterSpacing: '0.1em', marginTop: 3 }}>
-                    {project.year}
-                  </div>
-                </div>
+              <div className="bg-layer layer-near">
+                <Image 
+                  src={brand.projects[nextIdx].src || '/placeholder.jpg'} 
+                  alt="" fill className="object-cover" draggable="false"
+                />
               </div>
             </div>
-          ))}
+
+            <AnimatePresence mode="popLayout" custom={direction}>
+              <motion.div
+                key={`${brand.id}-${current}`}
+                custom={direction} 
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                className="active-card-wrapper"
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.7}
+                onDragEnd={(e, info) => {
+                  if (info.offset.x > 80) handlePrev()
+                  else if (info.offset.x < -80) handleNext()
+                }}
+                whileTap={{ cursor: "grabbing" }}
+              >
+                {brand.projects[current].src ? (
+                  <Image 
+                    src={brand.projects[current].src} 
+                    alt={brand.projects[current].title} 
+                    fill 
+                    className="main-img"
+                    draggable="false"
+                    priority
+                  />
+                ) : (
+                  <div className="img-placeholder" style={{ background: '#222', width: '100%', height: '100%' }} />
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <div className="stack-dots">
+            {brand.projects.map((_, i) => (
+              <span 
+                key={i} 
+                className={`dot ${i === current ? 'active' : ''}`} 
+                onClick={() => {
+                  setDirection(i > current ? -1 : 1)
+                  setCurrent(i)
+                }} 
+              />
+            ))}
+          </div>
         </div>
+
+        <div className="project-info-side">
+          <div className="info-content">
+            <h2 className="brand-title">{brand.name}</h2>
+            <p className="brand-desc">
+              Hikayelerini anlattığımız, kariyer stratejilerini şekillendirdiğimiz ve başarılarına ortak olduğumuz, sektörün en parlak ve en yaratıcı isimleri.
+            </p>
+            <Link href={`/work/${brand.id}`} className="btn-all-work">
+              TÜM İŞLER
+            </Link>
+          </div>
+        </div>
+
       </div>
-    </div>
+    </section>
   )
 }
 
@@ -236,17 +267,19 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+    
+      <div className="pre-footer-marquee">
+        <Marquee />
+      </div>
 
       {/* Marka Slider'ları */}
       <section id="work">
         {brands.map((brand) => (
-          <BrandSlider key={brand.id} brand={brand} />
+          <BrandShowcase key={brand.id} brand={brand} />
         ))}
       </section>
 
-      <div className="pre-footer-marquee">
-        <Marquee />
-      </div>
+      
     </>
   )
 }
