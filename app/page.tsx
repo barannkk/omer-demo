@@ -66,15 +66,33 @@ const marqueeItems = [
   'MARKA 6', 'MARKA 7', 'MARKA 8', 'MARKA 9', 'MARKA 10',
 ]
 
+// ─── Marquee Logoları ───
+const marqueeLogos = [
+  { src: '/logos/avonlogo.svg', alt: 'Avon' },
+  { src: '/logos/codagelogo.svg', alt: 'Codage' },
+  { src: '/logos/avonlogo.svg', alt: 'Marka 3' },
+  { src: '/logos/avonlogo.svg', alt: 'Marka 4' },
+  { src: '/logos/avonlogo.svg', alt: 'Marka 5' },
+]
+
 // ─── Marquee ───
 function Marquee() {
-  const doubled = [...marqueeItems, ...marqueeItems]
+  const quadrupled = [...marqueeLogos, ...marqueeLogos, ...marqueeLogos, ...marqueeLogos];
   return (
-    <div className="marquee-wrapper">
+  <div className="marquee-wrapper">
       <div className="marquee-track">
-        {doubled.map((item, i) => (
+        {quadrupled.map((logo, i) => (
           <div key={i} className="marquee-item">
-            <span>{item}</span>
+            <div className="logo-container">
+              <Image 
+                src={logo.src} 
+                alt={logo.alt} 
+                width={80} 
+                height={32} 
+                style={{ objectFit: 'contain' }}
+                className="marquee-img"
+              />
+            </div>
             <div className="marquee-dot" />
           </div>
         ))}
