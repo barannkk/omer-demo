@@ -39,12 +39,12 @@ export default function Nav() {
         {/* Sağ — Navigasyon Linkleri (Butonlar) */}
         <ul className="nav-links">
           <li>
-            <Link href="/about" style={getLinkStyle('/about')}>
+            <Link href="/about" className="glow-white" style={getLinkStyle('/about')}>
               HAKKIMDA
             </Link>
           </li>
           <li>
-            <Link href="/contact" style={getLinkStyle('/contact')}>
+            <Link href="/contact" className="glow-white" style={getLinkStyle('/contact')}>
               İLETİŞİM
             </Link>
           </li>

@@ -200,31 +200,39 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="hero">
-        <div className="hero-bg-text" aria-hidden="true">DESIGN</div>
-
-        <div className="hero-label fade-up fade-up-1">
-          Istanbul — Creative Designer
+      <section className="hero-split">
+        {/* Arkaplanı ikiye bölen yapı */}
+        <div className="split-bg">
+          <div className="bg-black"></div>
+          <div className="bg-green"></div>
         </div>
 
-        <h1 className="hero-title fade-up fade-up-2">
-          Markaları<br />
-          <em>Görünür</em>{' '}
-          <span className="outlined">Kılıyorum</span>
-        </h1>
+        {/* İçerik Katmanı */}
+        <div className="hero-container">
+          <div className="hero-text-block">
+            {/* DEFINED - İnce (Thin) */}
+            <h1 className="hero-title-top">DEFINED</h1>
+            
+            {/* BY DETAIL - Kalın (Black) ve Arkaplanlı */}
+            <div className="hero-title-bottom-wrapper">
+              <span className="hero-title-bottom">BY DETAIL</span>
+            </div>
+          </div>
 
-        <div className="hero-bottom fade-up fade-up-3">
-          <p className="hero-sub">
-            Marka kimliği, ambalaj ve görsel iletişim tasarımı.
-            Her projeye özgün bir bakış açısı, her markaya kalıcı bir his.
-          </p>
-          <div className="hero-cta fade-up fade-up-4">
-            <a href="#work" className="btn-primary">
-              İşleri Keşfet ↓
-            </a>
-            <Link href="/contact" className="btn-ghost">
-              Çalışalım →
-            </Link>
+          {/* Butonlar */}
+          <div className="hero-buttons">
+            <a href="#work" className="btn-white-pill">Çalışmaları Gör</a>
+            <a href="/contact" className="btn-green-pill">İletişime Geç</a>
+          </div>
+
+          {/* Sol Alt Logo (Attığın görseldeki gibi) */}
+          <div className="hero-corner-logo">
+            <Image 
+              src="/logos/workgreen.svg" 
+              alt="OMR Work" 
+              width={140} 
+              height={50} 
+            />
           </div>
         </div>
       </section>

@@ -104,29 +104,58 @@ a, button { cursor: pointer; }
   letter-spacing: 0.05em;
   text-transform: uppercase;
   text-decoration: none;
-  color: #111321; 
+  color: var(--black); 
   padding: 10px 20px;
-  display: flex; /* İçeriği dikeyde ortalamaya yardımcı olur */
+  display: flex;
   align-items: center;
   border-radius: 50px;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
 }
 
-/* AI ÇALIŞMALARI Butonu - Tam Ortalama */
+/* 2. Sadece Butonun Etrafına Beyaz Glow (Hakkımda & İletişim için) */
+/* className="glow-white" olan linkler için geçerli */
+.nav-links a.glow-white:hover {
+  background: rgba(255, 255, 255, 0.15); /* Üzerine gelince butonun içi hafifçe aydınlansın */
+  
+  /* YAZI GÖLGESİNİ SİLDİK, SADECE BUTON ETRAFINA GLOW EKLEDİK */
+  text-shadow: none !important; 
+  
+  /* Butonun dış çerçevesine yayılan beyaz parlama */
+  box-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.8), 
+    0 0 20px rgba(255, 255, 255, 0.4);
+
+  transform: translateY(-2px);
+}
+
+/* 3. AI ÇALIŞMALARI Butonu (Sade ve Stabil Hali) */
 .btn-ai {
   background: #111321 !important; 
   color: #bfd730 !important; 
   border: 1px solid #111321;
-  padding: 12px 28px !important; /* Dikey padding'i biraz artırarak daha dengeli yaptık */
+  padding: 12px 28px !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  line-height: 1; /* Yazının yukarı kaymasını engeller */
+  line-height: 1;
+  border-radius: 50px;
+  transition: all 0.3s ease;
 }
 
 .btn-ai:hover {
   background: #1a1d33 !important;
   transform: translateY(-1px);
+  /* AI butonunda parlama istemediğin için box-shadow kapalı */
+  box-shadow: none !important;
+}
+
+/* Aktif Sayfa Durumu */
+.nav-links a.active {
+  background: var(--black);
+  color: var(--accent);
+  box-shadow: 0 0 15px rgba(191, 215, 48, 0.3);
 }
 
 /* ─── PRE-FOOTER MARQUEE (DEV & SOFT - GÖRSEL VARYASYON TARZI) ─── */
@@ -205,147 +234,125 @@ a, button { cursor: pointer; }
   }
 }
 
-/* ─── HERO ─── */
-.hero {
-  min-height: 82vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 80px 48px 64px;
-  border-bottom: 1px solid var(--border);
+/* ─── HERO SPLIT LAYOUT (GÜNCEL) ─── */
+.hero-split {
   position: relative;
+  height: calc(100vh - var(--nav-h)); /* Navigasyon yüksekliğini düştük */
+  margin-top: var(--nav-h); /* Navigasyonun altında başlaması için */
+  width: 100%;
+  display: flex;
+  align-items: center;
   overflow: hidden;
 }
 
-/* Izgara arka plan */
-.hero::before {
-  content: '';
+/* Arkaplan Bölünmesi */
+.split-bg {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(#bfd73008 1px, transparent 1px),
-    linear-gradient(90deg, #bfd73008 1px, transparent 1px);
-  background-size: 80px 80px;
-  pointer-events: none;
-}
-
-.hero-bg-text {
-  position: absolute;
-  top: 50%;
-  left: -0.03em;
-  transform: translateY(-52%);
-  font-family: var(--font-display);
-  font-size: clamp(130px, 23vw, 300px);
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(191, 255, 0, 0.05);
-  white-space: nowrap;
-  pointer-events: none;
-  user-select: none;
-  line-height: 1;
-}
-
-.hero-label {
-  font-size: 10px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 22px;
   display: flex;
-  align-items: center;
-  gap: 12px;
+  z-index: -1;
 }
 
-.hero-label::before {
-  content: '';
-  display: block;
-  width: 32px;
-  height: 1px;
-  background: var(--accent);
+.bg-black { flex: 1; background: var(--black); }
+.bg-green { flex: 1; background: var(--accent); }
+
+/* İçerik Konumlandırma */
+.hero-container {
+  padding-left: 6%; /* Biraz daha sola çektik */
+  width: 100%;
+  z-index: 10;
+  /* Metnin sağ yeşil alana taşmaması için genişliği sınırladık */
+  max-width: 50%; 
 }
 
-.hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(64px, 10.5vw, 136px);
+/* YAZI STİLLERİ */
+.hero-text-block {
+  margin-bottom: 40px;
+}
+
+.hero-title-top {
+  font-family: var(--font-juturu);
+  font-weight: 500; /* Thin (100) yerine Medium (500) yapıldı */
+  font-size: clamp(50px, 8vw, 110px); /* Boyutu biraz dengeledik */
+  color: var(--white);
   line-height: 0.9;
-  letter-spacing: 0.01em;
-  max-width: 860px;
+  letter-spacing: -0.02em;
 }
 
-.hero-title em {
-  font-style: normal;
-  color: var(--accent);
+.hero-title-bottom-wrapper {
+  margin-top: 5px;
 }
 
-.hero-title .outlined {
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--white);
-}
-
-.hero-bottom {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-top: 48px;
-  gap: 40px;
-}
-
-.hero-sub {
-  max-width: 360px;
-  font-size: 15px;
-  color: var(--mid);
-  line-height: 1.75;
-}
-
-.hero-cta {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-shrink: 0;
-}
-
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 30px;
+.hero-title-bottom {
+  font-family: var(--font-juturu);
+  font-weight: 900; 
+  font-size: clamp(50px, 8vw, 110px);
   background: var(--accent);
-  color: var(--black);
-  font-weight: 600;
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  text-decoration: none;
-  border: none;
-  transition: background 0.2s, transform 0.15s;
+  color: var(--white);
+  padding: 5px 20px; /* Kutuyu biraz daha daralttık */
+  display: inline-block;
+  line-height: 1;
+  letter-spacing: -0.02em;
 }
 
-.btn-primary:hover {
-  background: #d4ff33;
-  transform: translateY(-2px);
+/* BUTONLAR */
+.hero-buttons {
+  display: flex;
+  gap: 15px;
 }
 
-.btn-ghost {
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--mid);
+.btn-white-pill, .btn-green-pill {
+  padding: 18px 45px; /* İç boşluğu biraz daha artırarak butonu dolgunlaştırdık */
+  border-radius: 100px;
+  font-family: var(--font-juturu);
+  font-weight: 700; /* Yazıları daha belirgin olması için Bold yaptık */
+  font-size: 16px; /* Yazı boyutu 13'ten 16'ya çıktı, artık daha dengeli */
   text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 3px;
-  transition: color 0.2s, border-color 0.2s;
+  justify-content: center;
+  border: none;
 }
 
-.btn-ghost:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+.btn-white-pill {
+  background: var(--white);
+  color: var(--black); /* Daha okunaklı olması için içini siyah yaptık */
 }
 
-/* ─── BRAND SECTION ─── */
-.brand-section {
-  border-bottom: 1px solid var(--border);
+.btn-green-pill {
+  background: var(--accent);
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn-white-pill:hover, .btn-green-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Sol Alt Logo */
+.hero-corner-logo {
+  position: absolute;
+  bottom: 30px;
+  left: 40px;
+  opacity: 0.7;
+}
+
+/* MOBİL AYARLAR */
+@media (max-width: 900px) {
+  .hero-split {
+    height: auto;
+    min-height: 80vh;
+    padding: 60px 0;
+  }
+  .bg-green { display: none; }
+  .hero-container { 
+    max-width: 100%; 
+    padding: 0 20px; 
+    text-align: center; 
+  }
+  .hero-buttons { justify-content: center; }
 }
 
 /* ─── SECTION HEADER ─── */
