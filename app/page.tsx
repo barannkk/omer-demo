@@ -36,13 +36,14 @@ const brands: Brand[] = [
   },
   {
     id: 'marka2',
-    name: 'MARKA 2',
+    name: 'DoldurKabı',
     projects: [
-      { src:'',id: 1, title: 'Label Design', year: '2024' },
-      { src:'',id: 2, title: 'Box System', year: '2024' },
-      { src:'',id: 3, title: 'Print', year: '2023' },
-      { src:'',id: 4, title: 'Campaign', year: '2023' },
-      { src:'',id: 5, title: 'Social', year: '2022' },
+      { src:'/images/vet_panel_kapak.jpg',id: 1, title: 'Label Design', year: '2024' },
+      { src:'/images/vet_panel_1.jpg',id: 2, title: 'Box System', year: '2024' },
+      { src:'/images/vet_panel_2.jpg',id: 3, title: 'Print', year: '2023' },
+      { src:'/images/vet_panel_3.jpg',id: 4, title: 'Campaign', year: '2023' },
+      { src:'/images/vet_panel_4.jpg',id: 5, title: 'Social', year: '2022' },
+      { src:'/images/vet_panel_5.jpg',id: 6, title: 'Social', year: '2022' },
     ],
   },
   {
