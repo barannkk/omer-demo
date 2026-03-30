@@ -38,6 +38,12 @@ export default function Nav() {
 
         {/* Sağ — Navigasyon Linkleri (Butonlar) */}
         <ul className="nav-links">
+          {/* ANA SAYFA linki en başa eklendi */}
+          <li>
+            <Link href="/" className="glow-white" style={getLinkStyle('/')}>
+              ANA SAYFA
+            </Link>
+          </li>
           <li>
             <Link href="/about" className="glow-white" style={getLinkStyle('/about')}>
               HAKKIMDA

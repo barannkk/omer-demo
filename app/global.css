@@ -47,10 +47,10 @@ a, button { cursor: pointer; }
   color: var(--black);
 }
 
-/* ─── FLOATING NAVIGATION ─── */
+/* ─── FLOATING NAVIGATION (EXACT MATCH) ─── */
 .floating-nav {
   position: fixed;
-  top: 25px; 
+  top: 44px; 
   left: 50%;
   transform: translateX(-50%); 
   width: auto; 
@@ -62,13 +62,13 @@ a, button { cursor: pointer; }
   display: flex;
   align-items: center; 
   justify-content: space-between; 
-  gap: 80px; 
-  padding: 10px 10px 10px 30px; 
+  gap: 70px; 
+  padding: 14px 16px 14px 26px; 
   pointer-events: auto; 
   background: #bfd730; 
   border-radius: 100px; 
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); 
-  min-width: 750px; 
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); 
+  min-width: 1000px; 
 }
 
 /* Logo Düzenlemesi */
@@ -80,6 +80,8 @@ a, button { cursor: pointer; }
 }
 
 .nav-img {
+  height: 32px;
+  width: auto;
   object-fit: contain;
   filter: none; 
 }
@@ -87,7 +89,7 @@ a, button { cursor: pointer; }
 .nav-links {
   display: flex;
   align-items: center; 
-  gap: 15px;
+  gap: 8px;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -100,7 +102,7 @@ a, button { cursor: pointer; }
   text-transform: uppercase;
   text-decoration: none;
   color: var(--black); 
-  padding: 10px 20px;
+  padding: 10px 22px;
   display: flex;
   align-items: center;
   border-radius: 50px;
@@ -111,14 +113,10 @@ a, button { cursor: pointer; }
 
 .nav-links a.glow-white:hover {
   background: rgba(255, 255, 255, 0.15); 
-  
   text-shadow: none !important; 
-  
-  /* Butonun dış çerçevesine yayılan beyaz parlama */
   box-shadow: 
     0 0 10px rgba(255, 255, 255, 0.8), 
     0 0 20px rgba(255, 255, 255, 0.4);
-
   transform: translateY(-2px);
 }
 
@@ -126,22 +124,22 @@ a, button { cursor: pointer; }
   background: #111321 !important; 
   color: #bfd730 !important; 
   border: 1px solid #111321;
-  padding: 12px 28px !important;
+  padding: 13px 32px !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   line-height: 1;
   border-radius: 50px;
   transition: all 0.3s ease;
+  font-weight: 800;
 }
 
 .btn-ai:hover {
   background: #1a1d33 !important;
   transform: translateY(-1px);
-  box-shadow: none !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
 }
 
-/* Aktif Sayfa Durumu */
 .nav-links a.active {
   background: var(--black);
   color: var(--accent);
@@ -205,124 +203,228 @@ a, button { cursor: pointer; }
   to { transform: translateX(-50%); }
 }
 
-/* ─── HERO SPLIT LAYOUT ─── */
-.hero-split {
+/* HERO */
+/* ADIM 1: Arka plan görselini 60px aşağı kaydırıyoruz */
+.hero-center-focus {
   position: relative;
-  height: calc(100vh - var(--nav-h)); 
-  margin-top: var(--nav-h);
-  width: 100%;
-  display: flex;
-  align-items: center;
+  min-height: 100vh;
+  background-image: url('/images/hero.png'); 
+  background-size: cover;
+  /* BURASI DEĞİŞTİ: Görseli dikeyde merkezden 60px aşağı ittik */
+  background-position: center calc(50% + 60px); 
   overflow: hidden;
-}
-
-.split-bg {
-  position: absolute;
-  inset: 0;
   display: flex;
-  z-index: -1;
-}
-
-.bg-black { flex: 1; background: var(--black); }
-.bg-green { flex: 1; background: var(--accent); }
-
-.hero-container {
-  padding-left: 6%; 
-  width: 100%;
-  z-index: 10;
-  max-width: 50%; 
-}
-
-/* YAZI STİLLERİ */
-.hero-text-block {
-  margin-bottom: 40px;
-}
-
-.hero-title-top {
-  font-family: var(--font-juturu);
-  font-weight: 500; 
-  font-size: clamp(50px, 8vw, 110px);
-  color: var(--white);
-  line-height: 0.9;
-  letter-spacing: -0.02em;
-}
-
-.hero-title-bottom-wrapper {
-  margin-top: 5px;
-}
-
-.hero-title-bottom {
-  font-family: var(--font-juturu);
-  font-weight: 900; 
-  font-size: clamp(50px, 8vw, 110px);
-  background: var(--accent);
-  color: var(--white);
-  padding: 5px 20px; 
-  display: inline-block;
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-
-/* BUTONLAR */
-.hero-buttons {
-  display: flex;
-  gap: 15px;
-}
-
-.btn-white-pill, .btn-green-pill {
-  padding: 18px 45px; 
-  border-radius: 100px;
-  font-family: var(--font-juturu);
-  font-weight: 700; 
-  font-size: 16px; 
-  text-decoration: none;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding-top: 120px;
+}
+
+/* Görüntünün üzerindeki dinamik neon parlamaları koruyun */
+.hero-glow-top-left,
+.hero-glow-bottom-right {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(191, 215, 48, 0.95) 0%,
+    rgba(191, 215, 48, 0.55) 22%,
+    rgba(191, 215, 48, 0.18) 45%,
+    rgba(191, 215, 48, 0) 72%
+  );
+  filter: blur(38px);
+  z-index: 1; /* Görüntünün üzerinde kalması için */
+}
+
+.hero-glow-top-left {
+  top: -180px;
+  left: -180px;
+}
+
+.hero-glow-bottom-right {
+  right: -180px;
+  bottom: -180px;
+}
+
+/* ADIM 3: Yan hapları ve butonları hassas bir şekilde katmanlayın */
+.hero-main-layout {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1600px;
+  display: grid;
+  grid-template-columns: 1fr 650px 1fr;
+  align-items: center;
+  gap: 20px;
+  padding: 0 40px;
+  /* BURASI EKLENDİ: Tüm içerik ızgarasını da 60px aşağı ittik */
+  top: 60px; 
+}
+
+.side-pills {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  /* BURASI EKLENDİ: Tüm bloğu iç düzenini bozmadan blok halinde yukarı çeker */
+  margin-top: -180px; 
+}
+
+.left-side {
+  align-items: flex-end;
+  padding-top: 40px;
+}
+
+.right-side {
+  align-items: flex-start;
+  padding-top: 40px;
+}
+
+/* ADIM 2: Hapları Görseldeki Beyaz Karttan Uzaklaştırıyoruz (Senin ayarların aynı kalıyor) */
+.left-side .pill-item:nth-child(1) { margin-right: 10px; }
+.left-side .pill-item:nth-child(2) { margin-right: 70px; }
+.left-side .pill-item:nth-child(3) { margin-right: -10px; }
+
+.right-side .pill-item:nth-child(1) { margin-left: 10px; }
+.right-side .pill-item:nth-child(2) { margin-left: 70px; }
+.right-side .pill-item:nth-child(3) { margin-left: -10px; }
+
+/* Önceki adımdaki hap boyutlarını koruyun */
+.pill-item {
+  min-width: 220px; /* 180px'den büyütüldü */
+  height: 56px; /* 48px'den büyütüldü */
+  border-radius: 16px; 
+  background: var(--accent);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px; /* 14px'den büyütüldü, daha okunaklı */
+  font-weight: 600; /* Yazıyı biraz daha dolgunlaştırdık */
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,0.9),
+    0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Orta kart alanı (HTML'de metin yok, sadece butonlar hassas bir şekilde yerleştirildi) */
+.card-unit {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ADIM 3: Butonları Yazının Altına Doğru İtiyoruz */
+.card-action-buttons {
+  display: flex;
+  gap: 24px; 
+  position: relative;
+  top: 45px; 
+}
+
+/* Önceki adımdaki buton boyutlarını koruyun, orantılı */
+.pill-btn-green {
+  min-width: 170px; /* 120px'den büyütüldü */
+  height: 48px; /* 36px'den büyütüldü */
+  border-radius: 999px;
+  background: #bfd730;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 20px; /* 12px'den büyütüldü */
+  font-weight: 600;
+  padding: 0 24px; 
+  box-shadow: none;
   border: none;
 }
 
-.btn-white-pill {
-  background: var(--white);
-  color: var(--black); 
-}
-
-.btn-green-pill {
-  background: var(--accent);
-  color: var(--white);
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-.btn-white-pill:hover, .btn-green-pill:hover {
+.pill-btn-green:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  opacity: 0.92;
 }
 
-/* Sol Alt Logo */
+/* Sağdaki yuvarlak ok (Daha zarif boyut, hassas konumlandırma) */
+.floating-up-arrow {
+  position: fixed; /* absolute yerine fixed yaptık ki hep ekranda kalsın */
+  right: 40px;
+  bottom: 40px; /* Ekranın sağ altına sabitledik (istersen top: 50% bırakıp sağ ortada da tutabilirsin) */
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: #bfd730;
+  color: #0b0d1d;
+  font-size: 32px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  z-index: 9999; /* Diğer tüm bölümlerin (footer, projeler) üstünde kalması için çok yüksek bir değer verdik */
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.floating-up-arrow:hover {
+  transform: translateY(-5px); /* Üzerine gelince tatlı bir şekilde yukarı zıplasın */
+  background: #cff032; /* Rengi hafif açılsın */
+}
+
 .hero-corner-logo {
   position: absolute;
-  bottom: 30px;
-  left: 40px;
+  /* Görüntünün o kısmına hassas bir şekilde yerleştirin */
+  left: 42px;
+  bottom: 18px;
+  z-index: 3;
 }
 
-/* MOBİL AYARLAR */
-@media (max-width: 900px) {
-  .hero-split {
-    height: auto;
-    min-height: 80vh;
-    padding: 60px 0;
+/* ADIM 5: Mobilde bozulmaması için yeni planla uyumlu düzenleme */
+@media (max-width: 1100px) {
+  .hero-main-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 30px 20px;
   }
-  .bg-green { display: none; }
-  .hero-container { 
-    max-width: 100%; 
-    padding: 0 20px; 
-    text-align: center; 
+
+  .side-pills {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
   }
-  .hero-buttons { justify-content: center; }
+
+  .left-side,
+  .right-side {
+    align-items: center;
+    padding-top: 0;
+  }
+
+  .left-side .pill-item,
+  .right-side .pill-item {
+    margin: 0 !important;
+  }
+
+  /* Orta kart alanı mobil için orantılı genişler */
+  .card-unit {
+    width: 100%;
+    max-width: 480px;
+  }
+
+  /* Butonları mobil için birleştirin/küçültün */
+  .card-action-buttons {
+    position: relative;
+    top: 40px; /* Mobil için hassas bir şekilde yerleştirin */
+    gap: 16px;
+  }
+
+  .floating-up-arrow {
+    display: none;
+  }
 }
-
-
 /* ─── BRAND SHOWCASE ─── */
 .brand-section {
   padding: 100px 6% 0px 6%;
@@ -364,6 +466,8 @@ a, button { cursor: pointer; }
   background: #1a1a1a;
   box-shadow: 0 30px 60px rgba(0,0,0,0.5);
   cursor: grab;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .main-img {
@@ -384,6 +488,7 @@ a, button { cursor: pointer; }
   background: #111;
   border: 1px solid rgba(255,255,255,0.05);
   overflow: hidden;
+  border-radius: 8px;
 }
 
 /* Açılı Deste Katmanları */
@@ -430,6 +535,7 @@ a, button { cursor: pointer; }
   text-transform: uppercase;
   text-decoration: none;
   transition: all 0.3s ease;
+  border-radius: 4px;
 }
 
 .btn-all-work:hover {
@@ -445,8 +551,8 @@ a, button { cursor: pointer; }
 }
 
 .dot {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   background: #333;
   border-radius: 50%;
   cursor: pointer;
@@ -483,7 +589,7 @@ a, button { cursor: pointer; }
 
 .footer-logo-img {
   object-fit: contain;
-  filter: brightness(1); /* Logonun renklerini korur */
+  filter: brightness(1);
 }
 
 .footer-copy {
@@ -508,7 +614,6 @@ a, button { cursor: pointer; }
   border-bottom: 1px solid var(--accent);
 }
 
-/* Mobil için */
 @media (max-width: 768px) {
   .footer-main {
     flex-direction: column;
@@ -663,23 +768,39 @@ a, button { cursor: pointer; }
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
-  nav {
-    grid-template-columns: 1fr auto;
-    padding: 0 20px;
+  .nav-inner {
+    min-width: auto;
+    width: 90%;
+    gap: 20px;
+    padding: 10px 15px;
   }
-  .nav-right { display: none; }
+  
+  .nav-links {
+    gap: 5px;
+  }
+  
+  .nav-links a {
+    padding: 8px 12px;
+    font-size: 10px;
+  }
+  
+  .btn-ai {
+    padding: 10px 20px !important;
+  }
 
-  .hero { padding: 60px 20px 48px; }
-  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .hero-center-focus { 
+    padding: 60px 20px 48px; 
+  }
 
-  .slide { min-width: calc(100% / 2); }
-  .ok-badge { min-width: calc(100% / 2); }
-
-  .section-header { padding: 20px; }
-
-  .about-grid { grid-template-columns: 1fr; }
-  .about-left { border-right: none; border-bottom: 1px solid var(--border); padding: 60px 24px; }
-  .about-right { padding: 60px 24px; }
-
-  footer { flex-direction: column; gap: 16px; text-align: center; padding: 40px 20px; }
+  .about-grid { 
+    grid-template-columns: 1fr; 
+  }
+  .about-left { 
+    border-right: none; 
+    border-bottom: 1px solid var(--border); 
+    padding: 60px 24px; 
+  }
+  .about-right { 
+    padding: 60px 24px; 
+  }
 }

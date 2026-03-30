@@ -230,41 +230,47 @@ function BrandShowcase({ brand }: { brand: Brand }) {
 export default function HomePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="hero-split">
-        {/* Arkaplanı ikiye bölen yapı */}
-        <div className="split-bg">
-          <div className="bg-black"></div>
-          <div className="bg-green"></div>
-        </div>
+  {/* Hero */}
+      <section className="hero-center-focus">
+        <div className="hero-glow-top-left"></div>
+        <div className="hero-glow-bottom-right"></div>
 
-        {/* İçerik Katmanı */}
-        <div className="hero-container">
-          <div className="hero-text-block">
-            {/* DEFINED - İnce (Thin) */}
-            <h1 className="hero-title-top">DEFINED</h1>
-            
-            {/* BY DETAIL - Kalın (Black) ve Arkaplanlı */}
-            <div className="hero-title-bottom-wrapper">
-              <span className="hero-title-bottom">BY DETAIL</span>
+        <div className="hero-main-layout">
+          
+          <div className="side-pills left-side">
+            <div className="pill-item">Social Media Ads</div>
+            <div className="pill-item">AI Image Gen</div>
+            <div className="pill-item">Product Packaging</div>
+          </div>
+
+          {/* ORTA KART ALANI: Metinler ve gölgeler silindi, sadece butonlar kaldı */}
+          <div className="card-unit">
+            <div className="card-action-buttons">
+              <a href="#work" className="pill-btn-green">Çalışmaları Gör</a>
+              <a href="/contact" className="pill-btn-green">İletişime Geç</a>
             </div>
           </div>
 
-          {/* Butonlar */}
-          <div className="hero-buttons">
-            <a href="#work" className="btn-white-pill">Çalışmaları Gör</a>
-            <a href="/contact" className="btn-green-pill">İletişime Geç</a>
+          <div className="side-pills right-side">
+            <div className="pill-item">Motion Design</div>
+            <div className="pill-item">Event Identity</div>
+            <div className="pill-item">AI Video Creation</div>
           </div>
+        </div>
 
-          {/* Sol Alt Logo (Attığın görseldeki gibi) */}
-          <div className="hero-corner-logo">
-            <Image 
-              src="/logos/workgreen.svg" 
-              alt="OMR Work" 
-              width={140} 
-              height={50} 
-            />
-          </div>
+        <button 
+    className="floating-up-arrow" 
+    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+  >
+    ↑
+  </button>
+        <div className="hero-corner-logo">
+          <Image
+            src="/logos/workgreen.svg"
+            alt="OMR Work"
+            width={130}
+            height={52}
+          />
         </div>
       </section>
     
@@ -283,3 +289,4 @@ export default function HomePage() {
     </>
   )
 }
+
