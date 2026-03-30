@@ -64,8 +64,7 @@ const marqueeLogos = [
   { src: '/logos/codagelogo.svg', alt: 'Codage' },
   { src: '/logos/avonlogo.svg', alt: 'Marka 3' },
   { src: '/logos/codagelogo.svg', alt: 'Marka 4' },
-  { src: '/logos/avonlogo.svg', alt: 'Marka 5' },
-  { src: '/logos/codagelogo.svg', alt: 'Marka 6' },
+  { src: '/logos/navlogo.svg', alt: 'Marka 5' },
 ]
 
 // ─── Marquee ───

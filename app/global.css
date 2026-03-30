@@ -152,25 +152,31 @@ a, button { cursor: pointer; }
   margin-bottom: 40px;
   border-top: none; 
   border-bottom: none;
-  background: transparent; 
-  padding: 60px 0; 
+  background: var(--accent); 
+  padding: 40px 0; /* 60'tan 40'a düşürüldü - Sadece biraz küçüldü */
   overflow: hidden;
   position: relative;
-  
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 15%,
-    black 85%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 15%,
-    black 85%,
-    transparent 100%
-  );
+}
+
+.marquee-wrapper::before,
+.marquee-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 250px; 
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.marquee-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, var(--accent) 0%, transparent 100%);
+}
+
+.marquee-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, var(--accent) 0%, transparent 100%);
 }
 
 .marquee-track {
@@ -184,17 +190,15 @@ a, button { cursor: pointer; }
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 180px;  
-  height: 60px;  
-  margin: 0 40px;
-  filter: grayscale(1) brightness(0.8);
-  opacity: 0.6;
-  transition: all 0.5s ease;
+  width: 160px;   /* 180'den 160'a - Hafif daraltıldı */
+  height: 45px;   /* 60'tan 45'e - Kibarlaştırıldı */
+  margin: 0 35px; /* Boşluklar çok az daraltıldı */
+  filter: brightness(0) invert(1); 
+  opacity: 1; 
+  transition: all 0.3s ease;
 }
 
 .logo-container:hover {
-  opacity: 1;
-  filter: grayscale(0) brightness(1);
   transform: scale(1.1);
 }
 
@@ -202,7 +206,6 @@ a, button { cursor: pointer; }
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-
 /* HERO */
 /* ADIM 1: Arka plan görselini 60px aşağı kaydırıyoruz */
 .hero-center-focus {
@@ -335,7 +338,7 @@ a, button { cursor: pointer; }
   display: flex;
   gap: 24px; 
   position: relative;
-  top: 45px; 
+  top: 45px;
 }
 
 /* Önceki adımdaki buton boyutlarını koruyun, orantılı */
@@ -354,11 +357,23 @@ a, button { cursor: pointer; }
   padding: 0 24px; 
   box-shadow: none;
   border: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
 }
 
 .pill-btn-green:hover {
-  transform: translateY(-2px);
-  opacity: 0.92;
+  /* Hafifçe yukarı kalkma */
+  transform: translateY(-5px); 
+  
+  /* Katmanlı Yeşil Glow Efekti */
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.2), /* Temel derinlik gölgesi */
+    0 0 15px rgba(191, 215, 48, 0.7), /* Çekirdek parlama */
+    0 0 30px rgba(191, 215, 48, 0.4); /* Dışa yayılan yumuşak parlama */
+    
+  /* İstersen üzerine gelince rengini çok hafif açabilirsin */
+  background: #c9e03a; 
+  opacity: 1; /* Önceki kodda varsa opacity düşüşünü engeller, daha net parlar */
 }
 
 /* Sağdaki yuvarlak ok (Daha zarif boyut, hassas konumlandırma) */
@@ -441,6 +456,8 @@ a, button { cursor: pointer; }
 }
 /* ─── BRAND SHOWCASE ─── */
 .brand-section {
+  position: relative; /* Parlamayı içine hapsetmek için */
+  overflow: hidden; 
   padding: 100px 6% 0px 6%;
   background: var(--black);
   display: flex;
@@ -449,7 +466,37 @@ a, button { cursor: pointer; }
   border-bottom: 1px solid var(--border);
 }
 
+.brand-section::after {
+ content: "";
+  position: absolute;
+  /* Glow'un merkezini tam sağ kenara ve dikeyde ortaya sabitliyoruz */
+  top: 50%;
+  right: -400px; /* 800px genişliğin yarısını dışarı attık, ışık yandan sızacak */
+  transform: translateY(-50%);
+  
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  
+  /* HERO'daki efsaneleşmiş renk geçişi (Birebir aynı değerler) */
+  background: radial-gradient(
+    circle,
+    rgba(191, 215, 48, 0.95) 0%,   /* Tam neon parlaklık */
+    rgba(191, 215, 48, 0.55) 22%,  /* Güçlü yayılım */
+    rgba(191, 215, 48, 0.18) 45%,  /* Yumuşama */
+    rgba(191, 215, 48, 0) 72%      /* Sönme */
+  );
+  
+  /* Hero'daki blur ve opaklık ayarları */
+  filter: blur(45px); 
+  opacity: 0.7; /* Çok patlamasın ama Hero kadar güçlü olsun */
+  z-index: 0;
+  pointer-events: none;
+}
+
 .section-container {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 100px;
@@ -586,56 +633,106 @@ a, button { cursor: pointer; }
 
 /* ─── FOOTER LAYOUT STYLES ─── */
 .footer-main {
+  background: var(--accent); /* Senin canlı yeşilin */
+  padding: 40px 6%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Üç bloğu ekrana yayar */
   align-items: center;
-  padding: 60px 6%;
-  background: var(--black);
-  border-top: 1px solid var(--border);
-  margin-top: 0px;
+  position: relative;
+  min-height: 140px;
+  box-sizing: border-box;
 }
 
+/* 1. SOL BLOK: Logo */
 .footer-left {
+  flex: 1;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  justify-content: flex-start;
 }
 
 .footer-logo-img {
-  object-fit: contain;
-  filter: brightness(1);
+  height: 42px;
+  width: auto;
 }
 
-.footer-copy {
-  font-size: 11px;
-  color: var(--mid);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+/* 2. ORTA BLOK: Sosyal Medya Kartı (Asla Büyümez) */
+.footer-social-wrapper {
+  flex: 0 0 auto; /* Esnemeyi yasakladık, sadece içeriği kadar yer kaplar */
+  display: flex;
+  justify-content: center;
+  z-index: 5;
+}
+
+.footer-social-card {
+  display: flex;
+  gap: 22px; /* İkonlar arası boşluk */
+  background: white;
+  padding: 12px 26px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+  width: fit-content; /* Kutu ikonlara yapışır, devasa olmaz */
+  align-items: center;
+}
+
+/* Dışarıdan çağırdığın SVG İkonları Zapt Etme */
+.footer-social-icon {
+  width: 22px; 
+  height: 22px;
+  display: block;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+  /* Eğer ikonların kendi rengi varsa ve siyah yapmak istersen: */
+  /* filter: brightness(0); */
+}
+
+.footer-social-card a:hover .footer-social-icon {
+  transform: scale(1.15); /* Hover efekti */
+}
+
+/* 3. SAĞ BLOK: Mail Adresi */
+.footer-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .footer-contact {
-  font-family: var(--font-juturu);
-  font-size: clamp(16px, 2vw, 24px);
-  font-weight: 700;
-  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+  color: #111321;
   text-decoration: none;
-  transition: color 0.3s ease;
-  border-bottom: 1px solid transparent;
+  white-space: nowrap; /* Mailin alt satıra düşmesini engeller */
+  transition: opacity 0.2s;
 }
 
 .footer-contact:hover {
-  color: var(--accent);
-  border-bottom: 1px solid var(--accent);
+  opacity: 0.7;
 }
 
-@media (max-width: 768px) {
+/* 4. TELİF YAZISI: En Alt Orta */
+.footer-copy {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(0,0,0,0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* MOBİL AYARI: Ekran küçülünce üst üste binerler */
+@media (max-width: 850px) {
   .footer-main {
     flex-direction: column;
-    gap: 40px;
+    gap: 30px;
+    padding: 60px 20px;
     text-align: center;
   }
-  .footer-left {
-    align-items: center;
+  .footer-left, .footer-right, .footer-social-wrapper {
+    justify-content: center;
+    flex: none;
   }
 }
 
