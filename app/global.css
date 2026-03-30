@@ -344,7 +344,7 @@ a, button { cursor: pointer; }
   gap: 24px; 
   position: relative;
   /* 45px'i 80px yaparak butonları daha aşağı çektik */
-  margin-top: 100px; 
+  margin-top: 110px; 
   justify-content: center; /* Yatayda tam orta */
   width: 100%;
 }
@@ -366,6 +366,7 @@ a, button { cursor: pointer; }
   border: none;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: pointer;
+  padding-bottom: 5px
 }
 
 .pill-btn-green:hover {
