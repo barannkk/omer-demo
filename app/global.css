@@ -150,14 +150,13 @@ a, button { cursor: pointer; }
 .marquee-wrapper {
   margin-top: 0; 
   margin-bottom: 40px;
-  border-top: none; 
-  border-bottom: none;
   background: var(--accent); 
-  padding: 40px 0; /* 60'tan 40'a düşürüldü - Sadece biraz küçüldü */
+  padding: 60px 0; /* ESKİ BOYUT: Tekrar o dolgun haline döndü */
   overflow: hidden;
   position: relative;
 }
 
+/* Kenar yumuşatmalar (Sahte gölgeler) */
 .marquee-wrapper::before,
 .marquee-wrapper::after {
   content: "";
@@ -190,16 +189,18 @@ a, button { cursor: pointer; }
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 160px;   /* 180'den 160'a - Hafif daraltıldı */
-  height: 45px;   /* 60'tan 45'e - Kibarlaştırıldı */
-  margin: 0 35px; /* Boşluklar çok az daraltıldı */
+  /* LOGOLAR KÜÇÜLTÜLDÜ: Bar büyük, logolar zarif */
+  width: 120px;   
+  height: 30px;   
+  /* Senin 90px margin ayarın */
+  margin: 0 90px; 
   filter: brightness(0) invert(1); 
   opacity: 1; 
   transition: all 0.3s ease;
 }
 
 .logo-container:hover {
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
 @keyframes marquee {
@@ -266,7 +267,7 @@ a, button { cursor: pointer; }
 }
 
 .side-pills {
-  display: flex;
+  display: flex;  
   flex-direction: column;
   gap: 80px;
   /* BURASI EKLENDİ: Tüm bloğu iç düzenini bozmadan blok halinde yukarı çeker */
@@ -294,21 +295,25 @@ a, button { cursor: pointer; }
 
 /* Önceki adımdaki hap boyutlarını koruyun */
 .pill-item {
-  min-width: 220px; /* 180px'den büyütüldü */
-  height: 56px; /* 48px'den büyütüldü */
+  min-width: 220px;
+  height: 56px;
   border-radius: 16px; 
   background: var(--accent);
   color: #ffffff;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 25px; /* 14px'den büyütüldü, daha okunaklı */
-  font-weight: 600; /* Yazıyı biraz daha dolgunlaştırdık */
+  align-items: center; /* DİKEY ORTALAMA */
+  justify-content: center; /* YATAY ORTALAMA */
+  font-size: 25px;
+  font-weight: 600;
+  /* Yazının tam ortada kalması için line-height'ı height ile eşitleyelim */
+  line-height: 56px; 
   box-shadow:
     inset 0 0 0 2px rgba(255,255,255,0.9),
     0 8px 20px rgba(0,0,0,0.3);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
   cursor: pointer;
+  text-align: center;
+  padding-bottom: 5px
 }
 
 .pill-item:hover {
@@ -338,24 +343,26 @@ a, button { cursor: pointer; }
   display: flex;
   gap: 24px; 
   position: relative;
-  top: 45px;
+  /* 45px'i 80px yaparak butonları daha aşağı çektik */
+  margin-top: 100px; 
+  justify-content: center; /* Yatayda tam orta */
+  width: 100%;
 }
-
 /* Önceki adımdaki buton boyutlarını koruyun, orantılı */
 .pill-btn-green {
-  min-width: 170px; /* 120px'den büyütüldü */
-  height: 48px; /* 36px'den büyütüldü */
+  min-width: 170px;
+  height: 48px;
   border-radius: 999px;
   background: #bfd730;
   color: #fff;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: center; /* DİKEY ORTALAMA */
+  justify-content: center; /* YATAY ORTALAMA */
   text-decoration: none;
-  font-size: 25px; /* 12px'den büyütüldü */
+  font-size: 25px;
   font-weight: 600;
   padding: 0 24px; 
-  box-shadow: none;
+  line-height: 48px; /* Dikey denge */
   border: none;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: pointer;
