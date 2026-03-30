@@ -304,6 +304,20 @@ a, button { cursor: pointer; }
   box-shadow:
     inset 0 0 0 2px rgba(255,255,255,0.9),
     0 8px 20px rgba(0,0,0,0.3);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+  cursor: pointer;
+}
+
+.pill-item:hover {
+  /* Hafifçe yukarı zıplama ve çok çok az büyüme */
+  transform: translateY(-5px) scale(1.02); 
+  
+  /* İçteki beyaz çizgiyi koruyup, dışarıya yeşil glow veriyoruz */
+  box-shadow:
+    inset 0 0 0 2px rgba(255,255,255,1), /* İç beyazlık hafif netleşsin */
+    0 10px 25px rgba(0,0,0,0.2), /* Alt gölge */
+    0 0 20px var(--accent), /* İlk yeşil parlama */
+    0 0 40px rgba(191, 215, 48, 0.6); /* Dışa doğru yayılan daha yumuşak yeşil parlama */
 }
 
 /* Orta kart alanı (HTML'de metin yok, sadece butonlar hassas bir şekilde yerleştirildi) */
