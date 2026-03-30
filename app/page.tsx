@@ -258,12 +258,15 @@ export default function HomePage() {
           </div>
         </div>
 
-        <button 
-    className="floating-up-arrow" 
-    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-  >
-    ↑
-  </button>
+       <button className="floating-up-arrow" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+  <Image 
+    src="/icons/ok.svg" 
+    alt="Yukarı Çık" 
+    width={28} 
+    height={28} 
+    style={{ objectFit: 'contain' }}
+  />
+</button>
         <div className="hero-corner-logo">
           <Image
             src="/logos/workgreen.svg"

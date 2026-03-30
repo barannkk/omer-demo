@@ -399,31 +399,28 @@ a, button { cursor: pointer; }
   opacity: 1; /* Önceki kodda varsa opacity düşüşünü engeller, daha net parlar */
 }
 
-/* Sağdaki yuvarlak ok (Daha zarif boyut, hassas konumlandırma) */
+/* Başka hiçbir floating-up-arrow kodu kalmasın, sadece bu! */
 .floating-up-arrow {
-  position: fixed; /* absolute yerine fixed yaptık ki hep ekranda kalsın */
+  position: fixed; 
   right: 40px;
-  bottom: 40px; /* Ekranın sağ altına sabitledik (istersen top: 50% bırakıp sağ ortada da tutabilirsin) */
+  bottom: 40px; 
   width: 56px;
   height: 56px;
   border-radius: 50%;
   border: none;
-  background: #bfd730;
-  color: #0b0d1d;
-  font-size: 32px;
-  font-weight: 700;
+  background: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  z-index: 9999; /* Diğer tüm bölümlerin (footer, projeler) üstünde kalması için çok yüksek bir değer verdik */
+  z-index: 9999; 
   cursor: pointer;
   transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .floating-up-arrow:hover {
-  transform: translateY(-5px); /* Üzerine gelince tatlı bir şekilde yukarı zıplasın */
-  background: #cff032; /* Rengi hafif açılsın */
+  transform: translateY(-5px); 
+  background: #cff032; 
 }
 
 .hero-corner-logo {
