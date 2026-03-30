@@ -923,3 +923,66 @@ a, button { cursor: pointer; }
     padding: 60px 24px; 
   }
 }
+
+/* ─── ULTRA SMOOTH ENTRANCE ANIMATIONS ─── */
+
+@keyframes smoothSlideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-120px) scale(0.9);
+    filter: blur(10px); /* Hafif bulanık başlar */
+  }
+  60% {
+    opacity: 0.8;
+    transform: translateX(10px) scale(1.02); /* Çok hafif ileri geçer (esneme) */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes smoothSlideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(120px) scale(0.9);
+    filter: blur(10px);
+  }
+  60% {
+    opacity: 0.8;
+    transform: translateX(-10px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Animasyonları Uygulama (Gecikmeleri hafif artırdık ki akış belli olsun) */
+.left-side .pill-item {
+  opacity: 0;
+  animation: smoothSlideInLeft 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.right-side .pill-item {
+  opacity: 0;
+  animation: smoothSlideInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Stagger (Sırayla dizilme) - Süreleri biraz daha açtık */
+.side-pills .pill-item:nth-child(1) { animation-delay: 0.1s; }
+.side-pills .pill-item:nth-child(2) { animation-delay: 0.25s; }
+.side-pills .pill-item:nth-child(3) { animation-delay: 0.4s; }
+
+/* Orta Butonlar için de aynı smoothluk */
+@keyframes smoothPopUp {
+  0% { opacity: 0; transform: translateY(40px) scale(0.95); filter: blur(5px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+.card-action-buttons {
+  opacity: 0;
+  animation: smoothPopUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+}
