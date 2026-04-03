@@ -70,18 +70,17 @@ const marqueeLogos = [
 function Marquee() {
   const quadrupled = [...marqueeLogos, ...marqueeLogos, ...marqueeLogos, ...marqueeLogos];
   return (
-    <div className="relative m-0 overflow-hidden bg-[#bfd730] py-[60px] before:pointer-events-none before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-[250px] before:bg-gradient-to-r before:from-[#bfd730] before:to-transparent after:pointer-events-none after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-[250px] after:bg-gradient-to-l after:from-[#bfd730] after:to-transparent">
+    <div className="relative m-0 overflow-hidden bg-[#bfd730] py-[60px] 2xl:py-[90px] before:pointer-events-none before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-[250px] 2xl:before:w-[400px] before:bg-gradient-to-r before:from-[#bfd730] before:to-transparent after:pointer-events-none after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-[250px] 2xl:after:w-[400px] after:bg-gradient-to-l after:from-[#bfd730] after:to-transparent transition-all duration-500">
       <div className="flex w-max items-center animate-[marquee_50s_linear_infinite]">
         {quadrupled.map((logo, i) => (
           <div key={i} className="shrink-0">
-            {/* Kutu boyutları (120x30) ve boşluklar (90px) orijinaliyle tamamen aynı */}
-            <div className="mx-[90px] flex h-[30px] w-[120px] shrink-0 items-center justify-center opacity-100 brightness-0 invert transition-all duration-300 ease-in hover:scale-[1.15]">
+            {/* 2xl: değerleri ile logoların boyutunu ve aralığını dev ekranlar için büyüttük */}
+            <div className="mx-[90px] 2xl:mx-[140px] flex h-[30px] 2xl:h-[45px] w-[120px] 2xl:w-[180px] shrink-0 items-center justify-center opacity-100 brightness-0 invert transition-all duration-300 ease-in hover:scale-[1.15]">
               <Image 
                 src={logo.src} 
                 alt={logo.alt} 
                 width={200} 
                 height={80} 
-                /* İŞTE SADECE BURASI DEĞİŞTİ: scale-[1.5] ile sadece logoyu görsel olarak büyütüyoruz */
                 className="scale-[1.7]" 
                 style={{ objectFit: 'contain' }}
               />
@@ -243,102 +242,89 @@ useEffect(() => {
   ];
    return (
     <>
- <section className="relative w-full h-screen overflow-hidden bg-[#0a0a0f] pt-20 pb-10 font-juturu">
+<section className="relative w-full h-[100svh] lg:h-screen overflow-hidden bg-[#0a0a0f] font-juturu">
   
   {isClient && (
-  <video 
-    autoPlay 
-    loop 
-    muted 
-    playsInline 
-    preload="auto" 
-    className="absolute inset-0 w-full h-full object-cover z-0"
-  >
-    <source src="/videos/herovideo.mp4" type="video/mp4" />
-  </video>
-)}
-
+    <video 
+      autoPlay loop muted playsInline preload="auto" 
+      className="absolute inset-0 w-full h-full object-cover z-0"
+    >
+      <source src="/videos/herovideo.mp4" type="video/mp4" />
+    </video>
+  )}
   {/* Video Üstü Karartma */}
   <div className="absolute inset-0 z-[1] bg-black/30" />
 
-  {/* SOL ALT LOGO */}
+  {/* SOL ALT LOGO (2K'da w-[180px] olur) */}
   <div className="absolute left-6 lg:left-12 bottom-6 lg:bottom-10 z-20">
     <Image 
       src="/logos/workgreen.svg"
       alt="OMR Work Logo" 
       width={140} 
       height={55} 
-      className="opacity-90 hover:opacity-100 transition-opacity"
+      className="opacity-90 hover:opacity-100 transition-opacity w-[100px] lg:w-[140px] 2xl:w-[180px] h-auto"
     />
   </div>
 
-  {/* 2. ANA İÇERİK ALANI */}
-  <div className="relative z-10 w-full h-full max-w-[1500px] mx-auto flex flex-col lg:flex-row items-center justify-between px-6 md:px-12">
+  {/* ANA KAPSAYICI (2K'da max-w-[1920px] olur) */}
+  <div className="relative z-10 w-full h-full max-w-[1500px] 2xl:max-w-[1920px] mx-auto flex flex-col lg:flex-row items-center justify-between px-6 md:px-12 2xl:px-20 transition-all duration-500">
     
-    {/* ── SOL: YAZILAR ── */}
-    <div className="flex flex-col justify-center text-left w-full lg:w-1/2 pb-10 lg:pb-0 z-20">
+    {/* ── SOL: YAZILAR ── 
+        Mobilde: Ekranın üst yarısını kaplar (h-[50%]), Navbar'a çarpmasın diye pt-28 eklendi.
+        Masaüstü: Senin orijinal kodunla tamamen aynı (lg:h-full lg:pt-0).
+        2K: text-[130px] ve daha geniş max-w ile devleşir.
+    */}
+    <div className="flex flex-col justify-center text-left w-full lg:w-1/2 h-[50%] lg:h-full pt-28 lg:pt-0 z-20">
       <h1 className="text-white font-bold leading-[1.05] tracking-tight mb-4 lg:mb-6">
-        <span className="block text-[50px] md:text-[80px] lg:text-[100px] animate-text-slide" style={{ animationDelay: '0.2s' }}>
+        <span className="block text-[50px] md:text-[80px] lg:text-[100px] 2xl:text-[130px] animate-text-slide" style={{ animationDelay: '0.2s' }}>
           Design that
         </span>
-        <span className="block text-[50px] md:text-[80px] lg:text-[100px] animate-text-slide" style={{ animationDelay: '0.4s' }}>
+        <span className="block text-[50px] md:text-[80px] lg:text-[100px] 2xl:text-[130px] animate-text-slide" style={{ animationDelay: '0.4s' }}>
           feels expensive
         </span>
       </h1>
-      <p className="text-[#e0e0e0] text-[18px] lg:text-[22px] font-light max-w-[450px] animate-text-slide" style={{ animationDelay: '0.6s' }}>
+      <p className="text-[#e0e0e0] text-[18px] lg:text-[22px] 2xl:text-[28px] font-light max-w-[450px] 2xl:max-w-[600px] animate-text-slide" style={{ animationDelay: '0.6s' }}>
         I build visuals that make brands stand out, not just exist.
       </p>
     </div>
 
-    {/* ── SAĞ: TELEFON VE PİLLER ── */}
-    <div className="w-full lg:w-1/2 h-full relative z-10">
-      {/* TELEFONUN ANA KAPSAYICISI - HİÇ DOKUNULMADI */}
-      <div className="absolute top-1/2 -translate-y-1/2 right-[-30%] lg:right-[-50%] w-[900px] lg:w-[1300px] flex items-center justify-center pointer-events-none">
+   {/* ── SAĞ: TELEFON VE PİLLER ── */}
+    <div className="w-full lg:w-1/2 h-[50%] lg:h-full relative z-10">
+      
+      {/* İşte senin düzeltilen kısmın + 2K (2xl) eklentileri: 
+          - scale-[0.90] md:scale-[0.8] lg:scale-100 kısımlarına DOKUNULMADI.
+          - Sadece dev ekranlar için 2xl:scale-125 ve 2xl:right-[-45%] eklendi.
+      */}
+      <div className="absolute top-[30%] lg:top-1/2 -translate-y-1/2 right-[-60%] md:right-[-40%] lg:right-[-50%] 2xl:right-[-45%] w-[900px] lg:w-[1300px] flex items-center justify-center pointer-events-none scale-[0.90] md:scale-[0.8] lg:scale-100 2xl:scale-125 transition-all duration-500">
         
-  {/* PİLLER KAPSAYICISI */}
-<div className="absolute z-10 left-[48%] lg:left-[53%] flex flex-col gap-3 lg:gap-4 items-start pointer-events-none">
-  
-  {pillTexts.map((text, i) => {
-    // Toplam eleman sayısından i'yi çıkararak ters bir çarpan oluşturuyoruz
-    // i = 0 (en üst) -> çarpan en büyük
-    // i = son (en alt) -> çarpan en küçük
-    const gapMultiplier = pillTexts.length - i;
+        {/* PİLLER KAPSAYICISI (Masaüstü oranına kilitlendi: left-[53%]) */}
+        <div className="absolute z-10 left-[53%] flex flex-col gap-3 lg:gap-4 items-start pointer-events-none">
+          {pillTexts.map((text, i) => {
+            const gapMultiplier = pillTexts.length - i;
+            return (
+              <div 
+                key={i} 
+                /* 2K'da haplar da hafif kalınlaşır: 2xl:h-[60px] */
+                className="pill-item-anim h-[45px] lg:h-[50px] 2xl:h-[60px] rounded-full bg-[#bfd730] text-[#111321] flex items-center shadow-xl transition-all hover:bg-white hover:scale-105 cursor-pointer pointer-events-auto w-fit border-2 border-white"
+                style={{
+                  animationDelay: `${0.8 + (i * 0.15)}s`,
+                  paddingLeft: `${30 + (gapMultiplier * 15)}px`, 
+                  paddingRight: '35px',
+                  marginLeft: '-50px',
+                  transform: `translateX(-${i * 10}px)`
+                }}
+              >
+                {/* 2K'da yazılar büyür: 2xl:text-[26px] */}
+                <span className="text-[#FFFFFF] text-[16px] md:text-[18px] lg:text-[22px] 2xl:text-[26px] font-bold leading-none tracking-tighter whitespace-nowrap">
+                  {text}
+                </span>
+              </div>
+            );
+          })}
+        </div>
 
-    return (
-      <div 
-        key={i} 
-        className="pill-item-anim h-[45px] lg:h-[50px] rounded-full bg-[#bfd730] text-[#111321] flex items-center shadow-xl transition-all hover:bg-white hover:scale-105 cursor-pointer pointer-events-auto w-fit border-2 border-white"
-        style={{
-          animationDelay: `${0.8 + (i * 0.15)}s`,
-          
-          // SOLDAN BOŞLUK: Aşağı indikçe (i arttıkça) bu değer azalır.
-          // En üstteki pill'de boşluk: 30 + (6 * 15) = 120px
-          // En alttaki pill'de boşluk: 30 + (1 * 15) = 45px
-          paddingLeft: `${30 + (gapMultiplier * 15)}px`, 
-          
-          // Sağ tarafta metinden sonraki sabit boşluk
-          paddingRight: '35px',
-          
-          // Pill'in sol ucunu telefonun arkasına gömen negatif marj
-          // Bunu sabit tutuyoruz ki hepsi telefonun içinden çıkıyormuş gibi görünsün
-          marginLeft: '-50px',
-          
-          // Eğer pillerin sağ tarafları da merdiven gibi (diagonal) kalsın istersen 
-          // ufak bir transform ekleyebiliriz:
-          transform: `translateX(-${i * 10}px)`
-        }}
-      >
-        <span className="text-white text-[16px] md:text-[18px] lg:text-[22px] font-bold leading-none tracking-tighter whitespace-nowrap">
-          {text}
-        </span>
-      </div>
-    );
-  })}
-
-</div>
-
-        {/* TELEFON MOCKUP - HİÇ DOKUNULMADI */}
-        <div className="relative z-20 w-full h-auto drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)] pointer-events-auto left-[-30%] lg:left-[-4.5%]">
+        {/* TELEFON MOCKUP (Masaüstü oranına kilitlendi: left-[-4.5%]) */}
+        <div className="relative z-20 w-full h-auto drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)] pointer-events-auto left-[-4.5%]">
           <Image 
             src="/images/mockup.png" 
             alt="OMR Work Phone Mockup" 
