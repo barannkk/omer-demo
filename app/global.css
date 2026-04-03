@@ -1,3 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+ @keyframes textSlideInSoft {
+    0% { 
+      opacity: 0; 
+      transform: translateX(-60px); /* Mesafe 20'den 60'a çıktı, daha süzülerek gelir */
+      filter: blur(10px);           /* Başlangıçta hafif bulanık olması geçişi yumuşatır */
+    }
+    100% { 
+      opacity: 1; 
+      transform: translateX(0); 
+      filter: blur(0);
+    }
+  }
+
+  .animate-text-slide {
+    opacity: 0;
+    /* Süreyi 1.5s'den 2.5s'ye çıkardık, çok daha yavaş ve klas bir giriş yapar */
+    animation: textSlideInSoft 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  
+  /* ── PİL ANİMASYONU ── */
+  @keyframes pillSlideOutSoft {
+    0% {
+      opacity: 0;
+      transform: translateX(-150px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .pill-item-anim {
+    opacity: 0;
+    animation: pillSlideOutSoft 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+/* ─── NAV ─── */
+.nav-link-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link-hover:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.8), 
+    0 0 20px rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.nav-link-active {
+  box-shadow: 0 0 0 2px #111321 !important;
+  background: transparent !important;
+  color: #111321 !important;
+}
+
+.btn-ai-hover {
+  transition: all 0.3s ease;
+}
+
+.btn-ai-hover:hover {
+  background: #1a1d33 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ─── NAV MOBİL ─── */
+@media (max-width: 900px) {
+  .nav-mobile-inner {
+    min-width: unset !important;
+    width: 90vw !important;
+    gap: 16px !important;
+    padding: 10px 16px !important;
+    flex-wrap: wrap;
+    justify-content: space-between !important;
+  }
+
+  .nav-links-mobile {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 4px;
+    padding: 8px 0 4px 0;
+  }
+
+  .nav-links-mobile.open {
+    display: flex;
+  }
+
+  .nav-hamburger {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #111321;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+}
+
+@media (min-width: 901px) {
+  .nav-hamburger {
+    display: none !important;
+  }
+
+  .nav-links-mobile {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
 :root {
   --black: #111321;
   --white: #f0f0f0;
@@ -47,436 +174,12 @@ a, button { cursor: pointer; }
   color: var(--black);
 }
 
-/* ─── FLOATING NAVIGATION (EXACT MATCH) ─── */
-.floating-nav {
-  position: fixed;
-  top: 44px; 
-  left: 50%;
-  transform: translateX(-50%); 
-  width: auto; 
-  z-index: 1000;
-  pointer-events: none; 
-}
 
-.nav-inner {
-  display: flex;
-  align-items: center; 
-  justify-content: space-between; 
-  gap: 70px; 
-  padding: 14px 16px 14px 26px; 
-  pointer-events: auto; 
-  background: #bfd730; 
-  border-radius: 100px; 
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); 
-  min-width: 1000px; 
-}
 
-/* Logo Düzenlemesi */
-.nav-logo {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  flex-shrink: 0;
-}
 
-.nav-img {
-  height: 32px;
-  width: auto;
-  object-fit: contain;
-  filter: none; 
-}
-
-.nav-links {
-  display: flex;
-  align-items: center; 
-  gap: 8px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.nav-links a {
-  font-size: 15px; 
-  font-weight: 800; 
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--black); 
-  padding: 10px 22px;
-  display: flex;
-  align-items: center;
-  border-radius: 50px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  z-index: 1;
-}
-
-.nav-links a.glow-white:hover {
-  background: rgba(255, 255, 255, 0.15); 
-  text-shadow: none !important; 
-  box-shadow: 
-    0 0 10px rgba(255, 255, 255, 0.8), 
-    0 0 20px rgba(255, 255, 255, 0.4);
-  transform: translateY(-2px);
-}
-
-.btn-ai {
-  background: #111321 !important; 
-  color: #bfd730 !important; 
-  border: 1px solid #111321;
-  padding: 13px 32px !important;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  border-radius: 50px;
-  transition: all 0.3s ease;
-  font-weight: 800;
-}
-
-.btn-ai:hover {
-  background: #1a1d33 !important;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
-}
-
-.nav-links a.active {
-  background: var(--black);
-  color: var(--accent);
-  box-shadow: 0 0 15px rgba(191, 215, 48, 0.3);
-}
-
-/* ─── MARQUEE ─── */
-.marquee-wrapper {
-  margin-top: 0; 
-  margin-bottom: 0px;
-  background: var(--accent); 
-  padding: 60px 0; /* ESKİ BOYUT: Tekrar o dolgun haline döndü */
-  overflow: hidden;
-  position: relative;
-}
-
-/* Kenar yumuşatmalar (Sahte gölgeler) */
-.marquee-wrapper::before,
-.marquee-wrapper::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 250px; 
-  height: 100%;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.marquee-wrapper::before {
-  left: 0;
-  background: linear-gradient(to right, var(--accent) 0%, transparent 100%);
-}
-
-.marquee-wrapper::after {
-  right: 0;
-  background: linear-gradient(to left, var(--accent) 0%, transparent 100%);
-}
-
-.marquee-track {
-  display: flex;
-  align-items: center;
-  width: max-content;
-  animation: marquee 50s linear infinite; 
-}
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* LOGOLAR KÜÇÜLTÜLDÜ: Bar büyük, logolar zarif */
-  width: 120px;   
-  height: 30px;   
-  /* Senin 90px margin ayarın */
-  margin: 0 90px; 
-  filter: brightness(0) invert(1); 
-  opacity: 1; 
-  transition: all 0.3s ease;
-}
-
-.logo-container:hover {
-  transform: scale(1.15);
-}
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-/* HERO */
-/* ADIM 1: Arka plan görselini 60px aşağı kaydırıyoruz */
-.hero-center-focus {
-  position: relative;
-  min-height: 100vh;
-  background-image: url('/images/hero.png'); 
-  background-size: cover;
-  /* BURASI DEĞİŞTİ: Görseli dikeyde merkezden 60px aşağı ittik */
-  background-position: center calc(50% + 60px); 
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 120px;
-}
-
-/* Görüntünün üzerindeki dinamik neon parlamaları koruyun */
-.hero-glow-top-left,
-.hero-glow-bottom-right {
-  position: absolute;
-  width: 520px;
-  height: 520px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(191, 215, 48, 0.95) 0%,
-    rgba(191, 215, 48, 0.55) 22%,
-    rgba(191, 215, 48, 0.18) 45%,
-    rgba(191, 215, 48, 0) 72%
-  );
-  filter: blur(38px);
-  z-index: 1; /* Görüntünün üzerinde kalması için */
-}
-
-.hero-glow-top-left {
-  top: -180px;
-  left: -180px;
-}
-
-.hero-glow-bottom-right {
-  right: -180px;
-  bottom: -180px;
-}
-
-/* ADIM 3: Yan hapları ve butonları hassas bir şekilde katmanlayın */
-.hero-main-layout {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 1600px;
-  display: grid;
-  grid-template-columns: 1fr 650px 1fr;
-  align-items: center;
-  gap: 20px;
-  padding: 0 40px;
-  /* BURASI EKLENDİ: Tüm içerik ızgarasını da 60px aşağı ittik */
-  top: 60px; 
-}
-
-.side-pills {
-  display: flex;  
-  flex-direction: column;
-  gap: 80px;
-  /* BURASI EKLENDİ: Tüm bloğu iç düzenini bozmadan blok halinde yukarı çeker */
-  margin-top: -180px; 
-}
-
-.left-side {
-  align-items: flex-end;
-  padding-top: 40px;
-}
-
-.right-side {
-  align-items: flex-start;
-  padding-top: 40px;
-}
-
-/* ADIM 2: Hapları Görseldeki Beyaz Karttan Uzaklaştırıyoruz (Senin ayarların aynı kalıyor) */
-.left-side .pill-item:nth-child(1) { margin-right: 10px; }
-.left-side .pill-item:nth-child(2) { margin-right: 70px; }
-.left-side .pill-item:nth-child(3) { margin-right: -10px; }
-
-.right-side .pill-item:nth-child(1) { margin-left: 10px; }
-.right-side .pill-item:nth-child(2) { margin-left: 70px; }
-.right-side .pill-item:nth-child(3) { margin-left: -10px; }
-
-/* Önceki adımdaki hap boyutlarını koruyun */
-.pill-item {
-  min-width: 220px;
-  height: 56px;
-  border-radius: 16px; 
-  background: var(--accent);
-  color: #ffffff;
-  display: flex;
-  align-items: center; /* DİKEY ORTALAMA */
-  justify-content: center; /* YATAY ORTALAMA */
-  font-size: 25px;
-  font-weight: 600;
-  /* Yazının tam ortada kalması için line-height'ı height ile eşitleyelim */
-  line-height: 56px; 
-  box-shadow:
-    inset 0 0 0 2px rgba(255,255,255,0.9),
-    0 8px 20px rgba(0,0,0,0.3);
- transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  cursor: pointer;
-  text-align: center;
-  padding-bottom: 5px
-}
-
-/* 1. Ortak Hover Efektleri (Glow ve Renk) */
-.left-side .pill-item:hover,
-.right-side .pill-item:hover {
-  background: #c9e03a;
-  box-shadow:
-    inset 0 0 0 2px rgba(255, 255, 255, 1),
-    0 15px 25px rgba(0, 0, 0, 0.4),
-    0 0 20px rgba(191, 215, 48, 0.7),
-    0 0 45px rgba(191, 215, 48, 0.4) !important;
-  z-index: 50; /* Üzerine gelince diğerlerinin üstüne çıksın */
-}
-
-/* 2. SOL TARAF HAPLAR (Genel Eğilim: Sola ve Aşağı) */
-/* 1. Hap (Üst): Sol-Aşağı kayar, Sola yatar (-6 derece) */
-.left-side .pill-item:nth-child(1):hover { transform: translate(calc(-30px - 10px), 10px) rotate(-6deg) scale(1.03) !important; }
-/* 2. Hap (Orta): Sağa-Aşağı kayar, Sağa yatar (+6 derece) - ZİKZAK BAŞLAR */
-.left-side .pill-item:nth-child(2):hover { transform: translate(calc(15px + 10px), 10px) rotate(6deg) scale(1.03) !important; }
-/* 3. Hap (Alt): Sol-Aşağı kayar, Sola yatar (-6 derece) */
-.left-side .pill-item:nth-child(3):hover { transform: translate(calc(-15px - 10px), 10px) rotate(-6deg) scale(1.03) !important; }
-
-/* 3. SAĞ TARAF HAPLAR (Genel Eğilim: Sağa ve Aşağı) */
-/* 1. Hap (Üst): Sağa-Aşağı kayar, Sağa yatar (+6 derece) */
-.right-side .pill-item:nth-child(1):hover { transform: translate(calc(30px + 10px), 10px) rotate(6deg) scale(1.03) !important; }
-/* 2. Hap (Orta): Sola-Aşağı kayar, Sola yatar (-6 derece) - ZİKZAK BAŞLAR */
-.right-side .pill-item:nth-child(2):hover { transform: translate(calc(-15px - 10px), 10px) rotate(-6deg) scale(1.03) !important; }
-/* 3. Hap (Alt): Sağa-Aşağı kayar, Sağa yatar (+6 derece) */
-.right-side .pill-item:nth-child(3):hover { transform: translate(calc(15px + 10px), 10px) rotate(6deg) scale(1.03) !important; }
-/* Orta kart alanı (HTML'de metin yok, sadece butonlar hassas bir şekilde yerleştirildi) */
-.card-unit {
-  position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-/* ADIM 3: Butonları Yazının Altına Doğru İtiyoruz */
-.card-action-buttons {
-  display: flex;
-  gap: 24px; 
-  position: relative;
-  /* 45px'i 80px yaparak butonları daha aşağı çektik */
-  margin-top: 110px; 
-  justify-content: center; /* Yatayda tam orta */
-  width: 100%;
-}
-/* Önceki adımdaki buton boyutlarını koruyun, orantılı */
-.pill-btn-green {
-  min-width: 170px;
-  height: 48px;
-  border-radius: 999px;
-  background: #bfd730;
-  color: #fff;
-  display: flex;
-  align-items: center; /* DİKEY ORTALAMA */
-  justify-content: center; /* YATAY ORTALAMA */
-  text-decoration: none;
-  font-size: 25px;
-  font-weight: 600;
-  padding: 0 24px; 
-  line-height: 48px; /* Dikey denge */
-  border: none;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  cursor: pointer;
-  padding-bottom: 5px
-}
-
-.pill-btn-green:hover {
-  /* Hafifçe yukarı kalkma */
-  transform: translateY(-5px); 
-  
-  /* Katmanlı Yeşil Glow Efekti */
-  box-shadow: 
-    0 10px 20px rgba(0, 0, 0, 0.2), /* Temel derinlik gölgesi */
-    0 0 15px rgba(191, 215, 48, 0.7), /* Çekirdek parlama */
-    0 0 30px rgba(191, 215, 48, 0.4); /* Dışa yayılan yumuşak parlama */
-    
-  /* İstersen üzerine gelince rengini çok hafif açabilirsin */
-  background: #c9e03a; 
-  opacity: 1; /* Önceki kodda varsa opacity düşüşünü engeller, daha net parlar */
-}
-
-/* Başka hiçbir floating-up-arrow kodu kalmasın, sadece bu! */
-.floating-up-arrow {
-  position: fixed; 
-  right: 40px;
-  bottom: 40px; 
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: none;
-  background: var(--accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  z-index: 9999; 
-  cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease;
-}
-
-.floating-up-arrow:hover {
-  transform: translateY(-5px); 
-  background: #cff032; 
-}
-
-.hero-corner-logo {
-  position: absolute;
-  /* Görüntünün o kısmına hassas bir şekilde yerleştirin */
-  left: 42px;
-  bottom: 18px;
-  z-index: 3;
-}
-
-/* ADIM 5: Mobilde bozulmaması için yeni planla uyumlu düzenleme */
-@media (max-width: 1100px) {
-  .hero-main-layout {
-    grid-template-columns: 1fr;
-    gap: 30px;
-    padding: 30px 20px;
-  }
-
-  .side-pills {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-  }
-
-  .left-side,
-  .right-side {
-    align-items: center;
-    padding-top: 0;
-  }
-
-  .left-side .pill-item,
-  .right-side .pill-item {
-    margin: 0 !important;
-  }
-
-  /* Orta kart alanı mobil için orantılı genişler */
-  .card-unit {
-    width: 100%;
-    max-width: 480px;
-  }
-
-  /* Butonları mobil için birleştirin/küçültün */
-  .card-action-buttons {
-    position: relative;
-    top: 40px; /* Mobil için hassas bir şekilde yerleştirin */
-    gap: 16px;
-  }
-
-  .floating-up-arrow {
-    display: none;
-  }
-}
 /* ─── BRAND SHOWCASE ─── */
 .brand-section {
-  position: relative; /* Parlamayı içine hapsetmek için */
+  position: relative;
   overflow: hidden; 
   padding: 100px 6% 0px 6%;
   background: var(--black);
@@ -489,27 +192,21 @@ a, button { cursor: pointer; }
 .brand-section::after {
  content: "";
   position: absolute;
-  /* Glow'un merkezini tam sağ kenara ve dikeyde ortaya sabitliyoruz */
   top: 50%;
-  right: -400px; /* 800px genişliğin yarısını dışarı attık, ışık yandan sızacak */
+  right: -400px;
   transform: translateY(-50%);
-  
   width: 800px;
   height: 800px;
   border-radius: 50%;
-  
-  /* HERO'daki efsaneleşmiş renk geçişi (Birebir aynı değerler) */
   background: radial-gradient(
     circle,
-    rgba(191, 215, 48, 0.95) 0%,   /* Tam neon parlaklık */
-    rgba(191, 215, 48, 0.55) 22%,  /* Güçlü yayılım */
-    rgba(191, 215, 48, 0.18) 45%,  /* Yumuşama */
-    rgba(191, 215, 48, 0) 72%      /* Sönme */
+    rgba(191, 215, 48, 0.95) 0%, 
+    rgba(191, 215, 48, 0.55) 22%, 
+    rgba(191, 215, 48, 0.18) 45%, 
+    rgba(191, 215, 48, 0) 72% 
   );
-  
-  /* Hero'daki blur ve opaklık ayarları */
   filter: blur(45px); 
-  opacity: 0.7; /* Çok patlamasın ama Hero kadar güçlü olsun */
+  opacity: 0.7;
   z-index: 0;
   pointer-events: none;
 }
@@ -539,7 +236,6 @@ a, button { cursor: pointer; }
   perspective: 1200px;
 }
 
-/* Aktif Kart */
 .active-card-wrapper {
   position: absolute;
   inset: 0;
@@ -557,7 +253,6 @@ a, button { cursor: pointer; }
   height: 100%;
 }
 
-/* Sabit Deste */
 .static-stack-bg {
   position: absolute;
   inset: 0;
@@ -572,7 +267,6 @@ a, button { cursor: pointer; }
   border-radius: 8px;
 }
 
-/* Açılı Deste Katmanları */
 .layer-near {
   transform: translate3d(20px, 0, -100px) rotateZ(3deg);
   z-index: 5;
@@ -585,7 +279,6 @@ a, button { cursor: pointer; }
   opacity: 0.3;
 }
 
-/* Sağ Taraf Tipografi */
 .brand-title {
   font-family: var(--font-display);
   font-size: clamp(50px, 8vw, 100px);
@@ -653,17 +346,16 @@ a, button { cursor: pointer; }
 
 /* ─── FOOTER LAYOUT STYLES ─── */
 .footer-main {
-  background: var(--accent); /* Senin canlı yeşilin */
+  background: var(--accent); 
   padding: 40px 6%;
   display: flex;
-  justify-content: space-between; /* Üç bloğu ekrana yayar */
+  justify-content: space-between; 
   align-items: center;
   position: relative;
   min-height: 140px;
   box-sizing: border-box;
 }
 
-/* 1. SOL BLOK: Logo */
 .footer-left {
   flex: 1;
   display: flex;
@@ -675,9 +367,8 @@ a, button { cursor: pointer; }
   width: auto;
 }
 
-/* 2. ORTA BLOK: Sosyal Medya Kartı (Asla Büyümez) */
 .footer-social-wrapper {
-  flex: 0 0 auto; /* Esnemeyi yasakladık, sadece içeriği kadar yer kaplar */
+  flex: 0 0 auto; 
   display: flex;
   justify-content: center;
   z-index: 5;
@@ -685,31 +376,27 @@ a, button { cursor: pointer; }
 
 .footer-social-card {
   display: flex;
-  gap: 22px; /* İkonlar arası boşluk */
+  gap: 22px; 
   background: white;
   padding: 12px 26px;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-  width: fit-content; /* Kutu ikonlara yapışır, devasa olmaz */
+  width: fit-content; 
   align-items: center;
 }
 
-/* Dışarıdan çağırdığın SVG İkonları Zapt Etme */
 .footer-social-icon {
   width: 22px; 
   height: 22px;
   display: block;
   object-fit: contain;
   transition: transform 0.2s ease;
-  /* Eğer ikonların kendi rengi varsa ve siyah yapmak istersen: */
-  /* filter: brightness(0); */
 }
 
 .footer-social-card a:hover .footer-social-icon {
-  transform: scale(1.15); /* Hover efekti */
+  transform: scale(1.15); 
 }
 
-/* 3. SAĞ BLOK: Mail Adresi */
 .footer-right {
   flex: 1;
   display: flex;
@@ -721,7 +408,7 @@ a, button { cursor: pointer; }
   font-weight: 800;
   color: #111321;
   text-decoration: none;
-  white-space: nowrap; /* Mailin alt satıra düşmesini engeller */
+  white-space: nowrap; 
   transition: opacity 0.2s;
 }
 
@@ -729,7 +416,6 @@ a, button { cursor: pointer; }
   opacity: 0.7;
 }
 
-/* 4. TELİF YAZISI: En Alt Orta */
 .footer-copy {
   position: absolute;
   bottom: 12px;
@@ -742,7 +428,6 @@ a, button { cursor: pointer; }
   letter-spacing: 1px;
 }
 
-/* MOBİL AYARI: Ekran küçülünce üst üste binerler */
 @media (max-width: 850px) {
   .footer-main {
     flex-direction: column;
@@ -897,56 +582,17 @@ a, button { cursor: pointer; }
 
 .social-link:hover { color: var(--accent); }
 
-/* ─── RESPONSIVE ─── */
-@media (max-width: 900px) {
-  .nav-inner {
-    min-width: auto;
-    width: 90%;
-    gap: 20px;
-    padding: 10px 15px;
-  }
-  
-  .nav-links {
-    gap: 5px;
-  }
-  
-  .nav-links a {
-    padding: 8px 12px;
-    font-size: 20px;
-  }
-  
-  .btn-ai {
-    padding: 10px 20px !important;
-  }
-
-  .hero-center-focus { 
-    padding: 60px 20px 48px; 
-  }
-
-  .about-grid { 
-    grid-template-columns: 1fr; 
-  }
-  .about-left { 
-    border-right: none; 
-    border-bottom: 1px solid var(--border); 
-    padding: 60px 24px; 
-  }
-  .about-right { 
-    padding: 60px 24px; 
-  }
-}
-
 /* ─── ULTRA SMOOTH ENTRANCE ANIMATIONS ─── */
 
 @keyframes smoothSlideInLeft {
   0% {
     opacity: 0;
     transform: translateX(-120px) scale(0.9);
-    filter: blur(10px); /* Hafif bulanık başlar */
+    filter: blur(10px); 
   }
   60% {
     opacity: 0.8;
-    transform: translateX(10px) scale(1.02); /* Çok hafif ileri geçer (esneme) */
+    transform: translateX(10px) scale(1.02); 
   }
   100% {
     opacity: 1;
@@ -972,7 +618,6 @@ a, button { cursor: pointer; }
   }
 }
 
-/* Animasyonları Uygulama (Gecikmeleri hafif artırdık ki akış belli olsun) */
 .left-side .pill-item {
   opacity: 0;
   animation: smoothSlideInLeft 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -983,12 +628,10 @@ a, button { cursor: pointer; }
   animation: smoothSlideInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Stagger (Sırayla dizilme) - Süreleri biraz daha açtık */
 .side-pills .pill-item:nth-child(1) { animation-delay: 0.1s; }
 .side-pills .pill-item:nth-child(2) { animation-delay: 0.25s; }
 .side-pills .pill-item:nth-child(3) { animation-delay: 0.4s; }
 
-/* Orta Butonlar için de aynı smoothluk */
 @keyframes smoothPopUp {
   0% { opacity: 0; transform: translateY(40px) scale(0.95); filter: blur(5px); }
   100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
