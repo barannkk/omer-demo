@@ -71,33 +71,33 @@ function Marquee() {
   const quadrupled = [...marqueeLogos, ...marqueeLogos, ...marqueeLogos, ...marqueeLogos];
   return (
     <div className="relative m-0 overflow-hidden bg-[#bfd730] transition-all duration-300
-      /* Kutu Yüksekliği: Mobil -> Tablet -> Masaüstü -> Dev Ekran */
-      py-[30px] md:py-[40px] xl:py-[60px] 2xl:py-[90px]
+      /* Yeşil Barın Yüksekliği: Mobilde daha tok durması için 45px'e çıkarıldı */
+      py-[45px] md:py-[55px] xl:py-[70px] 2xl:py-[90px]
       
-      /* Sol Gölgelendirme (Mobilde çok kalındı, daralttık) */
+      /* Sol Gölgelendirme: Mobilde logoyu erken yutmaması için 40px'e düşürüldü */
       before:pointer-events-none before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:bg-gradient-to-r before:from-[#bfd730] before:to-transparent
-      before:w-[60px] md:before:w-[150px] xl:before:w-[250px] 2xl:before:w-[400px]
+      before:w-[40px] md:before:w-[100px] xl:before:w-[200px] 2xl:before:w-[300px]
       
-      /* Sağ Gölgelendirme */
+      /* Sağ Gölgelendirme: Mobilde 40px'e düşürüldü */
       after:pointer-events-none after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:bg-gradient-to-l after:from-[#bfd730] after:to-transparent
-      after:w-[60px] md:after:w-[150px] xl:after:w-[250px] 2xl:after:w-[400px]
+      after:w-[40px] md:after:w-[100px] xl:after:w-[200px] 2xl:after:w-[300px]
     ">
       <div className="flex w-max items-center animate-[marquee_50s_linear_infinite]">
         {quadrupled.map((logo, i) => (
           <div key={i} className="shrink-0">
             <div className="flex items-center justify-center opacity-100 brightness-0 invert transition-all duration-300 ease-in hover:scale-[1.15]
-              /* Logo Kutusu ve Aralarındaki Boşluklar (Mobil -> Masaüstü) */
-              mx-[30px] md:mx-[60px] xl:mx-[90px] 2xl:mx-[140px]
-              h-[20px] md:h-[25px] xl:h-[30px] 2xl:h-[45px]
-              w-[90px] md:w-[100px] xl:w-[120px] 2xl:w-[180px]
+              /* Logoların Arasındaki Boşluk ve Kutu Boyutları (Mobilde ciddi şekilde büyütüldü) */
+              mx-[45px] md:mx-[70px] xl:mx-[100px] 2xl:mx-[140px]
+              h-[32px] md:h-[40px] xl:h-[50px] 2xl:h-[65px]
+              w-[110px] md:w-[140px] xl:w-[180px] 2xl:w-[240px]
             ">
               <Image 
                 src={logo.src} 
                 alt={logo.alt} 
-                width={200} 
-                height={80} 
-                /* Mobilde patlayan "scale" değerini mobilde 1.2'ye düşürdük, ekrana sığdırdık */
-                className="w-full h-full object-contain scale-[1.2] md:scale-[1.4] xl:scale-[1.7]" 
+                width={300} 
+                height={120} 
+                /* SVG içindeki boşlukları tolere etmek için scale değerleri dengelendi */
+                className="w-full h-full object-contain scale-[1.3] md:scale-[1.4] 2xl:scale-[1.5]" 
               />
             </div>
           </div>
