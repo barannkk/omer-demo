@@ -71,7 +71,7 @@ function Marquee() {
   const quadrupled = [...marqueeLogos, ...marqueeLogos, ...marqueeLogos, ...marqueeLogos];
   return (
     <div className="relative m-0 overflow-hidden bg-[#bfd730] transition-all duration-300
-      py-[20px] md:py-[30px] xl:py-[60px] 2xl:py-[90px]
+      py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[60px]
       
       before:pointer-events-none before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:bg-gradient-to-r before:from-[#bfd730] before:to-transparent
       before:w-[30px] md:before:w-[100px] xl:before:w-[250px] 2xl:before:w-[400px]
