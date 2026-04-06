@@ -2,16 +2,13 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useState } from 'react' // usePathname'e artık gerek kalmadı sildik
 
 const LOGO_PATH = '/logos/navlogo.svg'
 const HAS_LOGO = true
 
 export default function Nav() {
-  const path = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
-  const isActive = (href: string) => path === href
 
   const links = [
     { href: '/', label: 'ANA SAYFA' },
@@ -22,19 +19,22 @@ export default function Nav() {
   return (
     <nav className="fixed top-[10px] left-1/2 -translate-x-1/2 z-[1000] pointer-events-none w-auto transition-all duration-300">
       <div
-        className="nav-mobile-inner flex items-center justify-between pointer-events-auto bg-[#bfd730] rounded-[100px] shadow-[0_8px_32px_rgba(0,0,0,0.3)] flex-wrap transition-all duration-300
+        className={`nav-mobile-inner flex items-center justify-between pointer-events-auto bg-[#bfd730] shadow-[0_8px_32px_rgba(0,0,0,0.3)] flex-wrap transition-all duration-300
+
+          ${menuOpen ? 'rounded-[24px]' : 'rounded-[100px]'}
+          
           /* Standart Masaüstü / Tablet (1024px) */
           gap-[40px] py-[12px] pl-[20px] pr-[14px] min-w-[900px]
           
           /* Yatay Basık Ekranlar (1024x600 vb.) */
           landscape:lg:py-[8px] landscape:lg:min-w-[850px] landscape:lg:gap-[30px]
           
-          /* Orta-Büyük Ekranlar (1280px+): Yatay ekran ezmesini iptal ediyoruz */ 
+          /* Orta-Büyük Ekranlar (1280px+) */ 
           xl:gap-[70px] landscape:xl:gap-[70px] xl:py-[14px] landscape:xl:py-[14px] xl:pl-[26px] xl:pr-[16px] xl:min-w-[1000px] landscape:xl:min-w-[1000px]
           
-          /* Dev Ekranlar (1536px+ ve 1920x1080): Devasa ayarlar geri döndü */ 
+          /* Dev Ekranlar (1536px+ ve 1920x1080) */ 
           2xl:gap-[100px] landscape:2xl:gap-[100px] 2xl:py-[18px] landscape:2xl:py-[18px] 2xl:pl-[32px] 2xl:pr-[20px] 2xl:min-w-[1250px] landscape:2xl:min-w-[1250px]
-        "
+        `}
       >
         {/* LOGO */}
         <Link href="/" aria-label="Ana Sayfa" className="flex items-center shrink-0">
@@ -69,6 +69,8 @@ export default function Nav() {
               <Link
                 href={href} onClick={() => setMenuOpen(false)}
                 className={`nav-link-hover flex items-center rounded-[50px] bg-transparent text-[#111321] no-underline uppercase tracking-[0.05em] font-extrabold transition-all duration-300
+                  
+                  /* Etrafındaki çizgiyi kaldırmak için isActive sildik */
                   
                   /* Boyut Ayarları */
                   text-[14px] px-[16px] py-[8px]
