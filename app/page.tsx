@@ -242,70 +242,89 @@ useEffect(() => {
   ];
    return (
     <>
-<section className="relative w-full h-[100svh] lg:h-screen overflow-hidden bg-[#0a0a0f] font-juturu">
+ <section className="relative w-full h-[100svh] xl:h-screen overflow-hidden bg-[#0a0a0f] font-juturu transition-all duration-300">
   
   {isClient && (
-    <video 
-      autoPlay loop muted playsInline preload="auto" 
-      className="absolute inset-0 w-full h-full object-cover z-0"
-    >
+    <video autoPlay loop muted playsInline preload="auto" className="absolute inset-0 w-full h-full object-cover z-0">
       <source src="/videos/herovideo.mp4" type="video/mp4" />
     </video>
   )}
-  {/* Video Üstü Karartma */}
   <div className="absolute inset-0 z-[1] bg-black/30" />
 
-  {/* SOL ALT LOGO (2K'da w-[180px] olur) */}
-  <div className="absolute left-6 lg:left-12 bottom-6 lg:bottom-10 z-20">
+  {/* SOL ALT LOGO */}
+  <div className="absolute left-6 xl:left-12 bottom-6 xl:bottom-10 z-20">
     <Image 
-      src="/logos/workgreen.svg"
-      alt="OMR Work Logo" 
-      width={140} 
-      height={55} 
-      className="opacity-90 hover:opacity-100 transition-opacity w-[100px] lg:w-[140px] 2xl:w-[180px] h-auto"
+      src="/logos/workgreen.svg" alt="OMR Work Logo" width={140} height={55} 
+      className="opacity-90 hover:opacity-100 transition-opacity w-[100px] md:w-[120px] xl:w-[140px] 2xl:w-[180px] h-auto"
     />
   </div>
 
-  {/* ANA KAPSAYICI (2K'da max-w-[1920px] olur) */}
-  <div className="relative z-10 w-full h-full max-w-[1500px] 2xl:max-w-[1920px] mx-auto flex flex-col lg:flex-row items-center justify-between px-6 md:px-12 2xl:px-20 transition-all duration-500">
+  <div className="relative z-10 w-full h-full max-w-[1500px] 2xl:max-w-[1920px] mx-auto flex flex-col xl:flex-row items-center justify-between px-6 md:px-12 2xl:px-16 transition-all duration-300">
     
-    {/* ── SOL: YAZILAR ── 
-        Mobilde: Ekranın üst yarısını kaplar (h-[50%]), Navbar'a çarpmasın diye pt-28 eklendi.
-        Masaüstü: Senin orijinal kodunla tamamen aynı (lg:h-full lg:pt-0).
-        2K: text-[130px] ve daha geniş max-w ile devleşir.
-    */}
-    <div className="flex flex-col justify-center text-left w-full lg:w-1/2 h-[50%] lg:h-full pt-28 lg:pt-0 z-20">
-      <h1 className="text-white font-bold leading-[1.05] tracking-tight mb-4 lg:mb-6">
-        <span className="block text-[50px] md:text-[80px] lg:text-[100px] 2xl:text-[130px] animate-text-slide" style={{ animationDelay: '0.2s' }}>
+    {/* ── SOL: YAZILAR ── */}
+    <div className="flex flex-col justify-end xl:justify-center text-left w-full xl:w-1/2 h-[45%] xl:h-full z-20 pb-4 xl:pb-0 
+      pt-24 portrait:lg:pt-32 landscape:lg:pt-16 xl:pt-0 landscape:xl:pt-0
+    ">
+      <h1 className="text-white font-bold leading-[1.05] tracking-tight mb-4 xl:mb-6">
+        <span className="block animate-text-slide
+          text-[42px] sm:text-[55px] md:text-[75px] 
+          portrait:lg:text-[85px] landscape:lg:text-[55px] 
+          xl:text-[100px] landscape:xl:text-[100px] 
+          2xl:text-[130px] landscape:2xl:text-[130px]
+        " style={{ animationDelay: '0.2s' }}>
           Design that
         </span>
-        <span className="block text-[50px] md:text-[80px] lg:text-[100px] 2xl:text-[130px] animate-text-slide" style={{ animationDelay: '0.4s' }}>
+        <span className="block animate-text-slide
+          text-[42px] sm:text-[55px] md:text-[75px] 
+          portrait:lg:text-[85px] landscape:lg:text-[55px] 
+          xl:text-[100px] landscape:xl:text-[100px] 
+          2xl:text-[130px] landscape:2xl:text-[130px]
+        " style={{ animationDelay: '0.4s' }}>
           feels expensive
         </span>
       </h1>
-      <p className="text-[#e0e0e0] text-[18px] lg:text-[22px] 2xl:text-[28px] font-light max-w-[450px] 2xl:max-w-[600px] animate-text-slide" style={{ animationDelay: '0.6s' }}>
+      <p className="text-[#e0e0e0] font-light animate-text-slide
+        text-[16px] sm:text-[18px] md:text-[22px] 
+        portrait:lg:text-[22px] landscape:lg:text-[16px] 
+        xl:text-[24px] landscape:xl:text-[24px] 
+        2xl:text-[28px] landscape:2xl:text-[28px] 
+        
+        max-w-[320px] sm:max-w-[450px] md:max-w-[550px] 
+        portrait:lg:max-w-[500px] landscape:lg:max-w-[400px] 
+        xl:max-w-[500px] landscape:xl:max-w-[500px] 
+        2xl:max-w-[600px] landscape:2xl:max-w-[600px]
+      " style={{ animationDelay: '0.6s' }}>
         I build visuals that make brands stand out, not just exist.
       </p>
     </div>
 
    {/* ── SAĞ: TELEFON VE PİLLER ── */}
-    <div className="w-full lg:w-1/2 h-[50%] lg:h-full relative z-10">
+    <div className="w-full xl:w-1/2 h-[55%] xl:h-full flex items-center justify-center relative z-10">
       
-      {/* İşte senin düzeltilen kısmın + 2K (2xl) eklentileri: 
-          - scale-[0.90] md:scale-[0.8] lg:scale-100 kısımlarına DOKUNULMADI.
-          - Sadece dev ekranlar için 2xl:scale-125 ve 2xl:right-[-45%] eklendi.
-      */}
-      <div className="absolute top-[30%] lg:top-1/2 -translate-y-1/2 right-[-60%] md:right-[-40%] lg:right-[-50%] 2xl:right-[-45%] w-[900px] lg:w-[1300px] flex items-center justify-center pointer-events-none scale-[0.90] md:scale-[0.8] lg:scale-100 2xl:scale-125 transition-all duration-500">
+      <div className="relative flex items-center justify-center shrink-0 pointer-events-none transition-all duration-300
+        w-[900px] xl:w-[1300px]
         
-        {/* PİLLER KAPSAYICISI (Masaüstü oranına kilitlendi: left-[53%]) */}
-        <div className="absolute z-10 left-[53%] flex flex-col gap-3 lg:gap-4 items-start pointer-events-none">
+        /* BOYUT AYARLARI */
+        scale-[0.85] sm:scale-[0.90] md:scale-[1.15] 
+        portrait:lg:scale-[1.50] landscape:lg:scale-[0.75] 
+        xl:scale-[1] landscape:xl:scale-[1] 
+        2xl:scale-[1.25] landscape:2xl:scale-[1.25]
+        
+        /* KONUM AYARLARI */
+        translate-x-[-5%] sm:translate-x-[15%] md:translate-x-[-20%] 
+        portrait:lg:translate-x-[-30%] landscape:lg:translate-x-[-10%] 
+        xl:translate-x-0 landscape:xl:translate-x-0 
+        2xl:translate-x-[10%] landscape:2xl:translate-x-[10%]
+      ">
+        
+        {/* PİLLER KAPSAYICISI */}
+        <div className="absolute z-10 left-[53%] flex flex-col gap-3 xl:gap-4 items-start pointer-events-none">
           {pillTexts.map((text, i) => {
             const gapMultiplier = pillTexts.length - i;
             return (
               <div 
                 key={i} 
-                /* 2K'da haplar da hafif kalınlaşır: 2xl:h-[60px] */
-                className="pill-item-anim h-[45px] lg:h-[50px] 2xl:h-[60px] rounded-full bg-[#bfd730] text-[#111321] flex items-center shadow-xl transition-all hover:bg-white hover:scale-105 cursor-pointer pointer-events-auto w-fit border-2 border-white"
+                className="pill-item-anim h-[45px] xl:h-[50px] 2xl:h-[60px] rounded-full bg-[#bfd730] text-[#111321] flex items-center shadow-xl transition-all hover:bg-white hover:scale-105 cursor-pointer pointer-events-auto w-fit border-2 border-white"
                 style={{
                   animationDelay: `${0.8 + (i * 0.15)}s`,
                   paddingLeft: `${30 + (gapMultiplier * 15)}px`, 
@@ -314,8 +333,7 @@ useEffect(() => {
                   transform: `translateX(-${i * 10}px)`
                 }}
               >
-                {/* 2K'da yazılar büyür: 2xl:text-[26px] */}
-                <span className="text-[#FFFFFF] text-[16px] md:text-[18px] lg:text-[22px] 2xl:text-[26px] font-bold leading-none tracking-tighter whitespace-nowrap">
+                <span className="text-[#FFFFFF] text-[16px] md:text-[18px] xl:text-[20px] 2xl:text-[26px] font-bold leading-none tracking-tighter whitespace-nowrap">
                   {text}
                 </span>
               </div>
@@ -323,16 +341,9 @@ useEffect(() => {
           })}
         </div>
 
-        {/* TELEFON MOCKUP (Masaüstü oranına kilitlendi: left-[-4.5%]) */}
+        {/* TELEFON MOCKUP */}
         <div className="relative z-20 w-full h-auto drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)] pointer-events-auto left-[-4.5%]">
-          <Image 
-            src="/images/mockup.png" 
-            alt="OMR Work Phone Mockup" 
-            width={1300} 
-            height={2600} 
-            className="w-full h-auto object-contain" 
-            priority
-          />
+          <Image src="/images/mockup.png" alt="OMR Work Phone Mockup" width={1300} height={2600} className="w-full h-auto object-contain" priority />
         </div>
 
       </div>

@@ -6,8 +6,8 @@
  @keyframes textSlideInSoft {
     0% { 
       opacity: 0; 
-      transform: translateX(-60px); /* Mesafe 20'den 60'a çıktı, daha süzülerek gelir */
-      filter: blur(10px);           /* Başlangıçta hafif bulanık olması geçişi yumuşatır */
+      transform: translateX(-60px); 
+      filter: blur(10px);           
     }
     100% { 
       opacity: 1; 
