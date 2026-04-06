@@ -362,7 +362,7 @@ useEffect(() => {
         </div>
 
         {/* TELEFON MOCKUP */}
-        <div className="relative z-20 w-full h-auto drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)] pointer-events-auto left-[-4.5%]">
+        <div className="relative z-20 w-full h-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.4)] pointer-events-auto left-[-4.5%]">
           <Image src="/images/mockup.png" alt="OMR Work Phone Mockup" width={1300} height={2600} className="w-full h-auto object-contain" priority />
         </div>
 
