@@ -344,7 +344,7 @@ useEffect(() => {
                   transform: `translateX(-${i * 10}px)`
                 }}
               >
-                <span className="text-[#FFFFFF] text-[16px] md:text-[18px] xl:text-[20px] 2xl:text-[26px] font-bold leading-none tracking-tighter whitespace-nowrap">
+                <span className="text-[#FFFFFF] text-[18px] md:text-[18px] xl:text-[20px] 2xl:text-[26px] font-medium leading-none whitespace-nowrap">
                   {text}
                 </span>
               </div>
