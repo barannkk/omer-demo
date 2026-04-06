@@ -84,7 +84,7 @@ function Marquee() {
         {quadrupled.map((logo, i) => (
           <div key={i} className="shrink-0">
             <div className="flex items-center justify-center opacity-100 brightness-0 invert transition-all duration-300 ease-in hover:scale-[1.15]
-              mx-[20px] md:mx-[50px] xl:mx-[90px] 2xl:mx-[140px]
+              mx-[10px] md:mx-[50px] xl:mx-[90px] 2xl:mx-[140px]
               h-[20px] md:h-[25px] xl:h-[30px] 2xl:h-[45px]
               w-[90px] md:w-[100px] xl:w-[120px] 2xl:w-[180px]
             ">
