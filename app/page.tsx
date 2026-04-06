@@ -70,19 +70,34 @@ const marqueeLogos = [
 function Marquee() {
   const quadrupled = [...marqueeLogos, ...marqueeLogos, ...marqueeLogos, ...marqueeLogos];
   return (
-    <div className="relative m-0 overflow-hidden bg-[#bfd730] py-[60px] 2xl:py-[90px] before:pointer-events-none before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-[250px] 2xl:before:w-[400px] before:bg-gradient-to-r before:from-[#bfd730] before:to-transparent after:pointer-events-none after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-[250px] 2xl:after:w-[400px] after:bg-gradient-to-l after:from-[#bfd730] after:to-transparent transition-all duration-500">
+    <div className="relative m-0 overflow-hidden bg-[#bfd730] transition-all duration-300
+      /* Kutu Yüksekliği: Mobil -> Tablet -> Masaüstü -> Dev Ekran */
+      py-[30px] md:py-[40px] xl:py-[60px] 2xl:py-[90px]
+      
+      /* Sol Gölgelendirme (Mobilde çok kalındı, daralttık) */
+      before:pointer-events-none before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:bg-gradient-to-r before:from-[#bfd730] before:to-transparent
+      before:w-[60px] md:before:w-[150px] xl:before:w-[250px] 2xl:before:w-[400px]
+      
+      /* Sağ Gölgelendirme */
+      after:pointer-events-none after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:bg-gradient-to-l after:from-[#bfd730] after:to-transparent
+      after:w-[60px] md:after:w-[150px] xl:after:w-[250px] 2xl:after:w-[400px]
+    ">
       <div className="flex w-max items-center animate-[marquee_50s_linear_infinite]">
         {quadrupled.map((logo, i) => (
           <div key={i} className="shrink-0">
-            {/* 2xl: değerleri ile logoların boyutunu ve aralığını dev ekranlar için büyüttük */}
-            <div className="mx-[90px] 2xl:mx-[140px] flex h-[30px] 2xl:h-[45px] w-[120px] 2xl:w-[180px] shrink-0 items-center justify-center opacity-100 brightness-0 invert transition-all duration-300 ease-in hover:scale-[1.15]">
+            <div className="flex items-center justify-center opacity-100 brightness-0 invert transition-all duration-300 ease-in hover:scale-[1.15]
+              /* Logo Kutusu ve Aralarındaki Boşluklar (Mobil -> Masaüstü) */
+              mx-[30px] md:mx-[60px] xl:mx-[90px] 2xl:mx-[140px]
+              h-[20px] md:h-[25px] xl:h-[30px] 2xl:h-[45px]
+              w-[90px] md:w-[100px] xl:w-[120px] 2xl:w-[180px]
+            ">
               <Image 
                 src={logo.src} 
                 alt={logo.alt} 
                 width={200} 
                 height={80} 
-                className="scale-[1.7]" 
-                style={{ objectFit: 'contain' }}
+                /* Mobilde patlayan "scale" değerini mobilde 1.2'ye düşürdük, ekrana sığdırdık */
+                className="w-full h-full object-contain scale-[1.2] md:scale-[1.4] xl:scale-[1.7]" 
               />
             </div>
           </div>
