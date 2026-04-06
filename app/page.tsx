@@ -284,7 +284,7 @@ useEffect(() => {
       pt-4 sm:pt-8 md:pt-12 
       portrait:lg:pt-16 landscape:lg:pt-8 xl:pt-0 landscape:xl:pt-0
     ">
-      <h1 className="text-white font-bold leading-[1.05] tracking-tight mb-4 xl:mb-6">
+      <h1 className="text-white font-bold leading-[1.05] tracking-tight mb-[5px] xl:mb-6">
         <span className="block animate-text-slide
           text-[42px] sm:text-[55px] md:text-[75px] 
           portrait:lg:text-[85px] landscape:lg:text-[55px] 
