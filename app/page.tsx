@@ -71,14 +71,12 @@ function Marquee() {
   const quadrupled = [...marqueeLogos, ...marqueeLogos, ...marqueeLogos, ...marqueeLogos];
   return (
     <div className="relative m-0 overflow-hidden bg-[#bfd730] transition-all duration-300
-      /* Masaüstünde eski orijinal kalınlık (60px/90px), Mobilde ince (20px) */
       py-[20px] md:py-[30px] xl:py-[60px] 2xl:py-[90px]
       
-      /* Sol Gölgelendirme (Masaüstünde eski orijinal boyut) */
       before:pointer-events-none before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:bg-gradient-to-r before:from-[#bfd730] before:to-transparent
       before:w-[30px] md:before:w-[100px] xl:before:w-[250px] 2xl:before:w-[400px]
       
-      /* Sağ Gölgelendirme (Masaüstünde eski orijinal boyut) */
+      
       after:pointer-events-none after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:bg-gradient-to-l after:from-[#bfd730] after:to-transparent
       after:w-[30px] md:after:w-[100px] xl:after:w-[250px] 2xl:after:w-[400px]
     ">
