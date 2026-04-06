@@ -21,6 +21,9 @@ const juturu = localFont({
 export const metadata: Metadata = {
   title: 'Ömer — Creative Design',
   description: 'Marka kimliği, ambalaj ve görsel iletişim tasarımı portfolyosu',
+  icons: {
+    icon: '/icons/favicon.svg', // <-- Burayı yeni dosyana göre değiştir
+  },
   openGraph: {
     title: 'Portfolio — Creative Design',
     description: 'Marka kimliği, ambalaj ve görsel iletişim tasarımı portfolyosu',

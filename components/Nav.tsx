@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState } from 'react' // usePathname'e artık gerek kalmadı sildik
+import { useState } from 'react'
 
 const LOGO_PATH = '/logos/navlogo.svg'
 const HAS_LOGO = true
@@ -40,7 +40,8 @@ export default function Nav() {
         <Link href="/" aria-label="Ana Sayfa" className="flex items-center shrink-0">
           {HAS_LOGO ? (
             <div className="relative transition-all duration-300
-              w-[90px] 
+              /* İŞTE BURASI: Mobilde 70px'e kadar düşüyor, Masaüstü dokunulmadı */
+              w-[70px] sm:w-[80px] md:w-[90px] 
               landscape:lg:w-[85px] 
               xl:w-[100px] landscape:xl:w-[100px] 
               2xl:w-[130px] landscape:2xl:w-[130px]
@@ -69,8 +70,6 @@ export default function Nav() {
               <Link
                 href={href} onClick={() => setMenuOpen(false)}
                 className={`nav-link-hover flex items-center rounded-[50px] bg-transparent text-[#111321] no-underline uppercase tracking-[0.05em] font-extrabold transition-all duration-300
-                  
-                  /* Etrafındaki çizgiyi kaldırmak için isActive sildik */
                   
                   /* Boyut Ayarları */
                   text-[14px] px-[16px] py-[8px]

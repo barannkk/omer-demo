@@ -157,13 +157,13 @@ function BrandShowcase({ brand }: { brand: Brand }) {
             <div className="static-stack-bg">
               <div className="bg-layer layer-far">
                 <Image 
-                  src={brand.projects[nextNextIdx].src || '/placeholder.jpg'} 
+                  src={brand.projects[nextNextIdx].src || '/placeholder.jpeg'} 
                   alt="" fill className="object-cover" draggable="false"
                 />
               </div>
               <div className="bg-layer layer-near">
                 <Image 
-                  src={brand.projects[nextIdx].src || '/placeholder.jpg'} 
+                  src={brand.projects[nextIdx].src || '/placeholder.jpeg'} 
                   alt="" fill className="object-cover" draggable="false"
                 />
               </div>
@@ -262,19 +262,26 @@ useEffect(() => {
   )}
   <div className="absolute inset-0 z-[1] bg-black/30" />
 
-  {/* SOL ALT LOGO */}
-  <div className="absolute left-6 xl:left-12 bottom-6 xl:bottom-10 z-20">
+  {/* SOL ALT LOGO: 
+      Telefon sola kaydığı için logoyu eziyordu. 
+      Logoyu mobilde ve tablette ufalttım (70px-90px) ve iyice köşeye (left-4 bottom-4) çektim. 
+      Masaüstü ayarları orijinal! 
+  */}
+  <div className="absolute left-4 sm:left-6 xl:left-12 bottom-4 sm:bottom-6 xl:bottom-10 z-20 pointer-events-none">
     <Image 
       src="/logos/workgreen.svg" alt="OMR Work Logo" width={140} height={55} 
-      className="opacity-90 hover:opacity-100 transition-opacity w-[100px] md:w-[120px] xl:w-[140px] 2xl:w-[180px] h-auto"
+      className="opacity-90 hover:opacity-100 transition-opacity 
+      w-[70px] sm:w-[85px] md:w-[100px] xl:w-[140px] 2xl:w-[180px] h-auto"
     />
   </div>
 
   <div className="relative z-10 w-full h-full max-w-[1500px] 2xl:max-w-[1920px] mx-auto flex flex-col xl:flex-row items-center justify-between px-6 md:px-12 2xl:px-16 transition-all duration-300">
     
     {/* ── SOL: YAZILAR ── */}
-    <div className="flex flex-col justify-end xl:justify-center text-left w-full xl:w-1/2 h-[45%] xl:h-full z-20 pb-4 xl:pb-0 
-      pt-24 portrait:lg:pt-32 landscape:lg:pt-16 xl:pt-0 landscape:xl:pt-0
+    <div className="flex flex-col justify-center text-left w-full xl:w-1/2 h-[50%] xl:h-full z-20 pb-4 xl:pb-0 
+      /* Navbar'a yaklaşması için mobilde pt değerlerini düşürdüm. Masaüstü dokunulmadı. */
+      pt-12 sm:pt-16 md:pt-24 
+      portrait:lg:pt-32 landscape:lg:pt-16 xl:pt-0 landscape:xl:pt-0
     ">
       <h1 className="text-white font-bold leading-[1.05] tracking-tight mb-4 xl:mb-6">
         <span className="block animate-text-slide
@@ -310,22 +317,23 @@ useEffect(() => {
     </div>
 
    {/* ── SAĞ: TELEFON VE PİLLER ── */}
-    <div className="w-full xl:w-1/2 h-[55%] xl:h-full flex items-center justify-center relative z-10">
+    <div className="w-full xl:w-1/2 h-[50%] xl:h-full flex items-center justify-center relative z-10">
       
       <div className="relative flex items-center justify-center shrink-0 pointer-events-none transition-all duration-300
         w-[900px] xl:w-[1300px]
         
-        /* BOYUT AYARLARI */
+        /* SENİN ORİJİNAL BOYUT AYARLARIN */
         scale-[0.85] sm:scale-[0.90] md:scale-[1.15] 
         portrait:lg:scale-[1.50] landscape:lg:scale-[0.75] 
         xl:scale-[1] landscape:xl:scale-[1] 
         2xl:scale-[1.25] landscape:2xl:scale-[1.25]
         
-        /* KONUM AYARLARI */
+        /* SENİN ORİJİNAL KONUM AYARLARIN (Birebir kopyalandı) */
         translate-x-[-5%] sm:translate-x-[15%] md:translate-x-[-20%] 
         portrait:lg:translate-x-[-30%] landscape:lg:translate-x-[-10%] 
         xl:translate-x-0 landscape:xl:translate-x-0 
-        2xl:translate-x-[10%] landscape:2xl:translate-x-[10%]
+        2xl:translate-x-[10%] landscape:2xl:translate-x-[10%] 
+       -translate-y-[15%] sm:-translate-y-[5%] md:-translate-y-[10%] lg:-translate-y-[5%] xl:translate-y-0
       ">
         
         {/* PİLLER KAPSAYICISI */}
