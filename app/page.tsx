@@ -93,7 +93,7 @@ function Marquee() {
                 alt={logo.alt} 
                 width={200} 
                 height={80} 
-                className="w-full h-full object-contain scale-[1.1] md:scale-[1.5] xl:scale-[1.7]" 
+                className="w-full h-full object-contain scale-[1.0] md:scale-[1.5] xl:scale-[1.7]" 
               />
             </div>
           </div>
