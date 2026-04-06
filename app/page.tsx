@@ -280,7 +280,7 @@ useEffect(() => {
     {/* ── SOL: YAZILAR ── */}
     <div className="flex flex-col justify-center text-left w-full xl:w-1/2 h-[50%] xl:h-full z-20 pb-4 xl:pb-0 
       /* Navbar'a yaklaşması için mobilde pt değerlerini düşürdüm. Masaüstü dokunulmadı. */
-      pt-10 sm:pt-16 md:pt-24 
+      pt-4 sm:pt-16 md:pt-24 
       portrait:lg:pt-32 landscape:lg:pt-16 xl:pt-0 landscape:xl:pt-0
     ">
       <h1 className="text-white font-bold leading-[1.05] tracking-tight mb-4 xl:mb-6">
