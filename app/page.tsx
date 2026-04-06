@@ -349,7 +349,7 @@ useEffect(() => {
                   animationDelay: `${0.8 + (i * 0.15)}s`,
                   paddingLeft: `${30 + (gapMultiplier * 15)}px`, 
                   paddingRight: '35px',
-                  marginLeft: '-50px',
+                  marginLeft: '-40px',
                   transform: `translateX(-${i * 10}px)`
                 }}
               >
