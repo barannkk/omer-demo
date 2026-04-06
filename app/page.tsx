@@ -94,8 +94,7 @@ function Marquee() {
                 alt={logo.alt} 
                 width={200} 
                 height={80} 
-                /* Masaüstünde orijinal scale-[1.7], mobilde kibar scale-[1.3] */
-                className="w-full h-full object-contain scale-[1.3] md:scale-[1.5] xl:scale-[1.7]" 
+                className="w-full h-full object-contain scale-[1] md:scale-[1.5] xl:scale-[1.7]" 
               />
             </div>
           </div>
