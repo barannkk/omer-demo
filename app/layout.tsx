@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   title: 'Ömer — Creative Design',
   description: 'Marka kimliği, ambalaj ve görsel iletişim tasarımı portfolyosu',
   icons: {
-    icon: '/icons/favicon.svg', // <-- Burayı yeni dosyana göre değiştir
+    icon: '/icons/favicon.svg', 
   },
   openGraph: {
     title: 'Portfolio — Creative Design',
@@ -48,7 +48,7 @@ export default function RootLayout({
        <footer className="footer-main">
   {/* SOL */}
   <div className="footer-left">
-    <img src="/logos/workblack.svg" alt="OMR Work" className="footer-logo-img" />
+    <img src="/logos/omr_siyah_logo.svg" alt="OMR Work" className="footer-logo-img" />
   </div>
 
   {/* ORTA */}

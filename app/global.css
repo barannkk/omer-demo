@@ -40,32 +40,28 @@
   }
 }
 /* ─── NAV ─── */
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --accent: #c2e200;
+  --dark: #111321;
+  --gray: #0a0a0a;
+  --mid: #6b6b9a;
+  --border: rgba(194, 226, 0, 0.1);
+  --nav-h: 68px;
+}
+
 .nav-link-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s ease;
 }
 
 .nav-link-hover:hover {
-  background: rgba(255, 255, 255, 0.15) !important;
-  box-shadow: 
-    0 0 10px rgba(255, 255, 255, 0.8), 
-    0 0 20px rgba(255, 255, 255, 0.4);
-  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #fff !important;
 }
 
-.nav-link-active {
-  box-shadow: 0 0 0 2px #111321 !important;
-  background: transparent !important;
-  color: #111321 !important;
-}
-
-.btn-ai-hover {
-  transition: all 0.3s ease;
-}
-
-.btn-ai-hover:hover {
-  background: #1a1d33 !important;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+.btn-proje {
+  transition: all 0.25s ease;
 }
 
 /* ─── NAV MOBİL ─── */
@@ -73,12 +69,11 @@
   .nav-mobile-inner {
     min-width: unset !important;
     width: 90vw !important;
-    gap: 16px !important;
+    gap: 12px !important;
     padding: 10px 16px !important;
     flex-wrap: wrap;
     justify-content: space-between !important;
   }
-
   .nav-links-mobile {
     display: none;
     flex-direction: column;
@@ -86,11 +81,7 @@
     gap: 4px;
     padding: 8px 0 4px 0;
   }
-
-  .nav-links-mobile.open {
-    display: flex;
-  }
-
+  .nav-links-mobile.open { display: flex; }
   .nav-hamburger {
     display: flex !important;
     flex-direction: column;
@@ -101,43 +92,24 @@
     cursor: pointer;
     padding: 4px;
   }
-
   .nav-hamburger span {
     display: block;
     width: 24px;
     height: 2px;
-    background: #111321;
+    background: #fff;
     border-radius: 2px;
     transition: all 0.3s ease;
   }
 }
 
 @media (min-width: 901px) {
-  .nav-hamburger {
-    display: none !important;
-  }
-
+  .nav-hamburger { display: none !important; }
   .nav-links-mobile {
     display: flex !important;
     flex-direction: row !important;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
   }
-}
-
-:root {
-  --black: #111321;
-  --white: #f0f0f0;
-  --accent: #bfd730;
-  --gray: #0a0a2e;
-  --mid: #6b6b9a;
-  --border: rgba(191, 255, 0, 0.1);
-
-  --font-main: var(--font-juturu);
-  --font-display: var(--font-main);
-  --font-body: var(--font-main);
-
-  --nav-h: 68px;
 }
 
 *, *::before, *::after {

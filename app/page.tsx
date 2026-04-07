@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Play, Radio, Package, Fingerprint, Film, Sparkles } from "lucide-react";
 
 // ─── Types ───
 interface Project {
@@ -12,7 +13,7 @@ interface Project {
   year: string
   src: string 
 }
-
+ 
 interface Brand {
   id: string
   name: string
@@ -64,29 +65,31 @@ const marqueeLogos = [
   { src: '/logos/codagelogo.svg', alt: 'Codage' },
   { src: '/logos/avonlogo.svg', alt: 'Marka 3' },
   { src: '/logos/codagelogo.svg', alt: 'Marka 4' },
-  { src: '/logos/navlogo.svg', alt: 'Marka 5' },
+  { src: '/logos/omr_beyaz_logo.svg', alt: 'Marka 5' },
 ]
 
 function Marquee() {
   const quadrupled = [...marqueeLogos, ...marqueeLogos, ...marqueeLogos, ...marqueeLogos];
   return (
-    <div className="relative m-0 overflow-hidden bg-[#bfd730] transition-all duration-300
-      py-[20px] md:py-[30px] xl:py-[40px] 2xl:py-[60px]
+    <div className="relative m-0 overflow-hidden bg-transparent transition-all duration-300
+      py-[20px] md:py-[30px] xl:py-[40px]
       
-      before:pointer-events-none before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:bg-gradient-to-r before:from-[#bfd730] before:to-transparent
-      before:w-[30px] md:before:w-[100px] xl:before:w-[250px] 2xl:before:w-[400px]
+      /* Sol Gradient (Siyah'tan şeffafa) */
+      before:pointer-events-none before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:bg-gradient-to-r before:from-black before:to-transparent
+      before:w-[30px] md:before:w-[100px] xl:before:w-[250px]
       
-      
-      after:pointer-events-none after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:bg-gradient-to-l after:from-[#bfd730] after:to-transparent
-      after:w-[30px] md:after:w-[100px] xl:after:w-[250px] 2xl:after:w-[400px]
+      /* Sağ Gradient (Siyah'tan şeffafa) */
+      after:pointer-events-none after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:bg-gradient-to-l after:from-black after:to-transparent
+      after:w-[30px] md:after:w-[100px] xl:after:w-[250px]
     ">
       <div className="flex w-max items-center animate-[marquee_50s_linear_infinite]">
         {quadrupled.map((logo, i) => (
           <div key={i} className="shrink-0">
+            {/* brightness-0 invert kısmı logoları zaten bembeyaz yapıyor */}
             <div className="flex items-center justify-center opacity-100 brightness-0 invert transition-all duration-300 ease-in hover:scale-[1.15]
-              mx-[10px] md:mx-[50px] xl:mx-[90px] 2xl:mx-[140px]
-              h-[20px] md:h-[25px] xl:h-[30px] 2xl:h-[45px]
-              w-[90px] md:w-[100px] xl:w-[120px] 2xl:w-[180px]
+              mx-[10px] md:mx-[50px] xl:mx-[90px]
+              h-[20px] md:h-[25px] xl:h-[30px]
+              w-[90px] md:w-[100px] xl:w-[120px]
             ">
               <Image 
                 src={logo.src} 
@@ -238,23 +241,24 @@ function BrandShowcase({ brand }: { brand: Brand }) {
 export default function HomePage() {
   const [isClient, setIsClient] = useState(false);
 
-useEffect(() => {
-  setIsClient(true);
-}, []);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
- const pillTexts = [
-    "AI Video Creation",
-    "Social Media Ads",
-    "Product Packing",
-    "Event Identity",
-    "Motion Design",
-    "AI Image Gen"
-    
+  const services = [
+    { icon: <Play size={16} />, label: "AI Video Creation" },
+    { icon: <Radio size={16} />, label: "Social Media Ads" },
+    { icon: <Package size={16} />, label: "Product Packing" },
+    { icon: <Fingerprint size={16} />, label: "Event Identity" },
+    { icon: <Film size={16} />, label: "Motion Design" },
+    { icon: <Sparkles size={16} />, label: "AI Image Gen" },
   ];
-   return (
+
+  return (
     <>
- <section className="relative w-full h-[100svh] xl:h-screen overflow-hidden bg-[#0a0a0f] font-juturu transition-all duration-300">
-  
+    <section className="relative w-full h-[100svh] overflow-hidden bg-black">
+
+  {/* VIDEO ARKAPLAN */}
   {isClient && (
     <video autoPlay loop muted playsInline preload="auto" className="absolute inset-0 w-full h-full object-cover z-0">
       <source src="/videos/herovideo.mp4" type="video/mp4" />
@@ -262,108 +266,128 @@ useEffect(() => {
   )}
   <div className="absolute inset-0 z-[1] bg-black/30" />
 
-  {/* SOL ALT LOGO: 
-      Telefon sola kaydığı için logoyu eziyordu. 
-      Logoyu mobilde ve tablette ufalttım (70px-90px) ve iyice köşeye (left-4 bottom-4) çektim. 
-      Masaüstü ayarları orijinal! 
-  */}
-  <div className="absolute left-4 sm:left-6 xl:left-12 bottom-4 sm:bottom-6 xl:bottom-10 z-20 pointer-events-none">
-    <Image 
-      src="/logos/workgreen.svg" alt="OMR Work Logo" width={140} height={55} 
-      className="opacity-90 hover:opacity-100 transition-opacity 
-      w-[70px] sm:w-[85px] md:w-[100px] xl:w-[140px] 2xl:w-[180px] h-auto"
-    />
-  </div>
+  {/* ANA İÇERİK */}
+  <div className="relative z-10 w-full h-full max-w-[1920px] mx-auto flex flex-col xl:flex-row items-center px-6 sm:px-10 md:px-16 xl:px-20">
 
-  <div className="relative z-10 w-full h-full max-w-[1500px] 2xl:max-w-[1920px] mx-auto flex flex-col xl:flex-row items-center justify-between px-6 md:px-12 2xl:px-16 transition-all duration-300">
-    
-    {/* ── SOL: YAZILAR ── */}
-    <div className="flex flex-col justify-center text-left w-full xl:w-1/2 h-[50%] xl:h-full z-20 pb-4 xl:pb-0 
-      /* md:pt-24 (96px) değerini md:pt-12 (48px) olarak yarıya indirdik. */
-      /* sm:pt-16 (64px) değerini de sm:pt-8 (32px) yaptık. */
-      pt-4 sm:pt-8 md:pt-12 
-      portrait:lg:pt-16 landscape:lg:pt-8 xl:pt-0 landscape:xl:pt-0
+    {/* SOL: BAŞLIK + BUTONLAR */}
+    <div className="flex flex-col justify-end xl:justify-center w-full xl:w-[45%] h-1/2 xl:h-full
+      pb-6 sm:pb-8 xl:pb-0
+      pt-[var(--nav-h)]
     ">
-      <h1 className="text-white font-bold leading-[1.05] tracking-tight mb-[5px] xl:mb-6">
+      {/* BAŞLIK */}
+      <h1 className="font-black leading-[0.95] tracking-tight text-white mb-6 xl:mb-8">
         <span className="block animate-text-slide
-          text-[42px] sm:text-[55px] md:text-[75px] 
-          portrait:lg:text-[85px] landscape:lg:text-[55px] 
-          xl:text-[100px] landscape:xl:text-[100px] 
-          2xl:text-[130px] landscape:2xl:text-[130px]
-        " style={{ animationDelay: '0.2s' }}>
+          text-[50px] sm:text-[68px] md:text-[86px]
+          portrait:lg:text-[100px] landscape:lg:text-[70px]
+          xl:text-[clamp(90px,8vw,130px)]
+        " style={{ animationDelay: '0.1s' }}>
           Design that
         </span>
         <span className="block animate-text-slide
-          text-[42px] sm:text-[55px] md:text-[75px] 
-          portrait:lg:text-[85px] landscape:lg:text-[55px] 
-          xl:text-[100px] landscape:xl:text-[100px] 
-          2xl:text-[130px] landscape:2xl:text-[130px]
-        " style={{ animationDelay: '0.4s' }}>
-          feels expensive
+          text-[50px] sm:text-[68px] md:text-[86px]
+          portrait:lg:text-[100px] landscape:lg:text-[70px]
+          xl:text-[clamp(90px,8vw,130px)]
+        " style={{ animationDelay: '0.3s' }}>
+          feels{' '}
+          <em className="not-italic text-[#c2e200]" style={{ fontStyle: 'italic' }}>
+            expensive.
+          </em>
         </span>
       </h1>
-      <p className="text-[#e0e0e0] font-light animate-text-slide
-        text-[16px] sm:text-[18px] md:text-[22px] 
-        portrait:lg:text-[22px] landscape:lg:text-[16px] 
-        xl:text-[24px] landscape:xl:text-[24px] 
-        2xl:text-[28px] landscape:2xl:text-[28px] 
-        
-        max-w-[320px] sm:max-w-[450px] md:max-w-[550px] 
-        portrait:lg:max-w-[500px] landscape:lg:max-w-[400px] 
-        xl:max-w-[500px] landscape:xl:max-w-[500px] 
-        2xl:max-w-[600px] landscape:2xl:max-w-[600px]
-      " style={{ animationDelay: '0.6s' }}>
+
+      {/* PARAGRAF */}
+      <p className="text-white/60 font-light animate-text-slide mb-8 xl:mb-12
+        text-[16px] sm:text-[18px] md:text-[22px]
+        portrait:lg:text-[26px] landscape:lg:text-[18px]
+        xl:text-[clamp(20px,1.7vw,28px)]
+        max-w-[340px] sm:max-w-[460px] md:max-w-[500px] xl:max-w-[600px]
+        leading-relaxed
+      " style={{ animationDelay: '0.5s' }}>
         I build visuals that make brands stand out, not just exist.
       </p>
+
+      {/* BUTONLAR */}
+      <div className="flex items-center gap-4 sm:gap-6 flex-wrap animate-text-slide" style={{ animationDelay: '0.7s' }}>
+        <Link
+          href="/contact"
+          className="inline-flex items-center justify-center rounded-full bg-[#c2e200] text-black font-extrabold uppercase tracking-[0.07em] transition-all duration-300 hover:bg-[#d4f500] hover:-translate-y-[2px]
+            text-[13px] px-[28px] py-[14px]
+            sm:text-[15px] sm:px-[32px] sm:py-[16px]
+            xl:text-[16px] xl:px-[40px] xl:py-[19px]
+          "
+        >
+          Bir Proje Başlat
+        </Link>
+        <Link
+          href="/works"
+          className="inline-flex items-center justify-center rounded-full border border-white/25 text-white font-bold uppercase tracking-[0.07em] transition-all duration-300 hover:border-white/60 hover:-translate-y-[2px]
+            text-[13px] px-[28px] py-[13px]
+            sm:text-[15px] sm:px-[32px] sm:py-[15px]
+            xl:text-[16px] xl:px-[40px] xl:py-[18px]
+          "
+        >
+          Çalışmalar
+        </Link>
+      </div>
     </div>
 
-   {/* ── SAĞ: TELEFON VE PİLLER ── */}
-    <div className="w-full xl:w-1/2 h-[50%] xl:h-full flex items-center justify-center relative z-10">
-      
-      <div className="relative flex items-center justify-center shrink-0 pointer-events-none transition-all duration-300
-        w-[900px] xl:w-[1300px]
-        
-        /* SENİN ORİJİNAL BOYUT AYARLARIN */
-        scale-[0.85] sm:scale-[0.90] md:scale-[1.15] 
-        portrait:lg:scale-[1.50] landscape:lg:scale-[0.75] 
-        xl:scale-[1] landscape:xl:scale-[1] 
-        2xl:scale-[1.25] landscape:2xl:scale-[1.25]
-        
-        /* SENİN ORİJİNAL KONUM AYARLARIN (Birebir kopyalandı) */
-        translate-x-[-5%] sm:translate-x-[15%] md:translate-x-[-20%] 
-        portrait:lg:translate-x-[-30%] landscape:lg:translate-x-[-10%] 
-        xl:translate-x-0 landscape:xl:translate-x-0 
-        2xl:translate-x-[10%] landscape:2xl:translate-x-[10%] 
-       -translate-y-[15%] sm:-translate-y-[5%] md:-translate-y-[10%] lg:-translate-y-[5%] xl:translate-y-0
+    {/* SAĞ: TELEFON + SERVİS LİSTESİ */}
+    <div className="w-full xl:w-[55%] h-1/2 xl:h-full flex items-center justify-center xl:justify-end relative z-10">
+
+      <div className="relative flex items-center justify-center shrink-0 transition-all duration-500
+        w-[350px] sm:w-[500px] md:w-[650px] lg:w-[800px] xl:w-[990px]
+        scale-100 xl:scale-110
+        xl:translate-x-[10%]
       ">
-        
-        {/* PİLLER KAPSAYICISI */}
-        <div className="absolute z-10 left-[53%] flex flex-col gap-3 xl:gap-4 items-start pointer-events-none">
-          {pillTexts.map((text, i) => {
-            const gapMultiplier = pillTexts.length - i;
-            return (
-              <div 
-                key={i} 
-                className="pill-item-anim h-[45px] xl:h-[50px] 2xl:h-[60px] rounded-full bg-[#bfd730] text-[#111321] flex items-center shadow-xl transition-all hover:bg-white hover:scale-105 cursor-pointer pointer-events-auto w-fit border-2 border-white"
-                style={{
-                  animationDelay: `${0.8 + (i * 0.15)}s`,
-                  paddingLeft: `${30 + (gapMultiplier * 15)}px`, 
-                  paddingRight: '35px',
-                  marginLeft: '-40px',
-                  transform: `translateX(-${i * 10}px)`
-                }}
-              >
-                <span className="text-[#FFFFFF] text-[18px] md:text-[18px] xl:text-[20px] 2xl:text-[26px] font-medium leading-none whitespace-nowrap">
-                  {text}
-                </span>
-              </div>
-            );
-          })}
-        </div>
 
         {/* TELEFON MOCKUP */}
-        <div className="relative z-20 w-full h-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.4)] pointer-events-auto left-[-4.5%]">
-          <Image src="/images/mockup.png" alt="OMR Work Phone Mockup" width={1300} height={2600} className="w-full h-auto object-contain" priority />
+        <div className="relative z-20 w-full h-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]">
+          <Image
+            src="/images/mockup.png" alt="OMR Work Phone Mockup"
+            width={1600} height={3200}
+            className="w-full h-auto object-contain"
+            priority
+          />
+        </div>
+
+        {/* SERVİS LİSTESİ */}
+        <div className="absolute top-1/2 -translate-y-1/2 flex flex-col z-30
+          left-[68%] md:left-[70%] xl:left-[67%]
+          w-[180px] sm:w-[240px] xl:w-[200px]
+        ">
+          {services.map((item, i) => (
+            <div key={i} className="flex flex-col w-full">
+              
+              <div
+                className="service-item-anim flex items-center gap-[10px] xl:gap-[14px] group cursor-pointer w-full justify-start
+                py-[10px] sm:py-[12px] xl:py-[16px]"
+                style={{ animationDelay: `${0.6 + i * 0.1}s` }}
+              >
+                {/* İKON */}
+                <span className="text-white group-hover:text-white/80 transition-colors duration-300 shrink-0
+                  [&>svg]:w-[12px] [&>svg]:h-[12px]
+                  sm:[&>svg]:w-[16px] sm:[&>svg]:h-[16px]
+                  xl:[&>svg]:w-[18px] xl:[&>svg]:h-[18px]
+                ">
+                  {item.icon}
+                </span>
+
+                {/* METİN */}
+                <span className="text-white group-hover:text-white/90 transition-colors duration-300
+                  font-extralight tracking-wider leading-none whitespace-nowrap
+                  text-[13px] sm:text-[15px] xl:text-[16px]
+                ">
+                  {item.label}
+                </span>
+              </div>
+
+              {/* ÇİZGİ */}
+              {i < services.length - 1 && (
+                <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#c2e200]/60 to-transparent shadow-[0_0_10px_rgba(194,226,0,0.2)]" />
+              )}
+              
+            </div>
+          ))}
         </div>
 
       </div>

@@ -11,9 +11,9 @@ const config: Config = {
     extend: {
       // Mevcut renklerini koruyoruz
       colors: {
-        black: "#111321",
+        black: "#000000",
         white: "#f0f0f0",
-        accent: "#bfd730",
+        accent: "#c2e200",
         gray: "#0a0a2e",
         mid: "#6b6b9a",
         border: "rgba(191, 255, 0, 0.1)",
@@ -51,5 +51,7 @@ const config: Config = {
   },
   plugins: [],
 };
+
+
 
 export default config;
