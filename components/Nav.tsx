@@ -37,13 +37,13 @@ export default function Nav() {
         className={`pointer-events-auto flex items-center justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]
           ${scrolled
             ? `rounded-[100px] border border-[rgba(194,226,0,0.18)]
-               'bg-[rgba(0,0,0,0.45)] backdrop-blur-[24px]'
+               bg-[rgba(0,0,0,0.45)] backdrop-blur-[24px]
                px-[20px] py-[10px] min-w-[860px] gap-[8px]
                shadow-[0_8px_32px_rgba(0,0,0,0.5)]
                ${menuOpen ? 'rounded-[24px]' : ''}
               `
             : `rounded-none border-b border-[rgba(194,226,0,0.08)]
-               bg-transparent
+               bg-black/30 backdrop-blur-md
                px-[48px] py-[18px] w-full
                xl:px-[80px] 2xl:px-[100px]
               `
