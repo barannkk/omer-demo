@@ -69,38 +69,46 @@ export default function Nav() {
         {/* LİNKLER */}
         <ul className={`nav-links-mobile m-0 p-0 list-none ${menuOpen ? 'open' : ''}`}>
           {links.map(({ href, label }) => (
-            <li key={href}>
+            <li 
+              key={href} 
+              // Eski düz border sınıfını sildik, yerine flex-col ekledik ki çizgi yazının altına insin
+              className="max-[900px]:w-full flex flex-col"
+            >
               <Link
                 href={href}
                 onClick={() => setMenuOpen(false)}
-                className={`nav-link-hover flex items-center rounded-[50px] text-[rgba(255,255,255,0.7)] no-underline uppercase tracking-[0.08em] font-bold transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+                className={`nav-link-hover flex items-center max-[900px]:w-full max-[900px]:justify-center rounded-[50px] max-[900px]:rounded-[12px] text-[rgba(255,255,255,0.7)] no-underline uppercase tracking-[0.08em] font-bold transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
                   hover:text-white hover:bg-[rgba(255,255,255,0.06)]
                   ${scrolled
-                    ? 'text-[12px] px-[16px] py-[8px]'
-                    : 'text-[12px] px-[16px] py-[8px] xl:text-[13px] xl:px-[18px] xl:py-[9px] 2xl:text-[14px] 2xl:px-[22px] 2xl:py-[10px]'
+                    ? 'text-[12px] px-[16px] py-[8px] max-[900px]:py-[16px]'
+                    : 'text-[12px] px-[16px] py-[8px] max-[900px]:py-[16px] xl:text-[13px] xl:px-[18px] xl:py-[9px] 2xl:text-[14px] 2xl:px-[22px] 2xl:py-[10px]'
                   }
                 `}
               >
                 {label}
               </Link>
+              
+              {/* SİHİR: Servislerdeki neon gradient çizgisi (Sadece mobilde görünür) */}
+             <div className="hidden max-[900px]:block w-[80%] mx-auto h-[1px] bg-gradient-to-r from-transparent via-[#c2e200]/60 to-transparent shadow-[0_0_10px_rgba(194,226,0,0.2)]" />
             </li>
           ))}
 
-          {/* BİR PROJE BAŞLAT BUTONU */}
-          <li>
+         {/* BİR PROJE BAŞLAT BUTONU */}
+          {/* Parent <li>'ye flex ve justify-center vererek butonu esnetmeden tam ortaya alıyoruz */}
+          <li className="max-[900px]:w-full max-[900px]:mt-4 max-[900px]:flex max-[900px]:justify-center">
             <Link
               href="/contact"
               onClick={() => setMenuOpen(false)}
-              className={`btn-proje group inline-flex items-center gap-[6px] justify-center leading-none rounded-[50px] uppercase tracking-[0.06em] font-extrabold no-underline transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+              className={`btn-proje group inline-flex items-center gap-[6px] leading-none rounded-[50px] uppercase tracking-[0.06em] font-extrabold no-underline transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
                 bg-[#c2e200] text-black hover:bg-[#d4f500] hover:translate-y-[-1px]
                 ${scrolled
-                  ? 'text-[12px] px-[22px] py-[11px]'
-                  : 'text-[12px] px-[22px] py-[11px] xl:text-[13px] xl:px-[26px] xl:py-[12px] 2xl:text-[14px] 2xl:px-[32px] 2xl:py-[13px]'
+                  ? 'text-[12px] px-[24px] py-[12px] max-[900px]:px-[32px] max-[900px]:py-[14px]'
+                  : 'text-[12px] px-[24px] py-[12px] max-[900px]:px-[32px] max-[900px]:py-[14px] xl:text-[13px] xl:px-[26px] xl:py-[12px] 2xl:text-[14px] 2xl:px-[32px] 2xl:py-[13px]'
                 }
               `}
             >
               BİR PROJE BAŞLAT
-              {/* YENİ: SVG İkonu ve Hover Animasyonu */}
+              {/* SVG İkonu */}
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
                 viewBox="0 0 24 24" 

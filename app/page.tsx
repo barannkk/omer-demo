@@ -258,157 +258,148 @@ export default function HomePage() {
     <>
       <section className="relative w-full h-[100svh] overflow-hidden bg-black">
 
-        <div className="relative z-10 w-full h-full max-w-[1920px] mx-auto flex flex-col xl:flex-row items-center px-6 sm:px-10 md:px-16 xl:px-20">
+  <div className="relative z-10 w-full h-full max-w-[1920px] mx-auto flex flex-col lg:flex-row items-center px-6 sm:px-10 md:px-16 xl:px-20">
 
-          {/* SOL: BAŞLIK + BUTONLAR */}
-          <div className="flex flex-col justify-center w-full xl:w-[45%] h-1/2 xl:h-full
-      pb-0 sm:pb-4 xl:pb-0
-      pt-[var(--nav-h)] xl:pt-0
+    {/* SOL: BAŞLIK + BUTONLAR */}
+    <div className="flex flex-col justify-center w-full lg:w-[45%] h-1/2 lg:h-full
+      pb-0 sm:pb-4 lg:pb-0
+      pt-[var(--nav-h)] lg:pt-0
     ">
-            <h1 className="font-medium leading-[0.95] tracking-tight text-white mb-4 sm:mb-6 xl:mb-8">
-              <span className="block animate-text-slide
+      <h1 className="font-medium leading-[0.95] tracking-tight text-white mb-4 sm:mb-6 xl:mb-8">
+        <span className="block animate-text-slide
           text-[56px] sm:text-[68px] md:text-[76px] lg:text-[86px]
           portrait:lg:text-[100px] landscape:lg:text-[70px]
           xl:text-[clamp(90px,8vw,130px)]
         " style={{ animationDelay: '0.1s' }}>
-                Design that
-              </span>
-              <span className="block animate-text-slide
+          Design that
+        </span>
+        <span className="block animate-text-slide
           text-[56px] sm:text-[68px] md:text-[76px] lg:text-[86px]
           portrait:lg:text-[100px] landscape:lg:text-[70px]
           xl:text-[clamp(90px,8vw,130px)]
         " style={{ animationDelay: '0.3s' }}>
-                feels{' '}
-                <em className="font-canela font-medium text-[#c2e200]">
-                  expensive.
-                </em>
-              </span>
-            </h1>
+          feels{' '}
+          <em className="font-canela font-medium text-[#c2e200]">
+            expensive.
+          </em>
+        </span>
+      </h1>
 
-            <p className="-mt-[5px] sm:-mt-[10px] xl:-mt-[20px] text-white/60 font-light animate-text-slide mb-6 sm:mb-8 xl:mb-12
+      <p className="-mt-[5px] sm:-mt-[10px] xl:-mt-[20px] text-white/60 font-light animate-text-slide mb-6 sm:mb-8 xl:mb-12
         text-[16px] sm:text-[18px] md:text-[20px]
         portrait:lg:text-[26px] landscape:lg:text-[18px]
         xl:text-[clamp(20px,1.7vw,28px)]
         max-w-[320px] sm:max-w-[420px] md:max-w-[500px] xl:max-w-[600px]
         leading-relaxed
       " style={{ animationDelay: '0.5s' }}>
-              I build visuals that make brands stand out, not just exist.
-            </p>
+        I build visuals that make brands stand out, not just exist.
+      </p>
 
-            <div className="-mt-[5px] sm:-mt-[10px] xl:-mt-[20px] flex items-center gap-3 sm:gap-4 xl:gap-6 flex-wrap animate-text-slide" style={{ animationDelay: '0.7s' }}>
-              <Link
-                href="/contact"
-                className="group inline-flex items-center gap-[8px] xl:gap-[8px] justify-center rounded-full bg-[#c2e200] text-black font-extrabold uppercase tracking-[0.07em] transition-all duration-300 hover:bg-[#d4f500] hover:-translate-y-[2px]
+      <div className="-mt-[5px] sm:-mt-[10px] xl:-mt-[20px] flex items-center gap-3 sm:gap-4 xl:gap-6 flex-wrap animate-text-slide" style={{ animationDelay: '0.7s' }}>
+        <Link
+          href="/contact"
+          className="group inline-flex items-center gap-[8px] xl:gap-[8px] justify-center rounded-full bg-[#c2e200] text-black font-extrabold uppercase tracking-[0.07em] transition-all duration-300 hover:bg-[#d4f500] hover:-translate-y-[2px]
             text-[13px] px-[26px] py-[14px]
             sm:text-[13px] sm:px-[26px] sm:py-[14px]
             xl:text-[16px] xl:px-[40px] xl:py-[19px]
           "
-              >
-                Bir Proje Başlat
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-[14px] h-[14px] xl:w-[16px] xl:h-[16px] transition-transform duration-300 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]"
-                >
-                  <path d="M7 17L17 7" />
-                  <path d="M7 7h10v10" />
-                </svg>
-              </Link>
-              <Link
-                href="/works"
-                className="inline-flex items-center justify-center rounded-full border border-white/25 text-white font-bold uppercase tracking-[0.07em] transition-all duration-300 hover:border-white/60 hover:-translate-y-[2px]
+        >
+          Bir Proje Başlat
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-[14px] h-[14px] xl:w-[16px] xl:h-[16px] transition-transform duration-300 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]"
+          >
+            <path d="M7 17L17 7" />
+            <path d="M7 7h10v10" />
+          </svg>
+        </Link>
+        <Link
+          href="/works"
+          className="inline-flex items-center justify-center rounded-full border border-white/25 text-white font-bold uppercase tracking-[0.07em] transition-all duration-300 hover:border-white/60 hover:-translate-y-[2px]
             text-[13px] px-[26px] py-[13px]
             sm:text-[13px] sm:px-[26px] sm:py-[13px]
             xl:text-[16px] xl:px-[40px] xl:py-[18px]
           "
-              >
-                Çalışmalar
-              </Link>
-            </div>
-          </div>
+        >
+          Çalışmalar
+        </Link>
+      </div>
+    </div>
 
-          {/* SAĞ: TELEFON + SERVİS LİSTESİ */}
-          <div className="w-full xl:w-[55%] h-1/2 xl:h-full flex items-center justify-center xl:justify-end relative z-10 pb-4 xl:pb-0
-  -translate-x-[15%] sm:-translate-x-[6%] md:-translate-x-[4%] lg:-translate-x-[2%] xl:translate-x-0
-">
+    {/* SAĞ: TELEFON + SERVİS LİSTESİ */}
+    <div className="w-full lg:w-[55%] h-1/2 lg:h-full flex items-center justify-center lg:justify-end relative z-10 pt-8 sm:pt-6 md:pt-4 lg:pt-0
+      -translate-x-[15%] sm:-translate-x-[12%] md:-translate-x-[8%] lg:-translate-x-[4%] xl:translate-x-0
+    ">
+      <div className="relative flex items-center justify-center shrink-0 transition-all duration-500
+        w-[600px] sm:w-[620px] md:w-[700px] lg:w-[820px] xl:w-[min(990px,52vw)]
+        scale-100 xl:scale-110
+      ">
 
-            {/*
-        Orantı: XL → 990px baz
-        mobile(380px): ×0.38  |  sm(480px): ×0.48  |  md(650px): ×0.66  |  lg(800px): ×0.81
-      */}
-            <div className="relative flex items-center justify-center shrink-0 transition-all duration-500
-  w-[600px] sm:w-[500px] md:w-[650px] lg:w-[800px] xl:w-[990px]
-  scale-100 xl:scale-110
-">
+        {/* ARKAPLAN GRADIENT */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[70%] bg-[#c2e200] rounded-full blur-[60px] sm:blur-[80px] xl:blur-[100px] opacity-30 z-0 pointer-events-none" />
 
-              {/* ARKAPLAN GRADIENT */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[70%] bg-[#c2e200] rounded-full blur-[60px] sm:blur-[80px] xl:blur-[100px] opacity-30 z-0 pointer-events-none" />
+        {/* TELEFON MOCKUP */}
+        <div className="relative z-20 w-full h-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] animate-float">
+          <Image
+            src="/images/mockup.png"
+            alt="OMR Work Phone Mockup"
+            width={1600}
+            height={3200}
+            className="w-full h-auto object-contain"
+            priority
+          />
+        </div>
 
-              {/* TELEFON MOCKUP */}
-              <div className="relative z-20 w-full h-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] animate-float">
-                <Image
-                  src="/images/mockup.png"
-                  alt="OMR Work Phone Mockup"
-                  width={1600}
-                  height={3200}
-                  className="w-full h-auto object-contain"
-                  priority
-                />
-              </div>
-
-
-              {/* SERVİS LİSTESİ */}
-              <div className="absolute top-1/2 -translate-y-1/2 flex flex-col z-30
-  left-[67%] sm:left-[60%] md:left-[65%] lg:left-[68%] xl:left-[72%]
-  w-[140px] sm:w-[160px] md:w-[180px] lg:w-[190px] xl:w-[200px]
-">
-                {services.map((item, i) => (
-                  <div
-                    key={i}
-                    className="service-item-anim flex flex-col w-full"
-                    style={{ animationDelay: `${0.3 + i * 0.2}s` }}
-                  >
-                    <div className="flex items-center group cursor-pointer w-full justify-start
+        {/* SERVİS LİSTESİ */}
+        <div className="absolute top-1/2 -translate-y-1/2 flex flex-col z-30
+          left-[67%] sm:left-[68%] md:left-[69%] lg:left-[70%] xl:left-[72%]
+          w-[140px] sm:w-[155px] md:w-[170px] lg:w-[185px] xl:w-[min(200px,10vw)]
+        ">
+          {services.map((item, i) => (
+            <div
+              key={i}
+              className="service-item-anim flex flex-col w-full"
+              style={{ animationDelay: `${0.3 + i * 0.2}s` }}
+            >
+              <div className="flex items-center group cursor-pointer w-full justify-start
                 gap-[5px] sm:gap-[7px] md:gap-[9px] lg:gap-[11px] xl:gap-[14px]
                 py-[7px] sm:py-[8px] md:py-[11px] lg:py-[13px] xl:py-[16px]
               ">
-                      {/* İKON */}
-                      <span className="flex items-center justify-center text-white translate-y-[2px] xl:translate-y-[4px] group-hover:text-white/80 transition-colors duration-300 shrink-0
+                <span className="flex items-center justify-center text-white translate-y-[2px] xl:translate-y-[4px] group-hover:text-white/80 transition-colors duration-300 shrink-0
                   [&>svg]:w-[13px] [&>svg]:h-[13px]
-sm:[&>svg]:w-[14px] sm:[&>svg]:h-[14px]
-md:[&>svg]:w-[15px] md:[&>svg]:h-[15px]
-lg:[&>svg]:w-[16px] lg:[&>svg]:h-[16px]
-xl:[&>svg]:w-[18px] xl:[&>svg]:h-[18px]
+                  sm:[&>svg]:w-[14px] sm:[&>svg]:h-[14px]
+                  md:[&>svg]:w-[15px] md:[&>svg]:h-[15px]
+                  lg:[&>svg]:w-[16px] lg:[&>svg]:h-[16px]
+                  xl:[&>svg]:w-[18px] xl:[&>svg]:h-[18px]
                 ">
-                        {item.icon}
-                      </span>
+                  {item.icon}
+                </span>
 
-                      {/* METİN */}
-                      <span className="text-white group-hover:text-white/90 transition-colors duration-300
+                <span className="text-white group-hover:text-white/90 transition-colors duration-300
                   font-extralight tracking-wider leading-none whitespace-nowrap
                   text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] xl:text-[24px]
                 ">
-                        {item.label}
-                      </span>
-                    </div>
-
-                    {/* ÇİZGİ */}
-                    {i < services.length - 1 && (
-                      <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#c2e200]/60 to-transparent shadow-[0_0_10px_rgba(194,226,0,0.2)]" />
-                    )}
-                  </div>
-                ))}
+                  {item.label}
+                </span>
               </div>
-            </div>
-          </div>
 
+              {i < services.length - 1 && (
+                <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#c2e200]/60 to-transparent shadow-[0_0_10px_rgba(194,226,0,0.2)]" />
+              )}
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
+    </div>
+
+  </div>
+</section>
       <div>
         <Marquee />
       </div>
