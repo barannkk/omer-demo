@@ -68,47 +68,62 @@ function Card({ brand, isActive }: { brand: Brand; isActive: boolean }) {
       style={{
         background: '#111',
         boxShadow: isActive
-          ? '0 40px 120px rgba(0,0,0,0.9)'
-          : '0 10px 40px rgba(0,0,0,0.5)',
+          ? '0 30px 80px rgba(0,0,0,0.75)'
+          : '0 10px 40px rgba(0,0,0,0.4)',
+        // GPU hızlandırması kalabilir, performansa yardımcı olur
+        transform: 'translateZ(0)',
       }}
     >
       {brand.src ? (
-        <Image src={brand.src} alt={brand.name} fill className="object-cover" draggable={false} />
+        
+        <Image 
+          src={brand.src} 
+          alt={brand.name} 
+          fill 
+          className="object-cover rounded-[24px]" 
+          draggable={false} 
+        />
       ) : (
-        <div className="w-full h-full bg-[#1a1a1a]" />
+        <div className="w-full h-full bg-[#1a1a1a] rounded-[24px]" />
       )}
 
+      {/* Karartma gradyanımız */}
       <div
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.5) 35%, transparent 65%)',
+          background: 'linear-gradient(to top, rgba(0,0,0,1) -2%, rgba(0,0,0,0.6) 15%, transparent 60%)',
         }}
       />
 
-      <div className="absolute bottom-0 left-0 right-0 p-7 flex flex-col gap-1">
-        <span className="text-white/50 text-[10px] font-medium uppercase tracking-[0.2em]">
-          {brand.name}
-        </span>
-        <span className="text-white font-medium text-[22px] leading-[1.2]">
-          {brand.label}
-        </span>
+      {/* İçerik (Yazılar ve Buton) */}
+      <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-row items-end justify-between gap-4 z-10">
+        
+        <div className="flex flex-col gap-1 flex-1">
+          <span className="text-white/50 text-[10px] font-medium uppercase tracking-[0.2em]">
+            {brand.name}
+          </span>
+          <span className="text-white font-medium text-[20px] leading-[1.2]">
+            {brand.label}
+          </span>
 
-        {isActive && (
-          <>
-            <p className="text-white/55 text-[14px] leading-[1.6] mt-2 mb-5">
+          {isActive && (
+            <p className="text-white/65 text-[13px] leading-[1.5] mt-1">
               {brand.description}
             </p>
-            <Link
-              href={`/work/${brand.id}`}
-              className="self-end w-[48px] h-[48px] rounded-full bg-[#c2e200] flex items-center justify-center transition-all duration-300 hover:bg-[#d4f500] hover:scale-110 shrink-0"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-[16px] h-[16px]">
-                <path d="M7 17L17 7" /><path d="M7 7h10v10" />
-              </svg>
-            </Link>
-          </>
+          )}
+        </div>
+
+        {isActive && (
+          <Link
+            href={`/work/${brand.id}`}
+            className="w-[44px] h-[44px] rounded-full bg-[#c2e200] flex items-center justify-center transition-all duration-300 hover:bg-[#d4f500] hover:scale-110 shrink-0"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-[14px] h-[14px]">
+              <path d="M7 17L17 7" /><path d="M7 7h10v10" />
+            </svg>
+          </Link>
         )}
-      </div>
+      </div>      
     </div>
   )
 }
