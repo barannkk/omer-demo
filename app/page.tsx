@@ -262,76 +262,80 @@ function BrandShowcase() {
               </Link>
             </div>
           </div>
-
-          <div className="pb-2">
-            <span className="text-white tabular-nums flex items-baseline gap-[3px]">
-              <span className="text-[42px] font-medium leading-none">
-                {String(current + 1).padStart(2, '0')}
-              </span>
-              <span className="text-white/30 text-[20px] font-light mx-1">/</span>
-              <span className="text-white/40 text-[20px] font-light">{String(total).padStart(2, '0')}</span>
-            </span>
-          </div>
-
         </div>
 
         {/* SAĞ ALAN */}
-        <div className="relative flex-1 flex flex-col">
+<div className="relative flex-1 flex flex-col">
 
-          <div className="relative flex-1 w-full" style={{ minHeight: 'clamp(600px, 80vh, 860px)' }}>
-            {brands.map((brand, index) => {
-              const offset = getOffset(index);
-              const style = getCardStyle(offset);
-              const isActive = offset === 0;
+  {/* KART ALANI */}
+  <div className="relative flex-1 w-full" style={{ minHeight: 'clamp(600px, 80vh, 860px)' }}>
+    {brands.map((brand, index) => {
+      const offset = getOffset(index);
+      const style = getCardStyle(offset);
+      const isActive = offset === 0;
 
-              return (
-                <div
-                  key={brand.id || index}
-                  style={style}
-                  onClick={() => {
-                    if (offset === -1) goPrev();
-                    if (offset === 1) goNext();
-                  }}
-                >
-                  <Card brand={brand} isActive={isActive} />
-                </div>
-              );
-            })}
-          </div>
-
-          {/* ALT BAR */}
-          <div className="flex items-center gap-5 pt-6 pb-2">
-            <div className="flex-1 h-[2px] bg-white/10 rounded-full overflow-hidden">
-              <div
-                // Progress bar süresini de yeni animasyon süremizle uyumlu olması için uzattık
-                className="h-full bg-[#c2e200] rounded-full transition-all duration-700 ease-out"
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-
-            <div className="flex items-center gap-3 shrink-0">
-              <button
-                onClick={goPrev}
-                disabled={isAnimating}
-                className="w-[46px] h-[46px] rounded-full border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:border-[#c2e200] hover:text-[#c2e200] disabled:opacity-30 disabled:cursor-not-allowed"
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
-                  <path d="M15 18l-6-6 6-6" />
-                </svg>
-              </button>
-              <button
-                onClick={goNext}
-                disabled={isAnimating}
-                className="w-[46px] h-[46px] rounded-full border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:border-[#c2e200] hover:text-[#c2e200] disabled:opacity-30 disabled:cursor-not-allowed"
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
-              </button>
-            </div>
-          </div>
-
+      return (
+        <div
+          key={brand.id || index}
+          style={style}
+          onClick={() => {
+            if (offset === -1) goPrev();
+            if (offset === 1) goNext();
+          }}
+        >
+          <Card brand={brand} isActive={isActive} />
         </div>
+      );
+    })}
+  </div>
+
+  {/* ALT BAR - FOTOĞRAFTAKİ GİBİ DÜZENLENDİ */}
+  <div className="flex items-center w-full mt-12 pb-4 gap-8">
+    
+    {/* 1. SAYFA SAYISI (SOLDA) */}
+    <div className="shrink-0">
+      <span className="text-white tabular-nums flex items-baseline gap-[2px]">
+        <span className="text-[24px] font-medium text-[#FFFFF]">
+          {String(current + 1).padStart(2, '0')}
+        </span>
+        <span className="text-white/20 text-[18px] mx-1">/</span>
+        <span className="text-white/40 text-[18px]">{String(total).padStart(2, '0')}</span>
+      </span>
+    </div>
+
+    {/* 2. PROGRESS BAR (ORTADA - ESNEK) */}
+    <div className="flex-1 h-[1px] bg-white/10 relative">
+      <div
+        className="absolute top-0 left-0 h-full bg-[#c2e200] transition-all duration-700 ease-out shadow-[0_0_10px_rgba(194,226,0,0.3)]"
+        style={{ width: `${progress}%` }}
+      />
+    </div>
+
+    {/* 3. OKLAR (SAĞDA) */}
+    <div className="flex items-center gap-3 shrink-0">
+      <button
+        onClick={goPrev}
+        disabled={isAnimating}
+        className="w-[50px] h-[50px] rounded-full border border-white/10 flex items-center justify-center text-white/50 transition-all duration-300 hover:border-[#c2e200] hover:text-[#c2e200] disabled:opacity-20"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+      <button
+        onClick={goNext}
+        disabled={isAnimating}
+        className="w-[50px] h-[50px] rounded-full border border-white/10 flex items-center justify-center text-white/50 transition-all duration-300 hover:border-[#c2e200] hover:text-[#c2e200] disabled:opacity-20"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
+    </div>
+
+  </div>
+  
+</div>
       </div>
     </section>
   );
