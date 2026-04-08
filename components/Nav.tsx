@@ -30,9 +30,9 @@ export default function Nav() {
         ${scrolled ? 'pt-[10px] px-4' : 'pt-0 px-0'}
       `}
     >
-      {/* 2. İÇ KUTU: Dış kutu esnerken, iç kutu da köşelerini yuvarlatıp maksimum genişliğini sınırlandırıyor. */}
+      {/* SİHİR BURADA: flex-wrap eklendi, böylece mobil görünümde taşan elemanlar alt satıra geçecek. */}
       <div
-        className={`pointer-events-auto flex items-center justify-between w-full transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+        className={`pointer-events-auto flex flex-wrap items-center justify-between w-full transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
           ${scrolled
             ? `max-w-[860px] rounded-[100px] border border-[rgba(194,226,0,0.18)]
                bg-[rgba(0,0,0,0.45)] backdrop-blur-[24px]
@@ -102,7 +102,7 @@ export default function Nav() {
               BİR PROJE BAŞLAT
               {/* YENİ: SVG İkonu ve Hover Animasyonu */}
               <svg 
-                xmlns="icons/arrow.svg" 
+                xmlns="http://www.w3.org/2000/svg" 
                 viewBox="0 0 24 24" 
                 fill="none" 
                 stroke="currentColor" 
