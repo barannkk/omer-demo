@@ -117,114 +117,89 @@ const mod = (n: number, m: number): number => ((n % m) + m) % m;
 
 function BrandShowcase() {
   const [current, setCurrent] = useState(0);
-  // Animasyonu pürüzsüz yapmak için 'prepare-enter' aşaması ekledik
-  const [phase, setPhase] = useState<'idle' | 'exit' | 'prepare-enter' | 'enter'>('idle');
-  const [direction, setDirection] = useState<'next' | 'prev'>('next');
-  const [displayed, setDisplayed] = useState(0);
-  const [incoming, setIncoming] = useState(0);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [isAnimating, setIsAnimating] = useState(false);
   const total = brands.length;
 
   const go = useCallback((dir: 'next' | 'prev') => {
-    if (phase !== 'idle') return;
-    const next = dir === 'next' ? mod(current + 1, total) : mod(current - 1, total);
+    if (isAnimating) return; // Hızlı tıklamaları engelle
+    setIsAnimating(true);
     
-    setDirection(dir);
-    setIncoming(next);
-    setPhase('exit'); // 1. Çıkış animasyonunu başlat
-
-    timerRef.current = setTimeout(() => {
-      setDisplayed(next);
-      setCurrent(next);
-      setPhase('prepare-enter'); // 2. Animasyonsuz bir şekilde kartı başlangıç noktasına al
-
-      timerRef.current = setTimeout(() => {
-        setPhase('enter'); // 3. Pürüzsüz giriş animasyonunu başlat
-
-        timerRef.current = setTimeout(() => {
-          setPhase('idle'); // 4. Başlangıç durumuna dön
-        }, 500); // Giriş süresi
-      }, 50); // Tarayıcının yeni konumu kavraması için çok kısa bir bekleme
-    }, 400); // Çıkış süresi
-  }, [phase, current, total]);
-
-  useEffect(() => {
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, []);
+    // Yön durumuna göre yeni indeksi belirle
+    setCurrent((prev) => (dir === 'next' ? mod(prev + 1, total) : mod(prev - 1, total)));
+    
+    // Animasyon süresi kadar bekle ve kilidi aç
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 500); 
+  }, [isAnimating, total]);
 
   const goNext = useCallback(() => go('next'), [go]);
   const goPrev = useCallback(() => go('prev'), [go]);
 
-  const getCard = (offset: number) => brands[mod(displayed + offset, total)];
   const progress = ((current + 1) / total) * 100;
 
-  // MERKEZ KART STİLLERİ (Yumuşatılmış ve Geliştirilmiş)
-  const centerStyle = (): React.CSSProperties => {
-    const base: React.CSSProperties = {
-      position: 'absolute',
-      width: 'clamp(300px, 30vw, 480px)',
-      aspectRatio: '4 / 5',
-      left: '50%',
-      top: '50%',
-      zIndex: 20,
-    };
-
-    if (phase === 'exit') {
-      return {
-        ...base,
-        transform: direction === 'next'
-          ? 'translate(-50%, -50%) translateX(-150px) scale(0.9)'
-          : 'translate(-50%, -50%) translateX(150px) scale(0.9)',
-        opacity: 0,
-        transition: 'transform 400ms cubic-bezier(0.4, 0, 0.2, 1), opacity 350ms ease-out',
-      };
-    }
-    
-    if (phase === 'prepare-enter') {
-      // Kart içeriği değiştiğinde, onu animasyonsuz bir şekilde zıt köşeye ışınlıyoruz
-      return {
-        ...base,
-        transform: direction === 'next'
-          ? 'translate(-50%, -50%) translateX(150px) scale(0.9)'
-          : 'translate(-50%, -50%) translateX(-150px) scale(0.9)',
-        opacity: 0,
-        transition: 'none', // DİKKAT: Burada transition yok, anında geçiş!
-      };
-    }
-    
-    if (phase === 'enter') {
-      return {
-        ...base,
-        transform: 'translate(-50%, -50%) translateX(0) scale(1)',
-        opacity: 1,
-        transition: 'transform 500ms cubic-bezier(0.2, 0, 0, 1), opacity 500ms ease-in',
-      };
-    }
-
-    // Idle (Bekleme)
-    return {
-      ...base,
-      transform: 'translate(-50%, -50%) translateX(0) scale(1)',
-      opacity: 1,
-      transition: 'transform 300ms ease', // Ufak etkileşimler için temel transition kalabilir
-    };
+  // Kartların merkeze göre uzaklığını hesaplayan sihirli formül
+  const getOffset = (index: number) => {
+    let offset = (index - current) % total;
+    if (offset > Math.floor(total / 2)) offset -= total;
+    if (offset < -Math.floor(total / 2)) offset += total;
+    return offset;
   };
 
-  // YAN KART STİLLERİ (Dik ve hizalı hale getirildi)
-  const sideCardStyle = (side: 'left' | 'right'): React.CSSProperties => ({
-    position: 'absolute',
-    width: 'clamp(220px, 22vw, 360px)',
-    aspectRatio: '4 / 5',
-    ...(side === 'left' ? { left: '0%' } : { right: '0%' }),
-    top: '50%',
-    // Rotasyon (-8/8 deg) kaldırıldı. Y ekseninde tam ortalama yapıldı (-50%)
-    transform: 'translateY(-50%) scale(0.85)', 
-    transformOrigin: 'center center',
-    zIndex: 10,
-    opacity: phase !== 'idle' ? 0.3 : 0.5,
-    cursor: 'pointer',
-    transition: 'all 500ms cubic-bezier(0.2, 0, 0, 1)',
-  });
+  // Kartların pozisyonlarını belirleyen stil fonksiyonu
+  const getCardStyle = (offset: number): React.CSSProperties => {
+    const isCenter = offset === 0;
+    const isLeft = offset === -1;
+    const isRight = offset === 1;
+
+    // Tüm kartlar için geçerli olan temel geçiş stili (Hız ve yumuşaklık burada gizli)
+    const base: React.CSSProperties = {
+      position: 'absolute',
+      top: '50%',
+      width: 'clamp(250px, 25vw, 400px)',
+      aspectRatio: '4 / 5',
+      transition: 'all 500ms cubic-bezier(0.25, 1, 0.5, 1)', // Kusursuz akıcılık sağlayan ivme
+      transformOrigin: 'center center',
+    };
+
+    if (isCenter) {
+      return {
+        ...base,
+        left: '50%',
+        transform: 'translate(-50%, -50%) scale(1)',
+        opacity: 1,
+        zIndex: 20,
+      };
+    } else if (isLeft) {
+      return {
+        ...base,
+        left: '10%',
+        transform: 'translate(0%, -50%) scale(0.85)', // Dik duruş sağlandı
+        opacity: 0.4,
+        zIndex: 10,
+        cursor: 'pointer',
+      };
+    } else if (isRight) {
+      return {
+        ...base,
+        left: '90%',
+        transform: 'translate(-100%, -50%) scale(0.85)', // Dik duruş sağlandı
+        opacity: 0.4,
+        zIndex: 10,
+        cursor: 'pointer',
+      };
+    } else {
+      // Ekranda görünmeyen ama arkada bekleyen kartlar
+      return {
+        ...base,
+        left: offset < 0 ? '-20%' : '120%',
+        transform: offset < 0 ? 'translate(-100%, -50%) scale(0.7)' : 'translate(0%, -50%) scale(0.7)',
+        opacity: 0,
+        zIndex: 0,
+        pointerEvents: 'none',
+      };
+    }
+  };
 
   return (
     <section className="relative w-full min-h-screen bg-black overflow-hidden flex items-center px-[4%]">
@@ -238,30 +213,30 @@ function BrandShowcase() {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-[1700px] mx-auto flex flex-col lg:flex-row items-stretch gap-0 min-h-screen py-[80px]">
+      {/* gap-20 ile sağ ve sol alanı ayırdık */}
+      <div className="relative z-10 w-full max-w-[1700px] mx-auto flex flex-col lg:flex-row items-stretch gap-20 min-h-screen py-[80px]">
 
         {/* SOL ALAN */}
         <div className="flex flex-col justify-between w-full lg:w-[26%] shrink-0 py-4 pr-4">
 
-          {/* Üst blok (Yazılar ve Buton bir arada) */}
+          {/* Üst blok */}
           <div className="flex flex-col justify-center flex-1">
             <span className="flex items-center gap-2 text-[#c2e200] text-[11px] tracking-[0.22em] font-medium uppercase mb-6">
               <span className="w-2 h-2 rounded-full bg-[#c2e200] inline-block" />
               SEÇİLMİŞ İŞLERİM
             </span>
-
+            
+            {/* YAZI: Ideas become visuals alt alta kenetlendi */}
             <h2 className="text-white font-medium leading-[1.0] tracking-tight mb-6 text-[48px] sm:text-[56px] lg:text-[64px] xl:text-[80px]">
-              Fikirleri{' '}<br />
-              <em className="font-canela font-medium text-[#c2e200] not-italic">görsellere</em>
-              <br />
-              dönüştürüyorum.
+              <span className="whitespace-nowrap">Ideas become</span> <br />
+              <em className="font-canela font-medium text-[#c2e200] not-italic">visuals</em>
             </h2>
 
             <p className="text-white/55 text-[15px] lg:text-[16px] leading-[1.75] max-w-[320px] mb-8">
               Markaların hedeflerine ulaşması için yaratıcı, etkili ve akılda kalıcı işler üretiyorum.
             </p>
 
-            {/* BUTON YAZININ HEMEN ALTINA ALINDI */}
+            {/* BUTON: Yazının hemen altında */}
             <div className="mt-2">
               <Link
                 href="/works"
@@ -275,13 +250,10 @@ function BrandShowcase() {
             </div>
           </div>
 
-          {/* Alt blok (Sadece sayaç) */}
+          {/* Alt blok: Sayaç */}
           <div className="pb-2">
             <span className="text-white tabular-nums flex items-baseline gap-[3px]">
-              <span
-                key={current}
-                className="text-[42px] font-medium leading-none"
-              >
+              <span className="text-[42px] font-medium leading-none">
                 {String(current + 1).padStart(2, '0')}
               </span>
               <span className="text-white/30 text-[20px] font-light mx-1">/</span>
@@ -295,25 +267,29 @@ function BrandShowcase() {
         <div className="relative flex-1 flex flex-col">
 
           {/* KART ALANI */}
-          <div className="relative flex-1" style={{ minHeight: 'clamp(600px, 80vh, 860px)' }}>
-
-            {/* SOL KART */}
-            <div style={sideCardStyle('left')} onClick={goPrev}>
-              <Card brand={getCard(-1)} isActive={false} />
-            </div>
-
-            {/* SAĞ KART */}
-            <div style={sideCardStyle('right')} onClick={goNext}>
-              <Card brand={getCard(1)} isActive={false} />
-            </div>
-
-            {/* MERKEZ KART 
-                ÖNEMLİ: Daha pürüzsüz bir animasyon için 'key' prop'unu buradan kaldırdık. 
-                Böylece DOM elementi silinip baştan oluşturulmak yerine CSS ile akıcı bir şekilde yer değiştiriyor. 
+          <div className="relative flex-1 w-full" style={{ minHeight: 'clamp(600px, 80vh, 860px)' }}>
+            
+            {/* Tüm markaları ekrana basıyoruz ve konumlarını getCardStyle ile ayarlıyoruz.
+              Böylece "duraksama" olmadan css ile kayarak yer değiştiriyorlar.
             */}
-            <div style={centerStyle()}>
-              <Card brand={brands[displayed]} isActive={true} />
-            </div>
+            {brands.map((brand, index) => {
+              const offset = getOffset(index);
+              const style = getCardStyle(offset);
+              const isActive = offset === 0;
+
+              return (
+                <div
+                  key={brand.id || index}
+                  style={style}
+                  onClick={() => {
+                    if (offset === -1) goPrev();
+                    if (offset === 1) goNext();
+                  }}
+                >
+                  <Card brand={brand} isActive={isActive} />
+                </div>
+              );
+            })}
 
           </div>
 
@@ -329,8 +305,8 @@ function BrandShowcase() {
             <div className="flex items-center gap-3 shrink-0">
               <button
                 onClick={goPrev}
-                disabled={phase !== 'idle'}
-                className="w-[46px] h-[46px] rounded-full border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:border-[#c2e200] hover:text-[#c2e200] disabled:opacity-30"
+                disabled={isAnimating}
+                className="w-[46px] h-[46px] rounded-full border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:border-[#c2e200] hover:text-[#c2e200] disabled:opacity-30 disabled:cursor-not-allowed"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
                   <path d="M15 18l-6-6 6-6" />
@@ -338,8 +314,8 @@ function BrandShowcase() {
               </button>
               <button
                 onClick={goNext}
-                disabled={phase !== 'idle'}
-                className="w-[46px] h-[46px] rounded-full border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:border-[#c2e200] hover:text-[#c2e200] disabled:opacity-30"
+                disabled={isAnimating}
+                className="w-[46px] h-[46px] rounded-full border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:border-[#c2e200] hover:text-[#c2e200] disabled:opacity-30 disabled:cursor-not-allowed"
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
                   <path d="M9 18l6-6-6-6" />
