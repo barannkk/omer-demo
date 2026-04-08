@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   title: 'Ömer — Creative Design',
   description: 'Marka kimliği, ambalaj ve görsel iletişim tasarımı portfolyosu',
   icons: {
-    icon: '/icons/favicon.svg', 
+    icon: '/logos/omr_lime_logo.svg', 
   },
   openGraph: {
     title: 'Portfolio — Creative Design',
@@ -49,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="tr">
+    <html lang="tr" style={{ colorScheme: 'dark' }}>
       <body className={`${juturu.className} ${juturu.variable} ${canela.variable}`}>
         <Nav />
 
