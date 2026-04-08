@@ -3,11 +3,12 @@
 @tailwind utilities;
 
 @layer utilities {
- @keyframes textSlideInSoft {
+  /* ── SOL TARAF İÇİN (METİNLER) ── */
+  @keyframes textSlideInSoft {
     0% { 
       opacity: 0; 
-      transform: translateX(-60px); 
-      filter: blur(10px);           
+      transform: translateX(-35px); /* 60'tan 35'e düşürdük, daha narin bir hareket */
+      filter: blur(12px);          
     }
     100% { 
       opacity: 1; 
@@ -17,26 +18,39 @@
   }
 
   .animate-text-slide {
-    opacity: 0;
-    /* Süreyi 1.5s'den 2.5s'ye çıkardık, çok daha yavaş ve klas bir giriş yapar */
-    animation: textSlideInSoft 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-  
-  /* ── PİL ANİMASYONU ── */
-  @keyframes pillSlideOutSoft {
-    0% {
-      opacity: 0;
-      transform: translateX(-150px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    /* Her iki tarafın da süresini 2.5s yaparak senkronize ettik */
+    animation: textSlideInSoft 2.5s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
-  .pill-item-anim {
+  /* ── SAĞ TARAF İÇİN (SERVİSLER) ── */
+ @keyframes slideInRightSoft {
+  0% {
     opacity: 0;
-    animation: pillSlideOutSoft 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform: translate3d(80px, 0, 0);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    filter: blur(0);
+  }
+}
+
+.service-item-anim {
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: slideInRightSoft 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+  /* ── MOCKUP İÇİN HAVADA SÜZÜLME ANİMASYONU ── */
+  @keyframes floating {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); } /* 20px yerine 15px, daha yavaş ve sakin süzülecek */
+  }
+
+  .animate-float {
+    /* 5 saniyeden 6 saniyeye çıkardık, daha ağırdan alacak */
+    animation: floating 6s ease-in-out infinite;
   }
 }
 /* ─── NAV ─── */

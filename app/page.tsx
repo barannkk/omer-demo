@@ -258,14 +258,6 @@ export default function HomePage() {
     <>
     <section className="relative w-full h-[100svh] overflow-hidden bg-black">
 
-  {/* VIDEO ARKAPLAN */}
-  {isClient && (
-    <video autoPlay loop muted playsInline preload="auto" className="absolute inset-0 w-full h-full object-cover z-0">
-      <source src="/videos/herovideo.mp4" type="video/mp4" />
-    </video>
-  )}
-  <div className="absolute inset-0 z-[1] bg-black/30" />
-
   {/* ANA İÇERİK */}
   <div className="relative z-10 w-full h-full max-w-[1920px] mx-auto flex flex-col xl:flex-row items-center px-6 sm:px-10 md:px-16 xl:px-20">
 
@@ -337,11 +329,14 @@ export default function HomePage() {
       <div className="relative flex items-center justify-center shrink-0 transition-all duration-500
         w-[350px] sm:w-[500px] md:w-[650px] lg:w-[800px] xl:w-[990px]
         scale-100 xl:scale-110
-        xl:translate-x-[10%]
+        xl:translate-x-[-0%]
       ">
 
-        {/* TELEFON MOCKUP */}
-        <div className="relative z-20 w-full h-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]">
+        {/* YENİ: ARKAPLAN GRADIENT PARLAMASI */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[70%] bg-[#c2e200] rounded-full blur-[100px] opacity-30 z-0 pointer-events-none" />
+
+        {/* TELEFON MOCKUP (animate-float eklendi) */}
+        <div className="relative z-20 w-full h-auto drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)] animate-float">
           <Image
             src="/images/mockup.png" alt="OMR Work Phone Mockup"
             width={1600} height={3200}
@@ -352,17 +347,19 @@ export default function HomePage() {
 
         {/* SERVİS LİSTESİ */}
         <div className="absolute top-1/2 -translate-y-1/2 flex flex-col z-30
-          left-[68%] md:left-[70%] xl:left-[67%]
+          left-[68%] md:left-[70%] xl:left-[72%]
           w-[180px] sm:w-[240px] xl:w-[200px]
         ">
           {services.map((item, i) => (
-            <div key={i} className="flex flex-col w-full">
-              
-              <div
-                className="service-item-anim flex items-center gap-[10px] xl:gap-[14px] group cursor-pointer w-full justify-start
-                py-[10px] sm:py-[12px] xl:py-[16px]"
-                style={{ animationDelay: `${0.6 + i * 0.1}s` }}
-              >
+            <div 
+  key={i}
+  className="service-item-anim flex flex-col w-full"
+  style={{
+    animationDelay: `${0.3 + i * 0.2}s`,
+  }}
+>
+              {/* YENİ: Animasyon sınıflarını en dıştaki sarmalayıcıya taşıdık */}
+              <div className="flex items-center gap-[10px] xl:gap-[14px] group cursor-pointer w-full justify-start py-[10px] sm:py-[12px] xl:py-[16px]">
                 {/* İKON */}
                 <span className="text-white group-hover:text-white/80 transition-colors duration-300 shrink-0
                   [&>svg]:w-[12px] [&>svg]:h-[12px]
@@ -375,7 +372,7 @@ export default function HomePage() {
                 {/* METİN */}
                 <span className="text-white group-hover:text-white/90 transition-colors duration-300
                   font-extralight tracking-wider leading-none whitespace-nowrap
-                  text-[13px] sm:text-[15px] xl:text-[16px]
+                  text-[13px] sm:text-[15px] xl:text-[24px]
                 ">
                   {item.label}
                 </span>
@@ -389,7 +386,6 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-
       </div>
     </div>
 
