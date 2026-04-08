@@ -67,55 +67,52 @@ function Card({ brand, isActive }: { brand: Brand; isActive: boolean }) {
       className="relative w-full h-full rounded-[24px] overflow-hidden"
       style={{
         background: '#111',
+        // 1. GÖLGE DÜŞÜRÜLDÜ: Eskiye göre daha yumuşak ve az yayılan bir gölge
         boxShadow: isActive
-          ? '0 30px 80px rgba(0,0,0,0.75)'
-          : '0 10px 40px rgba(0,0,0,0.4)',
-        // GPU hızlandırması kalabilir, performansa yardımcı olur
-        transform: 'translateZ(0)',
+          ? '0 20px 60px rgba(0,0,0,0.6)'
+          : '0 8px 30px rgba(0,0,0,0.3)',
       }}
     >
       {brand.src ? (
-        
-        <Image 
-          src={brand.src} 
-          alt={brand.name} 
-          fill 
-          className="object-cover rounded-[24px]" 
-          draggable={false} 
-        />
+        <Image src={brand.src} alt={brand.name} fill className="object-cover" draggable={false} />
       ) : (
-        <div className="w-full h-full bg-[#1a1a1a] rounded-[24px]" />
+        <div className="w-full h-full bg-[#1a1a1a]" />
       )}
 
-      {/* Karartma gradyanımız */}
+      {/* 2. KARARTMA DÜŞÜRÜLDÜ: Siyahlık daha aşağıdan başlıyor ve daha şeffaf */}
       <div
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(to top, rgba(0,0,0,1) -2%, rgba(0,0,0,0.6) 15%, transparent 60%)',
+          background: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3) 30%, transparent 50%)',
         }}
       />
 
-      {/* İçerik (Yazılar ve Buton) */}
-      <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-row items-end justify-between gap-4 z-10">
+      {/* 3. AYNI SEVİYEYE İNDİRME: flex-col yerine flex-row ve items-end kullandık */}
+      <div className="absolute bottom-0 left-0 right-0 p-4 flex flex-row items-end justify-between gap-4">
         
-        <div className="flex flex-col gap-1 flex-1">
-          <span className="text-white/50 text-[10px] font-medium uppercase tracking-[0.2em]">
+        {/* SOL: Yazı Grubu */}
+        <div className="flex flex-col gap-0 flex-1">
+          <span className="text-accent text-[22px] font-bold uppercase">
             {brand.name}
           </span>
+          {/* Yazı boyutu 22px -> 20px yapıldı */}
           <span className="text-white font-medium text-[20px] leading-[1.2]">
             {brand.label}
           </span>
 
           {isActive && (
-            <p className="text-white/65 text-[13px] leading-[1.5] mt-1">
+            // Açıklama boyutu 14px -> 13px yapıldı, margin-top (mt) azaltıldı
+            <p className="text-white/65 text-[13px] leading-[1.5] mt-0">
               {brand.description}
             </p>
           )}
         </div>
 
+        {/* SAĞ: Buton (Yazılarla aynı hizaya oturdu) */}
         {isActive && (
           <Link
             href={`/work/${brand.id}`}
+            // Butonu da yeni orana uyması için hafifçe küçülttüm (48px -> 44px)
             className="w-[44px] h-[44px] rounded-full bg-[#c2e200] flex items-center justify-center transition-all duration-300 hover:bg-[#d4f500] hover:scale-110 shrink-0"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-[14px] h-[14px]">
@@ -123,7 +120,7 @@ function Card({ brand, isActive }: { brand: Brand; isActive: boolean }) {
             </svg>
           </Link>
         )}
-      </div>      
+      </div>
     </div>
   )
 }
@@ -138,13 +135,13 @@ function BrandShowcase() {
   const go = useCallback((dir: 'next' | 'prev') => {
     if (isAnimating) return;
     setIsAnimating(true);
-    
+
     setCurrent((prev) => (dir === 'next' ? mod(prev + 1, total) : mod(prev - 1, total)));
-    
+
     // Animasyon süresini daha nefes alan bir süreye (800ms) çektik
     setTimeout(() => {
       setIsAnimating(false);
-    }, 800); 
+    }, 800);
   }, [isAnimating, total]);
 
   const goNext = useCallback(() => go('next'), [go]);
@@ -243,7 +240,7 @@ function BrandShowcase() {
               <span className="w-2 h-2 rounded-full bg-[#c2e200] inline-block" />
               SEÇİLMİŞ İŞLERİM
             </span>
-            
+
             <h2 className="text-white font-medium leading-[1.0] tracking-tight mb-6 text-[48px] sm:text-[56px] lg:text-[64px] xl:text-[80px]">
               <span className="whitespace-nowrap">Ideas become</span> <br />
               <em className="font-canela font-medium text-[#c2e200] not-italic">visuals</em>
@@ -333,7 +330,7 @@ function BrandShowcase() {
               </button>
             </div>
           </div>
-          
+
         </div>
       </div>
     </section>
