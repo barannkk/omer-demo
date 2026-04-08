@@ -233,9 +233,9 @@ function BrandShowcase() {
       <div className="relative z-10 w-full max-w-[1700px] mx-auto flex flex-col lg:flex-row items-stretch gap-20 min-h-screen py-[80px]">
 
         {/* SOL ALAN */}
-        <div className="flex flex-col justify-between w-full lg:w-[26%] shrink-0 py-4 pr-4">
+        <div className="flex flex-col justify-start w-full lg:w-[26%] shrink-0 py-4 pr-4">
 
-          <div className="flex flex-col justify-center flex-1">
+          <div className="flex flex-col pt-[80px]">
             <span className="flex items-center gap-2 text-[#c2e200] text-[11px] tracking-[0.22em] font-medium uppercase mb-6">
               <span className="w-2 h-2 rounded-full bg-[#c2e200] inline-block" />
               SEÇİLMİŞ İŞLERİM
