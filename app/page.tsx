@@ -121,16 +121,15 @@ function BrandShowcase() {
   const total = brands.length;
 
   const go = useCallback((dir: 'next' | 'prev') => {
-    if (isAnimating) return; // Hızlı tıklamaları engelle
+    if (isAnimating) return;
     setIsAnimating(true);
     
-    // Yön durumuna göre yeni indeksi belirle
     setCurrent((prev) => (dir === 'next' ? mod(prev + 1, total) : mod(prev - 1, total)));
     
-    // Animasyon süresi kadar bekle ve kilidi aç
+    // Animasyon süresini daha nefes alan bir süreye (800ms) çektik
     setTimeout(() => {
       setIsAnimating(false);
-    }, 500); 
+    }, 800); 
   }, [isAnimating, total]);
 
   const goNext = useCallback(() => go('next'), [go]);
@@ -138,7 +137,6 @@ function BrandShowcase() {
 
   const progress = ((current + 1) / total) * 100;
 
-  // Kartların merkeze göre uzaklığını hesaplayan sihirli formül
   const getOffset = (index: number) => {
     let offset = (index - current) % total;
     if (offset > Math.floor(total / 2)) offset -= total;
@@ -146,19 +144,20 @@ function BrandShowcase() {
     return offset;
   };
 
-  // Kartların pozisyonlarını belirleyen stil fonksiyonu
+  // MERKEZ VE YAN KARTLARIN ZAMANLAMALARI AYRILDI
   const getCardStyle = (offset: number): React.CSSProperties => {
     const isCenter = offset === 0;
     const isLeft = offset === -1;
     const isRight = offset === 1;
 
-    // Tüm kartlar için geçerli olan temel geçiş stili (Hız ve yumuşaklık burada gizli)
+    // Ortak hareket eğrisi (Hızlı başlar, kayarak çok yumuşak durur)
+    const transitionMovement = 'left 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 800ms cubic-bezier(0.16, 1, 0.3, 1)';
+
     const base: React.CSSProperties = {
       position: 'absolute',
       top: '50%',
       width: 'clamp(250px, 25vw, 400px)',
       aspectRatio: '4 / 5',
-      transition: 'all 500ms cubic-bezier(0.25, 1, 0.5, 1)', // Kusursuz akıcılık sağlayan ivme
       transformOrigin: 'center center',
     };
 
@@ -169,27 +168,33 @@ function BrandShowcase() {
         transform: 'translate(-50%, -50%) scale(1)',
         opacity: 1,
         zIndex: 20,
+        // Merkez karta geçişte opacity anında tepki verir
+        transition: `${transitionMovement}, opacity 500ms ease`,
       };
     } else if (isLeft) {
       return {
         ...base,
         left: '10%',
-        transform: 'translate(0%, -50%) scale(0.85)', // Dik duruş sağlandı
+        transform: 'translate(0%, -50%) scale(0.85)',
         opacity: 0.4,
         zIndex: 10,
         cursor: 'pointer',
+        // SİHİR BURADA: Yan kartların opacity değişimi 150ms gecikmeli (delay) başlar
+        transition: `${transitionMovement}, opacity 600ms ease 150ms`,
       };
     } else if (isRight) {
       return {
         ...base,
         left: '90%',
-        transform: 'translate(-100%, -50%) scale(0.85)', // Dik duruş sağlandı
+        transform: 'translate(-100%, -50%) scale(0.85)',
         opacity: 0.4,
         zIndex: 10,
         cursor: 'pointer',
+        // SİHİR BURADA: Yan kartların opacity değişimi 150ms gecikmeli (delay) başlar
+        transition: `${transitionMovement}, opacity 600ms ease 150ms`,
       };
     } else {
-      // Ekranda görünmeyen ama arkada bekleyen kartlar
+      // Arka planda gizlenen kartlar
       return {
         ...base,
         left: offset < 0 ? '-20%' : '120%',
@@ -197,6 +202,7 @@ function BrandShowcase() {
         opacity: 0,
         zIndex: 0,
         pointerEvents: 'none',
+        transition: `${transitionMovement}, opacity 400ms ease`,
       };
     }
   };
@@ -204,7 +210,6 @@ function BrandShowcase() {
   return (
     <section className="relative w-full min-h-screen bg-black overflow-hidden flex items-center px-[4%]">
 
-      {/* Arka plan ışık efekti */}
       <div
         className="absolute top-1/2 right-[-100px] -translate-y-1/2 w-[1000px] h-[1000px] rounded-full pointer-events-none"
         style={{
@@ -213,20 +218,17 @@ function BrandShowcase() {
         }}
       />
 
-      {/* gap-20 ile sağ ve sol alanı ayırdık */}
       <div className="relative z-10 w-full max-w-[1700px] mx-auto flex flex-col lg:flex-row items-stretch gap-20 min-h-screen py-[80px]">
 
         {/* SOL ALAN */}
         <div className="flex flex-col justify-between w-full lg:w-[26%] shrink-0 py-4 pr-4">
 
-          {/* Üst blok */}
           <div className="flex flex-col justify-center flex-1">
             <span className="flex items-center gap-2 text-[#c2e200] text-[11px] tracking-[0.22em] font-medium uppercase mb-6">
               <span className="w-2 h-2 rounded-full bg-[#c2e200] inline-block" />
               SEÇİLMİŞ İŞLERİM
             </span>
             
-            {/* YAZI: Ideas become visuals alt alta kenetlendi */}
             <h2 className="text-white font-medium leading-[1.0] tracking-tight mb-6 text-[48px] sm:text-[56px] lg:text-[64px] xl:text-[80px]">
               <span className="whitespace-nowrap">Ideas become</span> <br />
               <em className="font-canela font-medium text-[#c2e200] not-italic">visuals</em>
@@ -236,7 +238,6 @@ function BrandShowcase() {
               Markaların hedeflerine ulaşması için yaratıcı, etkili ve akılda kalıcı işler üretiyorum.
             </p>
 
-            {/* BUTON: Yazının hemen altında */}
             <div className="mt-2">
               <Link
                 href="/works"
@@ -250,7 +251,6 @@ function BrandShowcase() {
             </div>
           </div>
 
-          {/* Alt blok: Sayaç */}
           <div className="pb-2">
             <span className="text-white tabular-nums flex items-baseline gap-[3px]">
               <span className="text-[42px] font-medium leading-none">
@@ -266,12 +266,7 @@ function BrandShowcase() {
         {/* SAĞ ALAN */}
         <div className="relative flex-1 flex flex-col">
 
-          {/* KART ALANI */}
           <div className="relative flex-1 w-full" style={{ minHeight: 'clamp(600px, 80vh, 860px)' }}>
-            
-            {/* Tüm markaları ekrana basıyoruz ve konumlarını getCardStyle ile ayarlıyoruz.
-              Böylece "duraksama" olmadan css ile kayarak yer değiştiriyorlar.
-            */}
             {brands.map((brand, index) => {
               const offset = getOffset(index);
               const style = getCardStyle(offset);
@@ -290,14 +285,14 @@ function BrandShowcase() {
                 </div>
               );
             })}
-
           </div>
 
-          {/* ALT BAR (Progress ve Yön Butonları) */}
+          {/* ALT BAR */}
           <div className="flex items-center gap-5 pt-6 pb-2">
             <div className="flex-1 h-[2px] bg-white/10 rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#c2e200] rounded-full transition-all duration-500 ease-out"
+                // Progress bar süresini de yeni animasyon süremizle uyumlu olması için uzattık
+                className="h-full bg-[#c2e200] rounded-full transition-all duration-700 ease-out"
                 style={{ width: `${progress}%` }}
               />
             </div>
