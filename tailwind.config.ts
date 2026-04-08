@@ -21,6 +21,7 @@ const config: Config = {
       // Yazı tipini CSS değişkenine bağlayalım (Layout'taki Juturu için)
       fontFamily: {
         juturu: ["var(--font-juturu)", "sans-serif"],
+        canela: ["var(--font-canela)", "serif"],
       },
       // Marquee ve Hover efektleri için özel değerler
       scale: {

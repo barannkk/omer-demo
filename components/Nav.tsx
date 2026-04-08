@@ -91,7 +91,7 @@ export default function Nav() {
             <Link
               href="/contact"
               onClick={() => setMenuOpen(false)}
-              className={`btn-proje inline-flex items-center gap-[6px] justify-center leading-none rounded-[50px] uppercase tracking-[0.06em] font-extrabold no-underline transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+              className={`btn-proje group inline-flex items-center gap-[6px] justify-center leading-none rounded-[50px] uppercase tracking-[0.06em] font-extrabold no-underline transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
                 bg-[#c2e200] text-black hover:bg-[#d4f500] hover:translate-y-[-1px]
                 ${scrolled
                   ? 'text-[12px] px-[22px] py-[11px]'
@@ -100,7 +100,20 @@ export default function Nav() {
               `}
             >
               BİR PROJE BAŞLAT
-              <span className="text-[14px] leading-none">↗</span>
+              {/* YENİ: SVG İkonu ve Hover Animasyonu */}
+              <svg 
+                xmlns="icons/arrow.svg" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.5" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className="w-[13px] h-[13px] transition-transform duration-300 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]"
+              >
+                <path d="M7 17L17 7" />
+                <path d="M7 7h10v10" />
+              </svg>
             </Link>
           </li>
         </ul>

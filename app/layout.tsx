@@ -6,16 +6,28 @@ import Image from 'next/image'
 
 const juturu = localFont({
   src: [
-    { path: './font/Juturu-Thin.otf', weight: '100' },
-    { path: './font/Juturu-Light.otf', weight: '300' },
-    { path: './font/Juturu-Regular.otf', weight: '400' },
-    { path: './font/Juturu-Medium.otf', weight: '500' },
-    { path: './font/Juturu-Semibold.otf', weight: '600' },
-    { path: './font/Juturu-Bold.otf', weight: '700' },
-    { path: './font/Juturu-Extrabold.otf', weight: '800' },
-    { path: './font/Juturu-Black.otf', weight: '900' },
+    { path: './font/juturu/Juturu-Thin.otf', weight: '100' },
+    { path: './font/juturu/Juturu-Light.otf', weight: '300' },
+    { path: './font/juturu/Juturu-Regular.otf', weight: '400' },
+    { path: './font/juturu/Juturu-Medium.otf', weight: '500' },
+    { path: './font/juturu/Juturu-Semibold.otf', weight: '600' },
+    { path: './font/juturu/Juturu-Bold.otf', weight: '700' },
+    { path: './font/juturu/Juturu-Extrabold.otf', weight: '800' },
+    { path: './font/juturu/Juturu-Black.otf', weight: '900' },
   ],
   variable: '--font-juturu',
+})
+
+const canela = localFont({
+  src: [
+    { path: './font/canela/Canela-ThinItalic-Trial.otf', weight: '100', style: 'italic' },
+    { path: './font/canela/Canela-LightItalic-Trial.otf', weight: '300', style: 'italic' },
+    { path: './font/canela/Canela-RegularItalic-Trial.otf', weight: '400', style: 'italic' },
+    { path: './font/canela/Canela-MediumItalic-Trial.otf', weight: '500', style: 'italic' },
+    { path: './font/canela/Canela-BoldItalic-Trial.otf', weight: '700', style: 'italic' },
+    { path: './font/canela/Canela-BlackItalic-Trial.otf', weight: '900', style: 'italic' },
+  ],
+  variable: '--font-canela',
 })
 
 export const metadata: Metadata = {
@@ -38,7 +50,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="tr">
-      <body className={`${juturu.className} ${juturu.variable}`}>
+      <body className={`${juturu.className} ${juturu.variable} ${canela.variable}`}>
         <Nav />
 
         <main>

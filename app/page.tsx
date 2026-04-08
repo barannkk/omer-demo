@@ -281,7 +281,8 @@ export default function HomePage() {
           xl:text-[clamp(90px,8vw,130px)]
         " style={{ animationDelay: '0.3s' }}>
           feels{' '}
-          <em className="not-italic text-[#c2e200]" style={{ fontStyle: 'italic' }}>
+          {/* font-light, font-medium, font-bold deneyerek en lüks duranı seçebilirsin */}
+          <em className="font-canela font-medium text-[#c2e200]">
             expensive.
           </em>
         </span>
@@ -300,15 +301,29 @@ export default function HomePage() {
 
       {/* BUTONLAR */}
       <div className="flex items-center gap-4 sm:gap-6 flex-wrap animate-text-slide" style={{ animationDelay: '0.7s' }}>
-        <Link
+       <Link
           href="/contact"
-          className="inline-flex items-center justify-center rounded-full bg-[#c2e200] text-black font-extrabold uppercase tracking-[0.07em] transition-all duration-300 hover:bg-[#d4f500] hover:-translate-y-[2px]
+          className="group inline-flex items-center gap-[8px] justify-center rounded-full bg-[#c2e200] text-black font-extrabold uppercase tracking-[0.07em] transition-all duration-300 hover:bg-[#d4f500] hover:-translate-y-[2px]
             text-[13px] px-[28px] py-[14px]
             sm:text-[15px] sm:px-[32px] sm:py-[16px]
             xl:text-[16px] xl:px-[40px] xl:py-[19px]
           "
         >
           Bir Proje Başlat
+          {/* YENİ: SVG İkonu ve Hover Animasyonu (Hero kısmı için ikon bir tık daha büyük ayarlandı) */}
+          <svg 
+            xmlns="icons/arrow.svg" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2.5" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            className="w-[14px] h-[14px] sm:w-[15px] sm:h-[15px] xl:w-[16px] xl:h-[16px] transition-transform duration-300 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]"
+          >
+            <path d="M7 17L17 7" />
+            <path d="M7 7h10v10" />
+          </svg>
         </Link>
         <Link
           href="/works"
@@ -361,7 +376,7 @@ export default function HomePage() {
               {/* YENİ: Animasyon sınıflarını en dıştaki sarmalayıcıya taşıdık */}
               <div className="flex items-center gap-[10px] xl:gap-[14px] group cursor-pointer w-full justify-start py-[10px] sm:py-[12px] xl:py-[16px]">
                 {/* İKON */}
-                <span className="text-white group-hover:text-white/80 transition-colors duration-300 shrink-0
+                <span className="text-white translate-y-[4px] group-hover:text-white/80 transition-colors duration-300 shrink-0
                   [&>svg]:w-[12px] [&>svg]:h-[12px]
                   sm:[&>svg]:w-[16px] sm:[&>svg]:h-[16px]
                   xl:[&>svg]:w-[18px] xl:[&>svg]:h-[18px]
