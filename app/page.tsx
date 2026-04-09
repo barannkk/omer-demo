@@ -138,7 +138,6 @@ function BrandShowcase() {
 
     setCurrent((prev) => (dir === 'next' ? mod(prev + 1, total) : mod(prev - 1, total)));
 
-    // Animasyon süresini daha nefes alan bir süreye (800ms) çektik
     setTimeout(() => {
       setIsAnimating(false);
     }, 800);
@@ -156,13 +155,11 @@ function BrandShowcase() {
     return offset;
   };
 
-  // MERKEZ VE YAN KARTLARIN ZAMANLAMALARI AYRILDI
   const getCardStyle = (offset: number): React.CSSProperties => {
     const isCenter = offset === 0;
     const isLeft = offset === -1;
     const isRight = offset === 1;
 
-    // Ortak hareket eğrisi (Hızlı başlar, kayarak çok yumuşak durur)
     const transitionMovement = 'left 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 800ms cubic-bezier(0.16, 1, 0.3, 1)';
 
     const base: React.CSSProperties = {
@@ -180,7 +177,6 @@ function BrandShowcase() {
         transform: 'translate(-50%, -50%) scale(1)',
         opacity: 1,
         zIndex: 20,
-        // Merkez karta geçişte opacity anında tepki verir
         transition: `${transitionMovement}, opacity 500ms ease`,
       };
     } else if (isLeft) {
@@ -191,7 +187,6 @@ function BrandShowcase() {
         opacity: 0.4,
         zIndex: 10,
         cursor: 'pointer',
-        // SİHİR BURADA: Yan kartların opacity değişimi 150ms gecikmeli (delay) başlar
         transition: `${transitionMovement}, opacity 600ms ease 150ms`,
       };
     } else if (isRight) {
@@ -202,11 +197,9 @@ function BrandShowcase() {
         opacity: 0.4,
         zIndex: 10,
         cursor: 'pointer',
-        // SİHİR BURADA: Yan kartların opacity değişimi 150ms gecikmeli (delay) başlar
         transition: `${transitionMovement}, opacity 600ms ease 150ms`,
       };
     } else {
-      // Arka planda gizlenen kartlar
       return {
         ...base,
         left: offset < 0 ? '-20%' : '120%',
@@ -222,6 +215,7 @@ function BrandShowcase() {
   return (
     <section className="relative w-full min-h-screen bg-black overflow-hidden flex items-center px-[4%]">
 
+      {/* Arka plan efekti */}
       <div
         className="absolute top-1/2 right-[-100px] -translate-y-1/2 w-[1000px] h-[1000px] rounded-full pointer-events-none"
         style={{
@@ -230,112 +224,117 @@ function BrandShowcase() {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-[1700px] mx-auto flex flex-col lg:flex-row items-stretch gap-20 min-h-screen py-[80px]">
+      {/* ANA YAPI: Sol-Sağ içerik ve Alt Bar'ı dikeyde (flex-col) sarar */}
+      <div className="relative z-10 w-full max-w-[1700px] mx-auto flex flex-col justify-between min-h-screen py-[60px]">
 
-        {/* SOL ALAN */}
-        <div className="flex flex-col justify-start w-full lg:w-[26%] shrink-0 py-4 pr-4">
+        {/* ÜST İÇERİK: Sol Yazılar ve Sağ Kartlar Yanyana */}
+        <div className="flex flex-col lg:flex-row items-stretch gap-20 flex-1">
+          
+          {/* SOL ALAN (Yazılar) - Yukarı çekildi */}
+          <div className="flex flex-col justify-start w-full lg:w-[26%] shrink-0 py-4 pr-4">
+            <div className="flex flex-col pt-[80px]">
+              <span className="flex items-center gap-2 text-[#c2e200] text-[11px] tracking-[0.22em] font-medium uppercase mb-6">
+                <span className="w-2 h-2 rounded-full bg-[#c2e200] inline-block" />
+                SEÇİLMİŞ İŞLERİM
+              </span>
 
-          <div className="flex flex-col pt-[80px]">
-            <span className="flex items-center gap-2 text-[#c2e200] text-[11px] tracking-[0.22em] font-medium uppercase mb-6">
-              <span className="w-2 h-2 rounded-full bg-[#c2e200] inline-block" />
-              SEÇİLMİŞ İŞLERİM
-            </span>
+              <h2 className="text-white font-medium leading-[1.0] tracking-tight mb-6 text-[48px] sm:text-[56px] lg:text-[64px] xl:text-[80px]">
+                <span className="whitespace-nowrap">Ideas become</span> <br />
+                <em className="font-canela font-medium text-[#c2e200] not-italic">visuals</em>
+              </h2>
 
-            <h2 className="text-white font-medium leading-[1.0] tracking-tight mb-6 text-[48px] sm:text-[56px] lg:text-[64px] xl:text-[80px]">
-              <span className="whitespace-nowrap">Ideas become</span> <br />
-              <em className="font-canela font-medium text-[#c2e200] not-italic">visuals</em>
-            </h2>
+              <p className="text-white/55 text-[15px] lg:text-[16px] leading-[1.75] max-w-[320px] mb-8">
+                Markaların hedeflerine ulaşması için yaratıcı, etkili ve akılda kalıcı işler üretiyorum.
+              </p>
 
-            <p className="text-white/55 text-[15px] lg:text-[16px] leading-[1.75] max-w-[320px] mb-8">
-              Markaların hedeflerine ulaşması için yaratıcı, etkili ve akılda kalıcı işler üretiyorum.
-            </p>
-
-            <div className="mt-2">
-              <Link
-                href="/works"
-                className="group inline-flex items-center gap-3 border border-[#c2e200] text-[#c2e200] font-medium uppercase tracking-[0.1em] text-[12px] px-[24px] py-[12px] rounded-full transition-all duration-300 hover:bg-[#c2e200]/10 shrink-0 w-max"
-              >
-                TÜM İŞLERİ GÖR
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-[13px] h-[13px] transition-transform duration-300 group-hover:translate-x-[3px] group-hover:-translate-y-[3px]">
-                  <path d="M7 17L17 7" /><path d="M7 7h10v10" />
-                </svg>
-              </Link>
+              <div className="mt-2">
+                <Link
+                  href="/works"
+                  className="group inline-flex items-center gap-3 border border-[#c2e200] text-[#c2e200] font-medium uppercase tracking-[0.1em] text-[12px] px-[24px] py-[12px] rounded-full transition-all duration-300 hover:bg-[#c2e200]/10 shrink-0 w-max"
+                >
+                  TÜM İŞLERİ GÖR
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-[13px] h-[13px] transition-transform duration-300 group-hover:translate-x-[3px] group-hover:-translate-y-[3px]">
+                    <path d="M7 17L17 7" /><path d="M7 7h10v10" />
+                  </svg>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* SAĞ ALAN */}
-<div className="relative flex-1 flex flex-col">
+          {/* SAĞ ALAN (Kartlar) */}
+          <div className="relative flex-1">
+            <div className="relative w-full h-full" style={{ minHeight: 'clamp(500px, 70vh, 800px)' }}>
+              {brands.map((brand, index) => {
+                const offset = getOffset(index);
+                const style = getCardStyle(offset);
+                const isActive = offset === 0;
 
-  {/* KART ALANI */}
-  <div className="relative flex-1 w-full" style={{ minHeight: 'clamp(600px, 80vh, 860px)' }}>
-    {brands.map((brand, index) => {
-      const offset = getOffset(index);
-      const style = getCardStyle(offset);
-      const isActive = offset === 0;
+                return (
+                  <div
+                    key={brand.id || index}
+                    style={style}
+                    onClick={() => {
+                      if (offset === -1) goPrev();
+                      if (offset === 1) goNext();
+                    }}
+                  >
+                    <Card brand={brand} isActive={isActive} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
-      return (
-        <div
-          key={brand.id || index}
-          style={style}
-          onClick={() => {
-            if (offset === -1) goPrev();
-            if (offset === 1) goNext();
-          }}
-        >
-          <Card brand={brand} isActive={isActive} />
-        </div>
-      );
-    })}
-  </div>
+        </div> {/* Üst İçerik Bitişi */}
 
-  
-  <div className="flex items-center w-full mt-12 pb-4 gap-8">
-    
-    {/* 1. SAYFA SAYISI (SOLDA) */}
-    <div className="shrink-0">
-      <span className="text-white tabular-nums flex items-baseline gap-[2px]">
-        <span className="text-[24px] font-medium text-[#FFFFF]">
-          {String(current + 1).padStart(2, '0')}
-        </span>
-        <span className="text-white/20 text-[18px] mx-1">/</span>
-        <span className="text-white/40 text-[18px]">{String(total).padStart(2, '0')}</span>
-      </span>
-    </div>
 
-    {/* 2. PROGRESS BAR (ORTADA - ESNEK) */}
-    <div className="flex-1 h-[1px] bg-white/10 relative">
-      <div
-        className="absolute top-0 left-0 h-full bg-[#c2e200] transition-all duration-700 ease-out shadow-[0_0_10px_rgba(194,226,0,0.3)]"
-        style={{ width: `${progress}%` }}
-      />
-    </div>
+        {/* ALT BAR: Sağ alandan çıkarıldı, Ana yapının en altına (tüm enine) yerleştirildi */}
+        <div className="flex items-center w-full mt-12 pb-4 gap-8">
+          
+          {/* 1. SAYFA SAYISI (SOLDA) */}
+          <div className="shrink-0">
+            <span className="text-white tabular-nums flex items-baseline gap-[2px]">
+              {/* text-[#FFFFF] hatası text-white olarak düzeltildi */}
+              <span className="text-[24px] font-medium text-[#c2e200]">
+                {String(current + 1).padStart(2, '0')}
+              </span>
+              <span className="text-white/20 text-[18px] mx-1">/</span>
+              <span className="text-white/40 text-[18px]">{String(total).padStart(2, '0')}</span>
+            </span>
+          </div>
 
-    {/* 3. OKLAR (SAĞDA) */}
-    <div className="flex items-center gap-3 shrink-0">
-      <button
-        onClick={goPrev}
-        disabled={isAnimating}
-        className="w-[50px] h-[50px] rounded-full border border-white/10 flex items-center justify-center text-white/50 transition-all duration-300 hover:border-[#c2e200] hover:text-[#c2e200] disabled:opacity-20"
-      >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-          <path d="M15 18l-6-6 6-6" />
-        </svg>
-      </button>
-      <button
-        onClick={goNext}
-        disabled={isAnimating}
-        className="w-[50px] h-[50px] rounded-full border border-white/10 flex items-center justify-center text-white/50 transition-all duration-300 hover:border-[#c2e200] hover:text-[#c2e200] disabled:opacity-20"
-      >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-          <path d="M9 18l6-6-6-6" />
-        </svg>
-      </button>
-    </div>
+          {/* 2. PROGRESS BAR (ORTADA) */}
+          <div className="flex-1 h-[1px] bg-white/10 relative">
+            <div
+              className="absolute top-0 left-0 h-full bg-[#c2e200] transition-all duration-700 ease-out shadow-[0_0_10px_rgba(194,226,0,0.3)]"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
 
-  </div>
-  
-</div>
+          {/* 3. OKLAR (SAĞDA) */}
+          <div className="flex items-center gap-3 shrink-0">
+            <button
+              onClick={goPrev}
+              disabled={isAnimating}
+              className="w-[50px] h-[50px] rounded-full border border-white/10 flex items-center justify-center text-white/50 transition-all duration-300 hover:border-[#c2e200] hover:text-[#c2e200] disabled:opacity-20"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <button
+              onClick={goNext}
+              disabled={isAnimating}
+              className="w-[50px] h-[50px] rounded-full border border-white/10 flex items-center justify-center text-white/50 transition-all duration-300 hover:border-[#c2e200] hover:text-[#c2e200] disabled:opacity-20"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+
+        </div> {/* Alt Bar Bitişi */}
+
       </div>
     </section>
   );
