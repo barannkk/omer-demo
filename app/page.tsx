@@ -28,7 +28,7 @@ const brands: Brand[] = [
     name: 'STRIDE',
     label: 'Spor Ayakkabı Lansmanı',
     description: 'Trend konsept ve dijital reklam serisi.',
-    src: '/projects/vet_panel_kapak.jpg',
+    src: '/images/vet_panel_kapak.jpg',
   },
   {
     id: 'vitara',
@@ -56,7 +56,7 @@ const brands: Brand[] = [
     name: 'MARKA 6',
     label: 'Campaign Design',
     description: 'Sosyal medya ve dijital kampanya görselleri.',
-    src: '/projects/vet_panel_kapak.jpg',
+    src: '/images/vet_panel_kapak.jpg',
   },
 ]
 
@@ -289,7 +289,7 @@ function BrandShowcase() {
     })}
   </div>
 
-  {/* ALT BAR - FOTOĞRAFTAKİ GİBİ DÜZENLENDİ */}
+  
   <div className="flex items-center w-full mt-12 pb-4 gap-8">
     
     {/* 1. SAYFA SAYISI (SOLDA) */}
