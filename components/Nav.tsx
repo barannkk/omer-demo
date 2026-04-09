@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation' // 1. YENİ: Aktif sayfayı bulmak için eklendi
 
 const LOGO_PATH = '/logos/omr_lime_logo.svg'
 const HAS_LOGO = true
@@ -10,6 +11,8 @@ const HAS_LOGO = true
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  
+  const pathname = usePathname() // 2. YENİ: Şu anki URL'yi alıyoruz
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
@@ -20,7 +23,6 @@ export default function Nav() {
   const links = [
     { href: '/', label: 'ANA SAYFA' },
     { href: '/about', label: 'HAKKIMDA' },
-    { href: '/works', label: 'ÇALIŞMALAR' },
     { href: '/contact', label: 'İLETİŞİM' },
   ]
 
@@ -30,7 +32,6 @@ export default function Nav() {
         ${scrolled ? 'pt-[10px] px-4' : 'pt-0 px-0'}
       `}
     >
-      {/* SİHİR BURADA: flex-wrap eklendi, böylece mobil görünümde taşan elemanlar alt satıra geçecek. */}
       <div
         className={`pointer-events-auto flex flex-wrap items-center justify-between w-full transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
           ${scrolled
@@ -68,17 +69,27 @@ export default function Nav() {
 
         {/* LİNKLER */}
         <ul className={`nav-links-mobile m-0 p-0 list-none ${menuOpen ? 'open' : ''}`}>
-          {links.map(({ href, label }) => (
+          {links.map(({ href, label }) => {
+            
+            // 3. YENİ: Bu link şu an açık olan sayfaya mı ait?
+            const isActive = pathname === href;
+
+            return (
             <li 
               key={href} 
-              // Eski düz border sınıfını sildik, yerine flex-col ekledik ki çizgi yazının altına insin
-              className="max-[900px]:w-full flex flex-col"
+              className="max-[900px]:w-full flex flex-col relative"
             >
               <Link
                 href={href}
                 onClick={() => setMenuOpen(false)}
-                className={`nav-link-hover flex items-center max-[900px]:w-full max-[900px]:justify-center rounded-[50px] max-[900px]:rounded-[12px] text-[rgba(255,255,255,0.7)] no-underline uppercase tracking-[0.08em] font-bold transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
-                  hover:text-white hover:bg-[rgba(255,255,255,0.06)]
+                className={`nav-link-hover relative flex items-center max-[900px]:w-full max-[900px]:justify-center rounded-[50px] max-[900px]:rounded-[12px] no-underline uppercase tracking-[0.08em] font-bold transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+                  
+                  /* 4. YENİ: Eğer aktifse sarı-yeşil yap ve parlat, değilse eski gri/beyaz hover kalsın */
+                  ${isActive 
+                    ? 'text-[#c2e200] drop-shadow-[0_0_8px_rgba(194,226,0,0.4)]' 
+                    : 'text-[rgba(255,255,255,0.7)] hover:text-white hover:bg-[rgba(255,255,255,0.06)]'
+                  }
+
                   ${scrolled
                     ? 'text-[12px] px-[16px] py-[8px] max-[900px]:py-[16px]'
                     : 'text-[12px] px-[16px] py-[8px] max-[900px]:py-[16px] xl:text-[13px] xl:px-[18px] xl:py-[9px] 2xl:text-[14px] 2xl:px-[22px] 2xl:py-[10px]'
@@ -86,18 +97,27 @@ export default function Nav() {
                 `}
               >
                 {label}
+
+                {/* 5. YENİ (FOTOĞRAFTAKİ SİHİR): Sadece aktif sayfadaysa bu çizgiyi render et */}
+                {isActive && (
+                  <span className="absolute bottom-[2px] xl:bottom-[4px] left-1/2 -translate-x-1/2 w-[70%] flex items-center justify-center pointer-events-none">
+                    {/* Kenarlara doğru şeffaflaşan çizgi */}
+                    <span className="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-[#c2e200] to-transparent opacity-80" />
+                    {/* Tam ortadaki patlayan parlak neon nokta */}
+                    <span className="absolute w-[4px] h-[4px] rounded-full bg-[#c2e200] shadow-[0_0_12px_3px_rgba(194,226,0,1)]" />
+                  </span>
+                )}
               </Link>
               
-              {/* SİHİR: Servislerdeki neon gradient çizgisi (Sadece mobilde görünür) */}
-             <div className="hidden max-[900px]:block w-[80%] mx-auto h-[1px] bg-gradient-to-r from-transparent via-[#c2e200]/60 to-transparent shadow-[0_0_10px_rgba(194,226,0,0.2)]" />
+              {/* Servislerdeki neon gradient çizgisi (Sadece mobilde görünür) */}
+              <div className="hidden max-[900px]:block w-[80%] mx-auto h-[1px] bg-gradient-to-r from-transparent via-[#c2e200]/60 to-transparent shadow-[0_0_10px_rgba(194,226,0,0.2)]" />
             </li>
-          ))}
+          )})}
 
-         {/* BİR PROJE BAŞLAT BUTONU */}
-          {/* Parent <li>'ye flex ve justify-center vererek butonu esnetmeden tam ortaya alıyoruz */}
+          {/* BİR PROJE BAŞLAT BUTONU */}
           <li className="max-[900px]:w-full max-[900px]:mt-4 max-[900px]:flex max-[900px]:justify-center">
             <Link
-              href="/contact"
+              href="/works"
               onClick={() => setMenuOpen(false)}
               className={`btn-proje group inline-flex items-center gap-[6px] leading-none rounded-[50px] uppercase tracking-[0.06em] font-extrabold no-underline transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
                 bg-[#c2e200] text-black hover:bg-[#d4f500] hover:translate-y-[-1px]
@@ -107,8 +127,7 @@ export default function Nav() {
                 }
               `}
             >
-              BİR PROJE BAŞLAT
-              {/* SVG İkonu */}
+              Tüm işleri gör
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
                 viewBox="0 0 24 24" 

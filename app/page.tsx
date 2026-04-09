@@ -17,18 +17,18 @@ interface Brand {
 // ─── Markalar ───
 const brands: Brand[] = [
   {
+    id: 'omrwork',
+    name: 'OMRWORK',
+    label: 'DESIGNED BY OMER',
+    description: 'WORK OF ART',
+    src: '/images/omr1.post.jpeg',
+  },
+  {
     id: 'avon',
     name: 'AVON',
     label: 'Beauty Campaign',
     description: 'Koku serisinin lansmanı için 360° dijital kampanya tasarımı.',
     src: '/projects/avon_anneler_gunu.png',
-  },
-  {
-    id: 'stride',
-    name: 'STRIDE',
-    label: 'Spor Ayakkabı Lansmanı',
-    description: 'Trend konsept ve dijital reklam serisi.',
-    src: '/images/vet_panel_kapak.jpg',
   },
   {
     id: 'vitara',
@@ -473,7 +473,7 @@ export default function HomePage() {
                       </span>
                     </div>
                     {i < services.length - 1 && (
-                      <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#c2e200]/60 to-transparent shadow-[0_0_10px_rgba(194,226,0,0.2)]" />
+                      <div className="w-[125%] h-[1px] bg-gradient-to-r from-transparent via-[#c2e200]/60 to-transparent shadow-[0_0_10px_rgba(194,226,0,0.2)]" />
                     )}
                   </div>
                 ))}
