@@ -223,6 +223,13 @@ function BrandShowcase() {
           filter: 'blur(70px)',
         }}
       />
+      <div
+        className="absolute bottom-[-300px] left-[-200px] w-[800px] h-[800px] rounded-full pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(194,226,0,0.15) 0%, rgba(194,226,0,0.05) 45%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
+      />
 
       {/* ANA YAPI: Sol-Sağ içerik ve Alt Bar'ı dikeyde (flex-col) sarar */}
       <div className="relative z-10 w-full max-w-[1700px] mx-auto flex flex-col justify-between min-h-screen py-[60px]">
@@ -289,7 +296,7 @@ function BrandShowcase() {
 
 
         {/* ALT BAR: Sağ alandan çıkarıldı, Ana yapının en altına (tüm enine) yerleştirildi */}
-        <div className="flex items-center w-full mt-12 pb-4 gap-8">
+        <div className="flex items-center w-full -mt-10 pb-4 gap-8 relative z-20">
           
           {/* 1. SAYFA SAYISI (SOLDA) */}
           <div className="shrink-0">
@@ -402,6 +409,13 @@ export default function HomePage() {
   return (
     <>
       <section className="relative w-full h-[100svh] overflow-hidden bg-black">
+        <div
+          className="absolute bottom-[-200px] left-[-200px] w-[800px] h-[800px] rounded-full pointer-events-none"
+          style={{
+            background: 'radial-gradient(circle, rgba(194,226,0,0.12) 0%, rgba(194,226,0,0.04) 45%, transparent 70%)',
+            filter: 'blur(90px)',
+          }}
+        />
         <div className="relative z-10 w-full h-full max-w-[1920px] mx-auto flex flex-col lg:flex-row items-center px-6 sm:px-10 md:px-16 xl:px-20">
 
           {/* SOL: BAŞLIK + BUTONLAR */}
