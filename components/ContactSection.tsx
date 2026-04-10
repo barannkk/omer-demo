@@ -46,9 +46,9 @@ export default function ContactSection({ id }: { id?: string }) {
             </span>
 
             <h2 className="text-white font-medium leading-[1.05] tracking-tight mb-6 text-[40px] sm:text-[48px] lg:text-[56px] xl:text-[64px]">
-              Birlikte harika <br />
-              bir şeyler{' '}
-              <em className="font-canela font-medium text-[#c2e200]">üretelim.</em>
+              Hemen <br />
+              bize{' '}
+              <em className="font-canela font-medium text-[#c2e200]">yaz.</em>
             </h2>
 
             <p className="text-white/55 text-[15px] lg:text-[16px] leading-[1.75] max-w-[340px] mb-10">
