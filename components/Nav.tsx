@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { usePathname } from 'next/navigation' // 1. YENİ: Aktif sayfayı bulmak için eklendi
+import { usePathname, useRouter } from 'next/navigation'
 
 const LOGO_PATH = '/logos/omr_lime_logo.svg'
 const HAS_LOGO = true
@@ -12,7 +12,8 @@ export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   
-  const pathname = usePathname() // 2. YENİ: Şu anki URL'yi alıyoruz
+  const pathname = usePathname()
+  const router = useRouter()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
@@ -20,10 +21,19 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    setMenuOpen(false)
+    if (pathname === '/') {
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      router.push('/#contact')
+    }
+  }
+
   const links = [
     { href: '/', label: 'ANA SAYFA' },
     { href: '/about', label: 'HAKKIMDA' },
-    { href: '/contact', label: 'İLETİŞİM' },
   ]
 
   return (
@@ -69,52 +79,58 @@ export default function Nav() {
 
         {/* LİNKLER */}
         <ul className={`nav-links-mobile m-0 p-0 list-none ${menuOpen ? 'open' : ''}`}>
+
+          {/* ANA SAYFA + HAKKIMDA — normal Link */}
           {links.map(({ href, label }) => {
-            
-            // 3. YENİ: Bu link şu an açık olan sayfaya mı ait?
-            const isActive = pathname === href;
-
+            const isActive = pathname === href
             return (
-            <li 
-              key={href} 
-              className="max-[900px]:w-full flex flex-col relative"
+              <li key={href} className="max-[900px]:w-full flex flex-col relative">
+                <Link
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className={`nav-link-hover relative flex items-center max-[900px]:w-full max-[900px]:justify-center rounded-[50px] max-[900px]:rounded-[12px] no-underline uppercase tracking-[0.08em] font-bold transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+                    ${isActive
+                      ? 'text-[#c2e200] drop-shadow-[0_0_8px_rgba(194,226,0,0.4)]'
+                      : 'text-[rgba(255,255,255,0.7)] hover:text-white hover:bg-[rgba(255,255,255,0.06)]'
+                    }
+                    ${scrolled
+                      ? 'text-[12px] px-[16px] py-[8px] max-[900px]:py-[16px]'
+                      : 'text-[12px] px-[16px] py-[8px] max-[900px]:py-[16px] xl:text-[13px] xl:px-[18px] xl:py-[9px] 2xl:text-[14px] 2xl:px-[22px] 2xl:py-[10px]'
+                    }
+                  `}
+                >
+                  {label}
+                  {isActive && (
+                    <span className="max-[900px]:hidden absolute bottom-[2px] xl:bottom-[4px] left-1/2 -translate-x-1/2 w-[70%] flex items-center justify-center pointer-events-none">
+                      <span className="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-[#c2e200] to-transparent opacity-80" />
+                      <span className="absolute w-[4px] h-[4px] rounded-full bg-[#c2e200] shadow-[0_0_12px_3px_rgba(194,226,0,1)]" />
+                    </span>
+                  )}
+                </Link>
+                <div className="hidden max-[900px]:block w-[80%] mx-auto h-[1px] bg-gradient-to-r from-transparent via-[#c2e200]/60 to-transparent shadow-[0_0_10px_rgba(194,226,0,0.2)]" />
+              </li>
+            )
+          })}
+
+          {/* İLETİŞİM — smooth scroll */}
+          <li className="max-[900px]:w-full flex flex-col relative">
+            <a
+              href="#contact"
+              onClick={handleContactClick}
+              className={`nav-link-hover relative flex items-center max-[900px]:w-full max-[900px]:justify-center rounded-[50px] max-[900px]:rounded-[12px] no-underline uppercase tracking-[0.08em] font-bold transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] cursor-pointer
+                text-[rgba(255,255,255,0.7)] hover:text-white hover:bg-[rgba(255,255,255,0.06)]
+                ${scrolled
+                  ? 'text-[12px] px-[16px] py-[8px] max-[900px]:py-[16px]'
+                  : 'text-[12px] px-[16px] py-[8px] max-[900px]:py-[16px] xl:text-[13px] xl:px-[18px] xl:py-[9px] 2xl:text-[14px] 2xl:px-[22px] 2xl:py-[10px]'
+                }
+              `}
             >
-              <Link
-                href={href}
-                onClick={() => setMenuOpen(false)}
-                className={`nav-link-hover relative flex items-center max-[900px]:w-full max-[900px]:justify-center rounded-[50px] max-[900px]:rounded-[12px] no-underline uppercase tracking-[0.08em] font-bold transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
-                  
-                  /* 4. YENİ: Eğer aktifse sarı-yeşil yap ve parlat, değilse eski gri/beyaz hover kalsın */
-                  ${isActive 
-                    ? 'text-[#c2e200] drop-shadow-[0_0_8px_rgba(194,226,0,0.4)]' 
-                    : 'text-[rgba(255,255,255,0.7)] hover:text-white hover:bg-[rgba(255,255,255,0.06)]'
-                  }
+              İLETİŞİM
+            </a>
+            <div className="hidden max-[900px]:block w-[80%] mx-auto h-[1px] bg-gradient-to-r from-transparent via-[#c2e200]/60 to-transparent shadow-[0_0_10px_rgba(194,226,0,0.2)]" />
+          </li>
 
-                  ${scrolled
-                    ? 'text-[12px] px-[16px] py-[8px] max-[900px]:py-[16px]'
-                    : 'text-[12px] px-[16px] py-[8px] max-[900px]:py-[16px] xl:text-[13px] xl:px-[18px] xl:py-[9px] 2xl:text-[14px] 2xl:px-[22px] 2xl:py-[10px]'
-                  }
-                `}
-              >
-                {label}
-
-                {/* 5. YENİ (FOTOĞRAFTAKİ SİHİR): Sadece aktif sayfadaysa bu çizgiyi render et */}
-                {isActive && (
-                 <span className="max-[900px]:hidden absolute bottom-[2px] xl:bottom-[4px] left-1/2 -translate-x-1/2 w-[70%] flex items-center justify-center pointer-events-none">
-    {/* Kenarlara doğru şeffaflaşan çizgi */}
-    <span className="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-[#c2e200] to-transparent opacity-80" />
-    {/* Tam ortadaki patlayan parlak neon nokta */}
-    <span className="absolute w-[4px] h-[4px] rounded-full bg-[#c2e200] shadow-[0_0_12px_3px_rgba(194,226,0,1)]" />
-  </span>
-                )}
-              </Link>
-              
-              {/* Servislerdeki neon gradient çizgisi (Sadece mobilde görünür) */}
-              <div className="hidden max-[900px]:block w-[80%] mx-auto h-[1px] bg-gradient-to-r from-transparent via-[#c2e200]/60 to-transparent shadow-[0_0_10px_rgba(194,226,0,0.2)]" />
-            </li>
-          )})}
-
-          {/* BİR PROJE BAŞLAT BUTONU */}
+          {/* TÜM İŞLERİ GÖR butonu */}
           <li className="max-[900px]:w-full max-[900px]:mt-4 max-[900px]:flex max-[900px]:justify-center">
             <Link
               href="/works"
@@ -128,14 +144,14 @@ export default function Nav() {
               `}
             >
               Tüm işleri gör
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2.5" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 className="w-[13px] h-[13px] transition-transform duration-300 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]"
               >
                 <path d="M7 17L17 7" />
@@ -143,6 +159,7 @@ export default function Nav() {
               </svg>
             </Link>
           </li>
+
         </ul>
       </div>
     </nav>

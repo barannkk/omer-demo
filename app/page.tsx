@@ -3,7 +3,8 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Play, Radio, Package, Fingerprint, Film, Sparkles } from "lucide-react"
+import { Play, Radio, Package, Fingerprint, Film, Sparkles, Contact } from "lucide-react"
+import ContactSection from '@/components/ContactSection'
 
 // ─── Types ───
 interface Brand {
@@ -431,12 +432,19 @@ export default function HomePage() {
             </p>
 
             <div className="-mt-[5px] sm:-mt-[10px] xl:-mt-[20px] flex items-center gap-3 sm:gap-4 xl:gap-6 flex-wrap animate-text-slide" style={{ animationDelay: '0.7s' }}>
-              <Link href="/contact" className="group inline-flex items-center gap-[8px] justify-center rounded-full bg-[#c2e200] text-black font-extrabold uppercase tracking-[0.07em] transition-all duration-300 hover:bg-[#d4f500] hover:-translate-y-[2px] text-[12px] px-[22px] py-[12px] sm:text-[12px] sm:px-[24px] sm:py-[13px] xl:text-[14px] xl:px-[35px] xl:py-[16px]">
-                Bir Proje Başlat
+               <a href="#contact"
+  onClick={(e) => {
+    e.preventDefault()
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+  }}
+  className="group inline-flex items-center gap-[8px] justify-center rounded-full bg-[#c2e200] text-black font-extrabold uppercase tracking-[0.07em] transition-all duration-300 hover:bg-[#d4f500] hover:-translate-y-[2px] text-[12px] px-[22px] py-[12px] sm:text-[12px] sm:px-[24px] sm:py-[13px] xl:text-[14px] xl:px-[35px] xl:py-[16px]"
+>
+  Bir Proje Başlat
+
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-[12px] h-[12px] xl:w-[14px] xl:h-[14px] transition-transform duration-300 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]">
                   <path d="M7 17L17 7" /><path d="M7 7h10v10" />
                 </svg>
-              </Link>
+              </a>
 
               <Link href="/works" className="group inline-flex items-center gap-[8px] justify-center rounded-full border border-[#c2e200] bg-black text-[#c2e200] font-bold uppercase tracking-[0.07em] transition-all duration-300 hover:bg-[#c2e200]/10 hover:-translate-y-[2px] text-[12px] px-[22px] py-[11.5px] sm:text-[12px] sm:px-[24px] sm:py-[12.5px] xl:text-[14px] xl:px-[35px] xl:py-[15.5px]">
                 TÜM İŞLERİ GÖR
@@ -486,6 +494,8 @@ export default function HomePage() {
       <section id="work">
         <BrandShowcase />
       </section>
+
+      <ContactSection id="contact"/>
     </>
   )
 }
