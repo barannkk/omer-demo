@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   title: 'Ömer — Creative Design',
   description: 'Marka kimliği, ambalaj ve görsel iletişim tasarımı portfolyosu',
   icons: {
-    icon: '/logos/omr_lime_logo.svg', 
+    icon: '/logos/omr_lime_logo.svg',
   },
   openGraph: {
     title: 'Portfolio — Creative Design',
@@ -57,47 +57,65 @@ export default function RootLayout({
           {children}
         </main>
 
-       <footer className="footer-main">
-  {/* SOL */}
-  <div className="footer-left">
-    <img src="/logos/omr_siyah_logo.svg" alt="OMR Work" className="footer-logo-img" />
-  </div>
+        <footer className="relative bg-black border-t border-white/[0.06] px-[6%] py-[22px]">
 
-  {/* ORTA */}
- <div className="footer-social-wrapper">
-  <div className="footer-social-card">
-    {/* Instagram */}
-    <a href="https://www.instagram.com/omr.work?igsh=MWNnaDNodnJ2aGRnMA%3D%3D&utm_source=qr" target="_blank" rel="noreferrer">
-      <img src="/icons/insta.svg" alt="Instagram" className="footer-social-icon" />
-    </a>
-    
-    {/* LinkedIn */}
-    <a href="https://www.linkedin.com/in/%C3%B6mer-faruk-geli%C5%9Fin-0427a1220/" target="_blank" rel="noreferrer">
-      <img src="/icons/linkedin.svg" alt="LinkedIn" className="footer-social-icon" />
-    </a>
+          {/* ANA SATIR: logo + telif | boşluk | ikonlar */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
 
-    {/* Behance */}
-    <a href="https://www.behance.net/gelisinfaruk" target="_blank" rel="noreferrer">
-      <img src="/icons/behance.svg" alt="Behance" className="footer-social-icon" />
-    </a>
+            {/* SOL: Logo + telif yan yana */}
+            <div className="flex items-center gap-4">
+              <img
+                src="/logos/omr_lime_logo.svg"
+                alt="OMR Work"
+                className="h-[28px] w-auto"
+              />
+              <span className="text-white/25 text-[12px] tracking-wide whitespace-nowrap">
+                © 2026 OMRWORK. Tüm hakları saklıdır.
+              </span>
+            </div>
 
-    {/* WhatsApp */}
-    <a href="https://wa.me/905511639133" target="_blank" rel="noreferrer">
-      <img src="/icons/wp.svg" alt="WhatsApp" className="footer-social-icon" />
-    </a>
-  </div>
-</div>
+            {/* SAĞ: Sosyal medya ikonları */}
+            <div className="flex items-center gap-6">
+              <a
+                href="https://www.instagram.com/omr.work?igsh=MWNnaDNodnJ2aGRnMA%3D%3D&utm_source=qr"
+                target="_blank"
+                rel="noreferrer"
+                className="opacity-40 hover:opacity-100 transition-opacity duration-200"
+              >
+                <img src="/icons/insta.svg" alt="Instagram" className="w-[18px] h-[18px] brightness-0 invert" />
+              </a>
 
-  {/* SAĞ */}
-  <div className="footer-right">
-    <a href="mailto:omr.workco@gmail.com" className="footer-contact">
-      omr.workco@gmail.com
-    </a>
-  </div>
+              <a
+                href="https://www.behance.net/gelisinfaruk"
+                target="_blank"
+                rel="noreferrer"
+                className="opacity-40 hover:opacity-100 transition-opacity duration-200 text-white font-semibold text-[14px] tracking-wide"
+              >
+                Bē
+              </a>
 
-  {/* TELİF */}
-  <p className="footer-copy">© 2026 — TÜM HAKLARI SAKLIDIR</p>
-</footer>
+              <a
+                href="https://www.linkedin.com/in/%C3%B6mer-faruk-geli%C5%9Fin-0427a1220/"
+                target="_blank"
+                rel="noreferrer"
+                className="opacity-40 hover:opacity-100 transition-opacity duration-200"
+              >
+                <img src="/icons/linkedin.svg" alt="LinkedIn" className="w-[18px] h-[18px] brightness-0 invert" />
+              </a>
+
+              <a
+                href="https://wa.me/905511639133"
+                target="_blank"
+                rel="noreferrer"
+                className="opacity-40 hover:opacity-100 transition-opacity duration-200"
+              >
+                <img src="/icons/wp.svg" alt="WhatsApp" className="w-[18px] h-[18px] brightness-0 invert" />
+              </a>
+            </div>
+
+          </div>
+
+        </footer>
       </body>
     </html>
   )
