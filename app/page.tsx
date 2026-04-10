@@ -67,7 +67,6 @@ function Card({ brand, isActive }: { brand: Brand; isActive: boolean }) {
       className="relative w-full h-full rounded-[24px] overflow-hidden"
       style={{
         background: '#111',
-        // 1. GÖLGE DÜŞÜRÜLDÜ: Eskiye göre daha yumuşak ve az yayılan bir gölge
         boxShadow: isActive
           ? '0 20px 60px rgba(0,0,0,0.6)'
           : '0 8px 30px rgba(0,0,0,0.3)',
@@ -78,41 +77,34 @@ function Card({ brand, isActive }: { brand: Brand; isActive: boolean }) {
       ) : (
         <div className="w-full h-full bg-[#1a1a1a]" />
       )}
-
-      {/* 2. KARARTMA DÜŞÜRÜLDÜ: Siyahlık daha aşağıdan başlıyor ve daha şeffaf */}
+ 
       <div
         className="absolute inset-0"
         style={{
           background: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.3) 30%, transparent 50%)',
         }}
       />
-
-      {/* 3. AYNI SEVİYEYE İNDİRME: flex-col yerine flex-row ve items-end kullandık */}
+ 
       <div className="absolute bottom-0 left-0 right-0 p-4 flex flex-row items-end justify-between gap-4">
         
-        {/* SOL: Yazı Grubu */}
         <div className="flex flex-col gap-0 flex-1">
           <span className="text-accent text-[22px] font-bold uppercase">
             {brand.name}
           </span>
-          {/* Yazı boyutu 22px -> 20px yapıldı */}
           <span className="text-white font-medium text-[20px] leading-[1.2]">
             {brand.label}
           </span>
-
+ 
           {isActive && (
-            // Açıklama boyutu 14px -> 13px yapıldı, margin-top (mt) azaltıldı
             <p className="text-white/65 text-[13px] leading-[1.5] mt-0">
               {brand.description}
             </p>
           )}
         </div>
-
-        {/* SAĞ: Buton (Yazılarla aynı hizaya oturdu) */}
+ 
         {isActive && (
           <Link
             href={`/work/${brand.id}`}
-            // Butonu da yeni orana uyması için hafifçe küçülttüm (48px -> 44px)
             className="w-[44px] h-[44px] rounded-full bg-[#c2e200] flex items-center justify-center transition-all duration-300 hover:bg-[#d4f500] hover:scale-110 shrink-0"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-[14px] h-[14px]">
@@ -122,99 +114,104 @@ function Card({ brand, isActive }: { brand: Brand; isActive: boolean }) {
         )}
       </div>
     </div>
-  )
+  );
 }
-
+ 
 const mod = (n: number, m: number): number => ((n % m) + m) % m;
-
+ 
 function BrandShowcase() {
   const [current, setCurrent] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const total = brands.length;
-
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
+ 
   const go = useCallback((dir: 'next' | 'prev') => {
     if (isAnimating) return;
     setIsAnimating(true);
-
     setCurrent((prev) => (dir === 'next' ? mod(prev + 1, total) : mod(prev - 1, total)));
-
-    setTimeout(() => {
-      setIsAnimating(false);
-    }, 800);
+    setTimeout(() => setIsAnimating(false), 800);
   }, [isAnimating, total]);
-
+ 
   const goNext = useCallback(() => go('next'), [go]);
   const goPrev = useCallback(() => go('prev'), [go]);
-
+ 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.changedTouches[0].screenX;
+  };
+ 
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    touchEndX.current = e.changedTouches[0].screenX;
+    const diff = touchStartX.current - touchEndX.current;
+    if (Math.abs(diff) > 50) diff > 0 ? goNext() : goPrev();
+  };
+ 
   const progress = ((current + 1) / total) * 100;
-
+ 
   const getOffset = (index: number) => {
     let offset = (index - current) % total;
     if (offset > Math.floor(total / 2)) offset -= total;
     if (offset < -Math.floor(total / 2)) offset += total;
     return offset;
   };
-
+ 
   const getCardStyle = (offset: number): React.CSSProperties => {
     const isCenter = offset === 0;
     const isLeft = offset === -1;
     const isRight = offset === 1;
-
-    const transitionMovement = 'left 800ms cubic-bezier(0.16, 1, 0.3, 1), transform 800ms cubic-bezier(0.16, 1, 0.3, 1)';
-
+ 
+    const transition =
+      'transform 800ms cubic-bezier(0.16, 1, 0.3, 1), opacity 600ms ease';
+ 
     const base: React.CSSProperties = {
       position: 'absolute',
       top: '50%',
-      width: 'clamp(250px, 25vw, 400px)',
+      left: '50%',
+      width: 'clamp(240px, 70vw, 380px)',
       aspectRatio: '4 / 5',
       transformOrigin: 'center center',
+      transition,
     };
-
+ 
     if (isCenter) {
       return {
         ...base,
-        left: '50%',
         transform: 'translate(-50%, -50%) scale(1)',
         opacity: 1,
         zIndex: 20,
-        transition: `${transitionMovement}, opacity 500ms ease`,
       };
     } else if (isLeft) {
       return {
         ...base,
-        left: '10%',
-        transform: 'translate(0%, -50%) scale(0.85)',
+        transform: 'translate(calc(-50% - 68%), -50%) scale(0.85)',
         opacity: 0.4,
         zIndex: 10,
         cursor: 'pointer',
-        transition: `${transitionMovement}, opacity 600ms ease 150ms`,
       };
     } else if (isRight) {
       return {
         ...base,
-        left: '90%',
-        transform: 'translate(-100%, -50%) scale(0.85)',
+        transform: 'translate(calc(-50% + 68%), -50%) scale(0.85)',
         opacity: 0.4,
         zIndex: 10,
         cursor: 'pointer',
-        transition: `${transitionMovement}, opacity 600ms ease 150ms`,
       };
     } else {
       return {
         ...base,
-        left: offset < 0 ? '-20%' : '120%',
-        transform: offset < 0 ? 'translate(-100%, -50%) scale(0.7)' : 'translate(0%, -50%) scale(0.7)',
+        transform: offset < 0
+          ? 'translate(calc(-50% - 200%), -50%) scale(0.7)'
+          : 'translate(calc(-50% + 200%), -50%) scale(0.7)',
         opacity: 0,
         zIndex: 0,
         pointerEvents: 'none',
-        transition: `${transitionMovement}, opacity 400ms ease`,
       };
     }
   };
-
+ 
   return (
-    <section className="relative w-full min-h-screen bg-black overflow-hidden flex items-center px-[4%]">
-
+    <section className="relative w-full min-h-[100dvh] bg-black overflow-hidden flex items-center px-[4%]">
+ 
       {/* Arka plan efekti */}
       <div
         className="absolute top-1/2 right-[-100px] -translate-y-1/2 w-[1000px] h-[1000px] rounded-full pointer-events-none"
@@ -230,30 +227,28 @@ function BrandShowcase() {
           filter: 'blur(80px)',
         }}
       />
-
-      {/* ANA YAPI: Sol-Sağ içerik ve Alt Bar'ı dikeyde (flex-col) sarar */}
-      <div className="relative z-10 w-full max-w-[1700px] mx-auto flex flex-col justify-between min-h-screen py-[60px]">
-
-        {/* ÜST İÇERİK: Sol Yazılar ve Sağ Kartlar Yanyana */}
+ 
+      <div className="relative z-10 w-full max-w-[1700px] mx-auto flex flex-col justify-between min-h-[100dvh] py-[60px]">
+ 
         <div className="flex flex-col lg:flex-row items-stretch gap-20 flex-1">
           
-          {/* SOL ALAN (Yazılar) - Yukarı çekildi */}
+          {/* SOL ALAN */}
           <div className="flex flex-col justify-start w-full lg:w-[26%] shrink-0 py-4 pr-4">
             <div className="flex flex-col pt-[80px]">
               <span className="flex items-center gap-2 text-[#c2e200] text-[11px] tracking-[0.22em] font-medium uppercase mb-6">
                 <span className="w-2 h-2 rounded-full bg-[#c2e200] inline-block" />
                 SEÇİLMİŞ İŞLERİM
               </span>
-
+ 
               <h2 className="text-white font-medium leading-[1.0] tracking-tight mb-6 text-[48px] sm:text-[56px] lg:text-[64px] xl:text-[80px]">
                 <span className="whitespace-nowrap">Ideas become</span> <br />
                 <em className="font-canela font-medium text-[#c2e200] not-italic">visuals</em>
               </h2>
-
+ 
               <p className="text-white/55 text-[15px] lg:text-[16px] leading-[1.75] max-w-[320px] mb-8">
                 Markaların hedeflerine ulaşması için yaratıcı, etkili ve akılda kalıcı işler üretiyorum.
               </p>
-
+ 
               <div className="mt-2">
                 <Link
                   href="/works"
@@ -267,15 +262,20 @@ function BrandShowcase() {
               </div>
             </div>
           </div>
-
+ 
           {/* SAĞ ALAN (Kartlar) */}
           <div className="relative flex-1">
-            <div className="relative w-full h-full" style={{ minHeight: 'clamp(500px, 70vh, 800px)' }}>
+            <div
+              className="relative w-full h-full"
+              style={{ minHeight: 'clamp(400px, 60vh, 800px)' }}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+            >
               {brands.map((brand, index) => {
                 const offset = getOffset(index);
                 const style = getCardStyle(offset);
                 const isActive = offset === 0;
-
+ 
                 return (
                   <div
                     key={brand.id || index}
@@ -291,17 +291,14 @@ function BrandShowcase() {
               })}
             </div>
           </div>
-
-        </div> {/* Üst İçerik Bitişi */}
-
-
-        {/* ALT BAR: Sağ alandan çıkarıldı, Ana yapının en altına (tüm enine) yerleştirildi */}
+ 
+        </div>
+ 
+        {/* ALT BAR */}
         <div className="flex items-center w-full -mt-10 pb-4 gap-8 relative z-20">
           
-          {/* 1. SAYFA SAYISI (SOLDA) */}
           <div className="shrink-0">
             <span className="text-white tabular-nums flex items-baseline gap-[2px]">
-              {/* text-[#FFFFF] hatası text-white olarak düzeltildi */}
               <span className="text-[24px] font-medium text-[#c2e200]">
                 {String(current + 1).padStart(2, '0')}
               </span>
@@ -309,16 +306,14 @@ function BrandShowcase() {
               <span className="text-white/40 text-[18px]">{String(total).padStart(2, '0')}</span>
             </span>
           </div>
-
-          {/* 2. PROGRESS BAR (ORTADA) */}
+ 
           <div className="flex-1 h-[1px] bg-white/10 relative">
             <div
               className="absolute top-0 left-0 h-full bg-[#c2e200] transition-all duration-700 ease-out shadow-[0_0_10px_rgba(194,226,0,0.3)]"
               style={{ width: `${progress}%` }}
             />
           </div>
-
-          {/* 3. OKLAR (SAĞDA) */}
+ 
           <div className="flex items-center gap-3 shrink-0">
             <button
               onClick={goPrev}
@@ -339,9 +334,9 @@ function BrandShowcase() {
               </svg>
             </button>
           </div>
-
-        </div> {/* Alt Bar Bitişi */}
-
+ 
+        </div>
+ 
       </div>
     </section>
   );
