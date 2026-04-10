@@ -233,35 +233,36 @@ function BrandShowcase() {
         <div className="flex flex-col lg:flex-row items-stretch gap-4 lg:gap-20 flex-1">
           
           {/* SOL ALAN */}
-          <div className="flex flex-col justify-start w-full lg:w-[26%] shrink-0 py-4 pr-4">
-            <div className="flex flex-col pt-[40px] lg:pt-[80px]">
-              <span className="flex items-center gap-2 text-[#c2e200] text-[11px] tracking-[0.22em] font-medium uppercase mb-6">
-                <span className="w-2 h-2 rounded-full bg-[#c2e200] inline-block" />
-                SEÇİLMİŞ İŞLERİM
-              </span>
- 
-              <h2 className="text-white font-medium leading-[1.0] tracking-tight mb-6 text-[48px] sm:text-[56px] lg:text-[64px] xl:text-[80px]">
-                <span className="whitespace-nowrap">Ideas become</span> <br />
-                <em className="font-canela font-medium text-[#c2e200]">visuals</em>
-              </h2>
- 
-              <p className="text-white/55 text-[15px] lg:text-[16px] leading-[1.75] max-w-[320px] mb-8">
-                Markaların hedeflerine ulaşması için yaratıcı, etkili ve akılda kalıcı işler üretiyorum.
-              </p>
- 
-              <div className="mt-2">
-                <Link
-                  href="/works"
-                  className="group inline-flex items-center gap-3 border border-[#c2e200] text-[#c2e200] font-medium uppercase tracking-[0.1em] text-[12px] px-[24px] py-[12px] rounded-full transition-all duration-300 hover:bg-[#c2e200]/10 shrink-0 w-max"
-                >
-                  TÜM İŞLERİ GÖR
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-[13px] h-[13px] transition-transform duration-300 group-hover:translate-x-[3px] group-hover:-translate-y-[3px]">
-                    <path d="M7 17L17 7" /><path d="M7 7h10v10" />
-                  </svg>
-                </Link>
-              </div>
-            </div>
-          </div>
+<div className="flex flex-col justify-start w-full lg:w-[26%] shrink-0 py-2 lg:py-4 pr-4">
+  <div className="flex flex-col pt-[20px] lg:pt-[80px]">
+    
+    <span className="flex items-center gap-2 text-[#c2e200] text-[11px] tracking-[0.22em] font-medium uppercase mb-3 lg:mb-6">
+      <span className="w-2 h-2 rounded-full bg-[#c2e200] inline-block" />
+      SEÇİLMİŞ İŞLERİM
+    </span>
+
+    <h2 className="text-white font-medium leading-[1.0] tracking-tight mb-3 lg:mb-6 text-[48px] sm:text-[56px] lg:text-[64px] xl:text-[80px]">
+      <span className="whitespace-nowrap">Ideas become</span> <br />
+      <em className="font-canela font-medium text-[#c2e200]">visuals</em>
+    </h2>
+
+    <p className="text-white/55 text-[15px] lg:text-[16px] leading-[1.75] max-w-[320px] mb-4 lg:mb-8">
+      Markaların hedeflerine ulaşması için yaratıcı, etkili ve akılda kalıcı işler üretiyorum.
+    </p>
+
+    <div className="mt-0 lg:mt-2">
+      <Link
+        href="/works"
+        className="group inline-flex items-center gap-3 border border-[#c2e200] text-[#c2e200] font-medium uppercase tracking-[0.1em] text-[12px] px-[24px] py-[12px] rounded-full transition-all duration-300 hover:bg-[#c2e200]/10 shrink-0 w-max"
+      >
+        TÜM İŞLERİ GÖR
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-[13px] h-[13px] transition-transform duration-300 group-hover:translate-x-[3px] group-hover:-translate-y-[3px]">
+          <path d="M7 17L17 7" /><path d="M7 7h10v10" />
+        </svg>
+      </Link>
+    </div>
+  </div>
+</div>
  
           {/* SAĞ ALAN (Kartlar) */}
           <div className="relative flex-1">
