@@ -242,7 +242,7 @@ function BrandShowcase() {
  
               <h2 className="text-white font-medium leading-[1.0] tracking-tight mb-6 text-[48px] sm:text-[56px] lg:text-[64px] xl:text-[80px]">
                 <span className="whitespace-nowrap">Ideas become</span> <br />
-                <em className="font-canela font-medium text-[#c2e200] not-italic">visuals</em>
+                <em className="font-canela font-medium text-[#c2e200]">visuals</em>
               </h2>
  
               <p className="text-white/55 text-[15px] lg:text-[16px] leading-[1.75] max-w-[320px] mb-8">
