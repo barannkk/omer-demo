@@ -7,11 +7,22 @@ export default function ContactSection({ id }: { id?: string }) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setStatus('sending')
-    // Buraya kendi form submit logic'ini ekle
-    setTimeout(() => setStatus('sent'), 1500)
+  e.preventDefault()
+  setStatus('sending')
+
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+
+    if (res.ok) setStatus('sent')
+    else setStatus('error')
+  } catch {
+    setStatus('error')
   }
+}
 
   return (
     <section id={id} className="relative w-full bg-black overflow-hidden px-6 sm:px-10 md:px-16 xl:px-20 py-[40px] md:py-[60px]">
