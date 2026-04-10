@@ -100,12 +100,12 @@ export default function Nav() {
 
                 {/* 5. YENİ (FOTOĞRAFTAKİ SİHİR): Sadece aktif sayfadaysa bu çizgiyi render et */}
                 {isActive && (
-                  <span className="absolute bottom-[2px] xl:bottom-[4px] left-1/2 -translate-x-1/2 w-[70%] flex items-center justify-center pointer-events-none">
-                    {/* Kenarlara doğru şeffaflaşan çizgi */}
-                    <span className="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-[#c2e200] to-transparent opacity-80" />
-                    {/* Tam ortadaki patlayan parlak neon nokta */}
-                    <span className="absolute w-[4px] h-[4px] rounded-full bg-[#c2e200] shadow-[0_0_12px_3px_rgba(194,226,0,1)]" />
-                  </span>
+                 <span className="max-[900px]:hidden absolute bottom-[2px] xl:bottom-[4px] left-1/2 -translate-x-1/2 w-[70%] flex items-center justify-center pointer-events-none">
+    {/* Kenarlara doğru şeffaflaşan çizgi */}
+    <span className="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-[#c2e200] to-transparent opacity-80" />
+    {/* Tam ortadaki patlayan parlak neon nokta */}
+    <span className="absolute w-[4px] h-[4px] rounded-full bg-[#c2e200] shadow-[0_0_12px_3px_rgba(194,226,0,1)]" />
+  </span>
                 )}
               </Link>
               

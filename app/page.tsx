@@ -473,7 +473,7 @@ export default function HomePage() {
                       </span>
                     </div>
                     {i < services.length - 1 && (
-                      <div className="w-[125%] h-[1px] bg-gradient-to-r from-transparent via-[#c2e200]/60 to-transparent shadow-[0_0_10px_rgba(194,226,0,0.2)]" />
+                      <div className="w-full lg:w-[125%] h-[1px] bg-gradient-to-r from-transparent via-[#c2e200]/60 to-transparent shadow-[0_0_10px_rgba(194,226,0,0.2)]" />
                     )}
                   </div>
                 ))}
