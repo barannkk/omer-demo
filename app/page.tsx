@@ -401,6 +401,7 @@ export default function HomePage() {
     { icon: <Fingerprint size={16} />, label: "Event Identity" },
     { icon: <Film size={16} />, label: "Motion Design" },
     { icon: <Sparkles size={16} />, label: "AI Image Gen" },
+    { icon: <Sparkles size={16} />, label: "AI Image Gen" },
   ]
 
   return (
