@@ -12,12 +12,6 @@ const services = [
   { icon: <Store size={18} />, label: "AppStore", description: "Mobil uygulamanız için orjinal tasarımlar." },
 ]
 
-const appProjects = [
-  { name: "OMR Work App", category: "Portfolyo & Tasarım", description: "Tüm projelerimi ve hizmetlerimi keşfedebileceğiniz mobil deneyim.", badge: "App Store", color: "#c2e200" },
-  { name: "Brand Kit", category: "Marka Araçları", description: "Markanız için hazır şablonlar, renkler ve tipografi kılavuzu.", badge: "Yakında", color: "rgba(255,255,255,0.2)" },
-  { name: "Motion Pack", category: "Animasyon", description: "Sosyal medya için hazır motion design template paketi.", badge: "Yakında", color: "rgba(255,255,255,0.2)" },
-]
-
 const GlowLine = () => (
   <span
     className="absolute bottom-[-1px] left-1/2 -translate-x-1/2 pointer-events-none"
