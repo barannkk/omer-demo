@@ -24,37 +24,30 @@ const GlowLine = () => (
   />
 )
 
-const PsIcon = ({ size = 72 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="56" height="56" rx="11" fill="#001E36"/>
-    <path d="M15 36V18H22C23.8 18 25.3 18.5 26.4 19.5C27.5 20.5 28.05 21.85 28.05 23.55C28.05 25.25 27.5 26.6 26.4 27.6C25.3 28.6 23.8 29.1 22 29.1H18.4V36H15ZM18.4 26.1H21.7C22.75 26.1 23.575 25.825 24.175 25.275C24.775 24.725 25.075 23.975 25.075 23.025C25.075 22.075 24.775 21.325 24.175 20.775C23.575 20.225 22.75 19.95 21.7 19.95H18.4V26.1Z" fill="#31A8FF"/>
-    <path d="M33.2 36.5C31.75 36.5 30.5 36.225 29.45 35.675C28.4 35.125 27.65 34.325 27.2 33.275L29.8 32C30.075 32.675 30.525 33.175 31.15 33.5C31.775 33.825 32.45 33.988 33.175 33.988C33.9 33.988 34.475 33.825 34.875 33.5C35.275 33.175 35.475 32.762 35.475 32.262C35.475 31.762 35.275 31.35 34.875 31.025C34.475 30.7 33.75 30.375 32.7 30.05C31.35 29.65 30.325 29.125 29.625 28.475C28.925 27.825 28.575 26.975 28.575 25.925C28.575 25.075 28.8 24.325 29.25 23.675C29.7 23.025 30.325 22.512 31.125 22.137C31.925 21.762 32.825 21.575 33.825 21.575C35.1 21.575 36.2 21.85 37.1 22.4C38 22.95 38.65 23.7 39.05 24.65L36.525 25.9C36.3 25.35 35.95 24.938 35.45 24.662C34.95 24.387 34.425 24.25 33.875 24.25C33.275 24.25 32.775 24.387 32.375 24.662C31.975 24.938 31.775 25.3 31.775 25.75C31.775 26.2 31.975 26.562 32.375 26.837C32.775 27.112 33.475 27.4 34.475 27.7C35.375 27.975 36.1 28.275 36.65 28.6C37.2 28.925 37.638 29.338 37.963 29.838C38.288 30.338 38.45 30.95 38.45 31.675C38.45 32.525 38.225 33.275 37.775 33.925C37.325 34.575 36.688 35.088 35.863 35.463C35.038 35.838 34.175 36.5 33.2 36.5Z" fill="#31A8FF"/>
-  </svg>
-)
-
-const AiIcon = ({ size = 72 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="56" height="56" rx="11" fill="#1A0A00"/>
-    <path d="M24.5 32H17.5L16.2 36H13L19.5 18H22.5L29 36H25.8L24.5 32ZM18.4 29.3H23.6L21 21.8L18.4 29.3Z" fill="#FF9A00"/>
-    <path d="M32 18H35.2V36H32V18Z" fill="#FF9A00"/>
-    <circle cx="33.6" cy="14.5" r="2" fill="#FF9A00"/>
-  </svg>
-)
-
 export default function AboutPage() {
   return (
     <main className="bg-black min-h-screen pt-[var(--nav-h)]">
       <style>{`
-        @keyframes floatA {
+        @keyframes float1 {
           0%, 100% { transform: translateY(0px) rotate(-2deg); }
           50% { transform: translateY(-16px) rotate(2deg); }
         }
-        @keyframes floatB {
+        @keyframes float2 {
           0%, 100% { transform: translateY(-8px) rotate(2deg); }
-          50% { transform: translateY(10px) rotate(-2deg); }
+          50% { transform: translateY(12px) rotate(-1deg); }
         }
-        .icon-float-ps { animation: floatA 4s ease-in-out infinite; }
-        .icon-float-ai { animation: floatB 3.5s ease-in-out infinite; }
+        @keyframes float3 {
+          0%, 100% { transform: translateY(5px) rotate(1deg); }
+          50% { transform: translateY(-10px) rotate(-3deg); }
+        }
+        @keyframes float4 {
+          0%, 100% { transform: translateY(-12px) rotate(-2deg); }
+          50% { transform: translateY(8px) rotate(2deg); }
+        }
+        .icon-float-1 { animation: float1 4s ease-in-out infinite; }
+        .icon-float-2 { animation: float2 3.5s ease-in-out infinite; }
+        .icon-float-3 { animation: float3 4.2s ease-in-out infinite; }
+        .icon-float-4 { animation: float4 3.8s ease-in-out infinite; }
       `}</style>
 
       {/* ── BÖLÜM 1: HAKKIMDA ── */}
@@ -65,16 +58,20 @@ export default function AboutPage() {
             HAKKIMDA
           </span>
 
-          {/* Photoshop ikonu — sol, sadece lg+ */}
-          <div className="icon-float-ps absolute left-[3%] lg:left-[6%] xl:left-[10%] top-1/2 -translate-y-1/2 opacity-75 hidden lg:block">
-            <div className="hidden xl:block"><PsIcon size={88} /></div>
-            <div className="block xl:hidden"><PsIcon size={72} /></div>
+          {/* SOL TARAFTAKİ 2 İKON */}
+          <div className="icon-float-1 absolute left-[3%] lg:left-[5%] xl:left-[8%] top-[25%] opacity-75 hidden lg:block">
+            <img src="/icons/ps.svg" alt="icon" className="w-[72px] h-[72px] xl:w-[88px] xl:h-[88px] object-contain" />
+          </div>
+          <div className="icon-float-2 absolute left-[8%] lg:left-[12%] xl:left-[15%] top-[65%] opacity-75 hidden lg:block">
+            <img src="/icons/ai.svg" alt="icon" className="w-[72px] h-[72px] xl:w-[88px] xl:h-[88px] object-contain" />
           </div>
 
-          {/* Illustrator ikonu — sağ, sadece lg+ */}
-          <div className="icon-float-ai absolute right-[3%] lg:right-[6%] xl:right-[10%] top-1/2 -translate-y-1/2 opacity-75 hidden lg:block">
-            <div className="hidden xl:block"><AiIcon size={88} /></div>
-            <div className="block xl:hidden"><AiIcon size={72} /></div>
+          {/* SAĞ TARAFTAKİ 2 İKON */}
+          <div className="icon-float-3 absolute right-[3%] lg:right-[5%] xl:right-[8%] top-[25%] opacity-75 hidden lg:block">
+            <img src="/icons/ae.svg" alt="icon" className="w-[72px] h-[72px] xl:w-[88px] xl:h-[88px] object-contain" />
+          </div>
+          <div className="icon-float-4 absolute right-[8%] lg:right-[12%] xl:right-[15%] top-[65%] opacity-75 hidden lg:block">
+            <img src="/icons/artificial.svg" alt="icon" className="w-[72px] h-[72px] xl:w-[88px] xl:h-[88px] object-contain" />
           </div>
 
           <div className="w-full max-w-[560px] flex flex-col items-center">
