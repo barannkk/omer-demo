@@ -1,6 +1,6 @@
 'use client'
 
-import { Play, Radio, Package, Fingerprint, Film, Sparkles, AppWindow } from "lucide-react"
+import { Play, Radio, Package, Fingerprint, Film, Sparkles, Store } from "lucide-react"
 
 const services = [
   { icon: <Play size={18} />, label: "AI Video Creation", description: "Yapay zeka destekli, etkileyici gelen videolar." },
@@ -9,7 +9,7 @@ const services = [
   { icon: <Fingerprint size={18} />, label: "Event Identity", description: "Etkinlikler için güçlü görsel anlatma, kimlik." },
   { icon: <Film size={18} />, label: "Motion Design", description: "Hareketli grafiklerle hikaye anlatımı." },
   { icon: <Sparkles size={18} />, label: "AI Image Gen", description: "Yapay zeka ile özgün görseller." },
-  { icon: <Sparkles size={18} />, label: "AI Image Gen", description: "Yapay zeka ile özgün görseller." },
+  { icon: <Store size={18} />, label: "AppStore", description: "Mobil uygulamanız için orjinal tasarımlar." },
 ]
 
 const appProjects = [

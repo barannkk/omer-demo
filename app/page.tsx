@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Play, Radio, Package, Fingerprint, Film, Sparkles, Contact } from "lucide-react"
+import { Play, Radio, Package, Fingerprint, Film, Sparkles, Store} from "lucide-react"
 import ContactSection from '@/components/ContactSection'
 
 // ─── Types ───
@@ -401,7 +401,7 @@ export default function HomePage() {
     { icon: <Fingerprint size={16} />, label: "Event Identity" },
     { icon: <Film size={16} />, label: "Motion Design" },
     { icon: <Sparkles size={16} />, label: "AI Image Gen" },
-    { icon: <Sparkles size={16} />, label: "AI Image Gen" },
+    { icon: <Store size={16} />, label: "AppStore" },
   ]
 
   return (
