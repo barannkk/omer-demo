@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import ContactSection from '@/components/ContactSection'
@@ -199,7 +199,7 @@ function ProjectCard({ project, onClick }: { project: Project; onClick: () => vo
 }
 
 // ─── Works Page ───
-export default function WorksPage() {
+function WorksContent() {
   const searchParams = useSearchParams()
 
   const initCategory = searchParams.get('category') ?? 'tumu'
@@ -459,5 +459,13 @@ export default function WorksPage() {
 
       <ContactSection id="contact" />
     </main>
+  )
+}
+
+export default function WorksPage() {
+  return (
+    <Suspense fallback={<main className="bg-black min-h-screen pt-[var(--nav-h)]" />}>
+      <WorksContent />
+    </Suspense>
   )
 }
