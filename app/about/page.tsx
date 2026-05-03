@@ -1,6 +1,7 @@
 'use client'
 
 import { Play, Radio, Package, Fingerprint, Film, Sparkles, Store } from "lucide-react"
+import ContactSection from '@/components/ContactSection'
 
 const services = [
   { icon: <Play size={18} />, label: "AI Video Creation", description: "Yapay zeka destekli, etkileyici gelen videolar." },
@@ -190,7 +191,8 @@ export default function AboutPage() {
           }}
         />
       </section>
-
+      <ContactSection id="contact" />
     </main>
+    
   )
 }
