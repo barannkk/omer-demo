@@ -26,10 +26,21 @@ const brands = [
   { id: 'tumu', label: 'TÜM MARKALAR' },
   { id: 'avon', label: 'AVON' },
   { id: 'codage', label: 'CODAGE' },
-  { id: 'mavi', label: 'MAVI' },
-  { id: 'oriflame', label: 'ORIFLAME' },
-  { id: 'penti', label: 'PENTİ' },
-  { id: 'watsons', label: 'WATSONS' },
+  { id: 'migros', label: 'MIGROS' },
+  { id: 'kiri', label: 'KİRİ' },
+  { id: 'lvqr', label: 'LVQR' },
+  { id: 'instax', label: 'INSTAX' },
+  { id: 'terapizy', label: 'TERAPIZY' },
+  { id: 'alabeauty', label: 'ALA BEAUTY' },
+  { id: 'doldurkabı', label: 'DOLDURKABI' },
+  { id: 'baremcars', label: 'BAREMCARS' },
+  { id: 'natuzzi', label: 'NATUZZI' },
+  { id: 'lingotürkiye', label: 'LINGO TÜRKİYE' },
+  { id: 'temizlikexpress', label: 'TEMİZLİK EXPRESS' },
+
+
+  
+  
 ]
 
 const projects: Project[] = [
